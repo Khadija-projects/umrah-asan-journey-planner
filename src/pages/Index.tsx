@@ -97,6 +97,27 @@ const Index = () => {
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in">
             Stay closer to Haram with trusted hotels, easy taxi booking & guided ziaraat — all in one place.
           </p>
+          
+          {/* Quick Contact Actions */}
+          <div className="flex justify-center gap-4 mb-8">
+            <a
+              href="https://wa.me/966123456789"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              <MessageCircle className="w-5 h-5" />
+              WhatsApp Support
+            </a>
+            <a
+              href="tel:+966123456789"
+              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              <Phone className="w-5 h-5" />
+              Call Now
+            </a>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
             <Link to="/hotels">
               <Button variant="holy" size="xl" className="w-full sm:w-auto">
