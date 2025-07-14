@@ -3,105 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Umrah Asan - Book Your Holy Umrah Trip | Hotels, Taxi & Ziaraat</title>
-  <meta name="description" content="Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours for your Umrah journey. Bank transfer payment, instant vouchers, 24/7 support.">
-  <meta name="author" content="Umrah Asan">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:title" content="Umrah Asan - Book Your Holy Umrah Trip">
-  <meta property="og:description" content="Trusted Umrah services - Hotels, Taxi & Ziaraat tours with transparent pricing and 24/7 support.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://umrahasan.com/">
-  <meta property="og:image" content="https://umrahasan.com/images/social-preview.jpg">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@umrahasan">
-  <meta name="twitter:creator" content="@umrahasan">
-  <meta name="twitter:image" content="https://umrahasan.com/images/social-preview.jpg">
-
-  <!-- Critical CSS -->
+  <title>Umrah Asan - Book Your Holy Umrah Trip</title>
   <style>
-    body {
+    body { 
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.5;
+      padding: 20px;
       color: #333;
     }
-    #root {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .loading-error {
-      padding: 2rem;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
       text-align: center;
-      margin: auto;
-      max-width: 600px;
+      padding-top: 50px;
     }
-    .loading-error h1 {
+    .error {
       color: #d32f2f;
-      margin-bottom: 1rem;
+      margin-bottom: 20px;
     }
-    .loading-error a {
+    .loading {
       color: #1976d2;
-      text-decoration: underline;
     }
   </style>
 </head>
-
 <body>
-  <div id="root">
-    <!-- Dynamic content will load here -->
+  <div class="container">
+    <div id="app-content">
+      <h1>Umrah Asan</h1>
+      <p class="loading">Loading application...</p>
+    </div>
   </div>
 
-  <!-- Smart Resource Loading -->
+  <!-- SIMPLE RELIABLE SCRIPT LOADING -->
   <script>
     (function() {
-      const root = document.getElementById('root');
+      const appContent = document.getElementById('app-content');
       const startTime = Date.now();
       
-      function showError(message) {
-        root.innerHTML = `
-          <div class="loading-error">
-            <h1>Application Loading Issue</h1>
-            <p>${message}</p>
-            <p>Page loaded in ${((Date.now() - startTime)/1000).toFixed(2)} seconds</p>
-            <p>Please <a href="/">refresh</a> or try again later.</p>
-            <p>If the problem continues, contact <a href="mailto:support@umrahasan.com">support@umrahasan.com</a></p>
-          </div>
+      function showLoaded() {
+        appContent.innerHTML = `
+          <h1>Umrah Asan</h1>
+          <p>Application loaded successfully!</p>
+          <small>Loaded in ${(Date.now()-startTime)/1000}s</small>
+        `;
+      }
+      
+      function showError() {
+        appContent.innerHTML = `
+          <h1>Umrah Asan</h1>
+          <p class="error">Temporary Loading Issue</p>
+          <p>We're experiencing technical difficulties. Please try:</p>
+          <ul style="text-align: left; max-width: 300px; margin: 0 auto;">
+            <li>Refreshing the page</li>
+            <li>Coming back later</li>
+            <li>Contacting support@umrahasan.com</li>
+          </ul>
+          <p><button onclick="window.location.reload()">Refresh Page</button></p>
         `;
       }
 
-      function loadScript(src, isModule = true) {
-        return new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = src;
-          if (isModule) script.type = 'module';
-          script.onload = resolve;
-          script.onerror = () => reject(new Error(`Failed to load ${src}`));
-          document.body.appendChild(script);
-        });
-      }
-
-      // Try production JS first
-      loadScript('/js/main.js')
-        .catch(() => {
-          console.log('Production JS not found, trying alternate location');
-          return loadScript('/assets/js/main.js');
-        })
-        .catch(() => {
-          console.log('Alternate JS not found, trying CDN fallback');
-          return loadScript('https://cdn.umrahasan.com/js/main.js');
-        })
-        .catch((err) => {
-          showError(`Technical difficulty: ${err.message}`);
-          console.error('Script loading failed:', err);
-        });
+      // Try loading from primary location
+      const script = document.createElement('script');
+      script.src = '/js/main.js?v=' + Date.now();
+      script.onload = showLoaded;
+      script.onerror = showError;
+      document.body.appendChild(script);
     })();
   </script>
-
-  <!-- Analytics (optional) -->
-  <script defer src="/js/analytics.js"></script>
 </body>
 </html>
