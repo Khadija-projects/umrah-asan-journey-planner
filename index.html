@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umrah Asan - Book Your Holy Umrah Trip</title>
+    <title>Umrah Asan - Website Upgrade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -13,138 +14,333 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a5d7c 0%, #0d3b5a 100%);
+            color: #fff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: url('https://images.unsplash.com/photo-1610465299993-e95f6caa7c8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            position: relative;
         }
         
-        /* Header styling */
-        .header {
-            background: linear-gradient(135deg, #2b5876, #4e4376);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 40, 60, 0.85);
+            z-index: -1;
         }
         
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .container {
             max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Main content styling */
-        .maintenance-section {
-            flex: 1;
+        .header {
+            text-align: center;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
-        .content-box {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            padding: 2.5rem;
+        .logo-icon {
+            font-size: 2.8rem;
+            color: #f8b400;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #f8b400, #ffde73);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
             max-width: 600px;
-            width: 100%;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #e0f7ff;
+        }
+        
+        .divider {
+            height: 4px;
+            background: linear-gradient(to right, transparent, #f8b400, transparent);
+            margin: 30px auto;
+            width: 80%;
+            border-radius: 10px;
+        }
+        
+        .content {
+            padding: 40px 30px;
             text-align: center;
-            transform: translateY(-20px);
         }
         
-        .content-box h2 {
-            color: #2b5876;
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
+        h2 {
+            font-size: 2.3rem;
+            margin-bottom: 25px;
+            color: #f8b400;
+            position: relative;
+            display: inline-block;
         }
         
-        .content-box p {
-            font-size: 1.1rem;
-            margin-bottom: 1.8rem;
-            color: #555;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #f8b400;
+            border-radius: 2px;
         }
         
-        .contact-info {
-            background: #f0f8ff;
-            border-left: 4px solid #2b5876;
-            padding: 1.2rem;
-            border-radius: 6px;
-            margin-top: 1.5rem;
-        }
-        
-        .contact-info p {
-            margin-bottom: 0.5rem;
-        }
-        
-        .contact-email {
-            color: #2b5876;
-            font-weight: bold;
+        .message {
             font-size: 1.2rem;
-            text-decoration: none;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e0f7ff;
+        }
+        
+        .contact {
+            background: rgba(248, 180, 0, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(248, 180, 0, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
             transition: all 0.3s ease;
         }
         
-        .contact-email:hover {
-            color: #4e4376;
-            text-decoration: underline;
+        .contact:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(248, 180, 0, 0.2);
         }
         
-        /* Footer styling */
-        .footer {
-            background: #2b5876;
-            color: rgba(255,255,255,0.8);
+        .contact-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #f8b400;
+        }
+        
+        .email {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .email:hover {
+            background: rgba(248, 180, 0, 0.25);
+            transform: scale(1.05);
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+            padding: 20px;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            width: 220px;
             text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Responsive design */
-        @media (max-width: 600px) {
-            .header h1 {
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: #f8b400;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #f8b400;
+        }
+        
+        .feature p {
+            font-size: 0.9rem;
+            color: #c4e8ff;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+            color: #a0d0ff;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
                 font-size: 2rem;
             }
             
-            .content-box {
-                padding: 1.8rem 1.2rem;
+            .email {
+                font-size: 1.2rem;
+                padding: 8px 20px;
             }
             
-            .content-box h2 {
-                font-size: 1.5rem;
+            .features {
+                gap: 20px;
+            }
+            
+            .feature {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header, .content {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+            
+            .contact {
+                padding: 20px;
+            }
+            
+            .email {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>Umrah Asan</h1>
-        <p>Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours</p>
-    </header>
-    
-    <section class="maintenance-section">
-        <div class="content-box">
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-kaaba logo-icon"></i>
+                <h1>Umrah Asan</h1>
+            </div>
+            <p class="tagline">Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="content">
             <h2>We're Upgrading Our Website</h2>
-            <p>Exciting improvements are underway to serve you better! We're enhancing our booking system to provide you with a seamless experience for your holy Umrah journey.</p>
+            <p class="message">Exciting improvements are underway to serve you better! We're enhancing our booking system to provide you with a seamless experience for your holy Umrah journey.</p>
             
-            <div class="contact-info">
-                <p>For immediate assistance, please contact us:</p>
-                <a href="mailto:support@umrahasan.com" class="contact-email">support@umrahasan.com</a>
+            <div class="contact">
+                <p class="contact-title">For immediate assistance, please contact us:</p>
+                <a href="mailto:support@umrahasan.com" class="email">support@umrahasan.com</a>
             </div>
         </div>
-    </section>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-hotel"></i>
+                <h3>Trusted Hotels</h3>
+                <p>Premium accommodations near Haram with verified reviews</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-taxi"></i>
+                <h3>Reliable Transport</h3>
+                <p>Comfortable and punctual taxi services for all your needs</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Guided Tours</h3>
+                <p>Expert-led ziaraat tours to sacred Islamic sites</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 Umrah Asan. All rights reserved. Serving pilgrims with dedication.</p>
+        </div>
+    </div>
     
-    <footer class="footer">
-        <p>© 2023 Umrah Asan. All rights reserved.</p>
-    </footer>
+    <script>
+        // Simple animation for the features
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            
+            features.forEach((feature, index) => {
+                // Add delay for staggered animation
+                feature.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
 </body>
 </html>
