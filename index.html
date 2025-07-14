@@ -1,75 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Umrah Asan - Book Your Holy Umrah Trip</title>
-  <style>
-    body { 
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 50px;
-    }
-    .error {
-      color: #d32f2f;
-      margin-bottom: 20px;
-    }
-    .loading {
-      color: #1976d2;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div id="app-content">
-      <h1>Umrah Asan</h1>
-      <p class="loading">Loading application...</p>
-    </div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umrah Asan - Book Your Holy Umrah Trip | Hotels, Taxi & Ziaraat</title>
+    <meta name="description" content="Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours for your Umrah journey. Bank transfer payment, instant vouchers, 24/7 support." />
+    <meta name="author" content="Umrah Asan" />
 
-  <!-- SIMPLE RELIABLE SCRIPT LOADING -->
-  <script>
-    (function() {
-      const appContent = document.getElementById('app-content');
-      const startTime = Date.now();
-      
-      function showLoaded() {
-        appContent.innerHTML = `
-          <h1>Umrah Asan</h1>
-          <p>Application loaded successfully!</p>
-          <small>Loaded in ${(Date.now()-startTime)/1000}s</small>
-        `;
-      }
-      
-      function showError() {
-        appContent.innerHTML = `
-          <h1>Umrah Asan</h1>
-          <p class="error">Temporary Loading Issue</p>
-          <p>We're experiencing technical difficulties. Please try:</p>
-          <ul style="text-align: left; max-width: 300px; margin: 0 auto;">
-            <li>Refreshing the page</li>
-            <li>Coming back later</li>
-            <li>Contacting support@umrahasan.com</li>
-          </ul>
-          <p><button onclick="window.location.reload()">Refresh Page</button></p>
-        `;
-      }
+    <meta property="og:title" content="Umrah Asan - Book Your Holy Umrah Trip" />
+    <meta property="og:description" content="Trusted Umrah services - Hotels, Taxi & Ziaraat tours with transparent pricing and 24/7 support." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-      // Try loading from primary location
-      const script = document.createElement('script');
-      script.src = '/js/main.js?v=' + Date.now();
-      script.onload = showLoaded;
-      script.onerror = showError;
-      document.body.appendChild(script);
-    })();
-  </script>
-</body>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
