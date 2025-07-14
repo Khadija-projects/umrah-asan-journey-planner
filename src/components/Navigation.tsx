@@ -57,7 +57,7 @@ const Navigation = () => {
             </div>
             <Link to="/login">
               <Button variant="outline" size="sm">
-                Login
+                Guest Login
               </Button>
             </Link>
           </div>
@@ -104,7 +104,7 @@ const Navigation = () => {
                 <div className="px-3 py-2">
                   <Link to="/login">
                     <Button variant="outline" size="sm" className="w-full">
-                      Partner/Admin Login
+                      Guest Login
                     </Button>
                   </Link>
                 </div>

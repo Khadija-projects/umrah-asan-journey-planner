@@ -154,22 +154,22 @@ const Index = () => {
                   <label className="font-medium">Hotel Category</label>
                 </div>
                 <div className="space-y-2">
-                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
                     <div className="flex justify-between items-center">
                       <span>3 Star</span>
-                      <span className="text-sm text-green-600">$150/night</span>
+                      <span className="text-sm text-green-600">SAR 562/night</span>
                     </div>
                   </div>
                   <div className="p-3 border-2 border-primary rounded-lg bg-primary/5">
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-primary">4 Star</span>
-                      <span className="text-sm text-green-600 font-medium">$250/night</span>
+                      <span className="text-sm text-green-600 font-medium">SAR 937/night</span>
                     </div>
                   </div>
                   <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
                     <div className="flex justify-between items-center">
                       <span>5 Star</span>
-                      <span className="text-sm text-green-600">$400/night</span>
+                      <span className="text-sm text-green-600">SAR 1500/night</span>
                     </div>
                   </div>
                 </div>
@@ -182,12 +182,6 @@ const Index = () => {
                   <label className="font-medium">Room Type</label>
                 </div>
                 <div className="space-y-2">
-                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
-                    <div className="flex justify-between items-center">
-                      <span>Single Room</span>
-                      <span className="text-xs text-muted-foreground">Up to 1 Guest</span>
-                    </div>
-                  </div>
                   <div className="p-3 border-2 border-primary rounded-lg bg-primary/5">
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-primary">Double Room</span>
@@ -203,7 +197,7 @@ const Index = () => {
                   <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
                     <div className="flex justify-between items-center">
                       <span>Multi-sharing</span>
-                      <span className="text-xs text-muted-foreground">Up to 6 guests</span>
+                      <span className="text-xs text-muted-foreground">Up to 8 guests</span>
                     </div>
                   </div>
                 </div>
@@ -279,8 +273,8 @@ const Index = () => {
 
             <div className="flex justify-between items-center pt-6 border-t">
               <div>
-                <div className="text-2xl font-bold">$250 per night</div>
-                <div className="text-sm text-muted-foreground">1 Room • 1 Guest</div>
+                <div className="text-2xl font-bold">SAR 937 per night</div>
+                <div className="text-sm text-muted-foreground">1 Room • 2 Guests</div>
               </div>
               <div className="text-right">
                 <div className="text-sm text-muted-foreground mb-1">Payment Method</div>
@@ -291,6 +285,82 @@ const Index = () => {
             <Button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white" size="lg">
               Continue to Guest Details
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Reviews */}
+      <section className="py-16 px-4 bg-accent/20">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-primary mb-12">
+            What Our Pilgrims Say
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="hover:shadow-card transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "Excellent service! The hotel was walking distance to Haram and the taxi service was very reliable. Highly recommend!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-primary font-semibold">AH</span>
+                  </div>
+                  <div>
+                    <div className="font-medium">Ahmed Hassan</div>
+                    <div className="text-sm text-muted-foreground">Pakistan</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-card transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "Amazing experience! The ziaraat guide was very knowledgeable and the whole process was smooth."
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-primary font-semibold">SF</span>
+                  </div>
+                  <div>
+                    <div className="font-medium">Siti Fatimah</div>
+                    <div className="text-sm text-muted-foreground">Indonesia</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-card transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "Perfect service from booking to arrival. The instant voucher system made everything easy!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-primary font-semibold">MA</span>
+                  </div>
+                  <div>
+                    <div className="font-medium">Mohammed Ali</div>
+                    <div className="text-sm text-muted-foreground">India</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
