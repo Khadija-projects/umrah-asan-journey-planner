@@ -7,18 +7,34 @@
     <meta name="description" content="Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours for your Umrah journey. Bank transfer payment, instant vouchers, 24/7 support." />
     <meta name="author" content="Umrah Asan" />
 
+    <!-- Open Graph / Facebook -->
     <meta property="og:title" content="Umrah Asan - Book Your Holy Umrah Trip" />
     <meta property="og:description" content="Trusted Umrah services - Hotels, Taxi & Ziaraat tours with transparent pricing and 24/7 support." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://umrahasan.com/" />
+    <meta property="og:image" content="https://umrahasan.com/og-image.jpg" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:site" content="@umrahasan" />
+    <meta name="twitter:image" content="https://umrahasan.com/og-image.jpg" />
+
+    <!-- Preload important resources -->
+    <link rel="preload" href="/assets/main.css" as="style" />
+    <link rel="preload" href="/js/main.js" as="script" />
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Production Script (for GitHub Pages) -->
+    <script type="module" src="/js/main.js"></script>
+    
+    <!-- Fallback for development -->
+    <script>
+      if (window.location.hostname === 'localhost') {
+        document.write('<script type="module" src="/src/main.tsx"><\/script>');
+      }
+    </script>
   </body>
 </html>
