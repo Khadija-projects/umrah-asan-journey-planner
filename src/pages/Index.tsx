@@ -15,8 +15,14 @@ import {
   CreditCard,
   Clock,
   Shield,
-  Star
+  Star,
+  Calendar,
+  Users,
+  Home,
+  CalendarDays
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Index = () => {
   const services = [
@@ -47,7 +53,7 @@ const Index = () => {
       buttonVariant: "default" as const,
     },
     {
-      title: "Sacred Ziaraat Tours",
+      title: "Blessed Ziaraat Tours",
       description: "Visit blessed sites with experienced local guides",
       icon: MapPin,
       features: [
@@ -98,25 +104,6 @@ const Index = () => {
             Stay closer to Haram with trusted hotels, easy taxi booking & guided ziaraat — all in one place.
           </p>
           
-          {/* Quick Contact Actions */}
-          <div className="flex justify-center gap-4 mb-8">
-            <a
-              href="https://wa.me/966123456789"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-            >
-              <MessageCircle className="w-5 h-5" />
-              WhatsApp Support
-            </a>
-            <a
-              href="tel:+966123456789"
-              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg font-medium transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              Call Now
-            </a>
-          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
             <Link to="/hotels">
@@ -134,6 +121,176 @@ const Index = () => {
                 Explore Ziaraat
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Booking Form */}
+      <section className="py-16 px-4 bg-background">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-card rounded-lg border p-6 shadow-lg">
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <MapPin className="w-5 h-5 text-primary" />
+                <h3 className="text-lg font-semibold">Select City</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 border-2 border-primary rounded-lg bg-primary/5">
+                  <h4 className="font-medium text-primary">Makkah</h4>
+                  <p className="text-sm text-muted-foreground">Holy Kaaba</p>
+                </div>
+                <div className="p-4 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                  <h4 className="font-medium">Madina</h4>
+                  <p className="text-sm text-muted-foreground">Prophet's Mosque</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              {/* Hotel Category */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Star className="w-4 h-4 text-primary" />
+                  <label className="font-medium">Hotel Category</label>
+                </div>
+                <div className="space-y-2">
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <div className="flex justify-between items-center">
+                      <span>3 Star</span>
+                      <span className="text-sm text-green-600">$150/night</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border-2 border-primary rounded-lg bg-primary/5">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-primary">4 Star</span>
+                      <span className="text-sm text-green-600 font-medium">$250/night</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <div className="flex justify-between items-center">
+                      <span>5 Star</span>
+                      <span className="text-sm text-green-600">$400/night</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Room Type */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Home className="w-4 h-4 text-primary" />
+                  <label className="font-medium">Room Type</label>
+                </div>
+                <div className="space-y-2">
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <div className="flex justify-between items-center">
+                      <span>Single Room</span>
+                      <span className="text-xs text-muted-foreground">Up to 1 Guest</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border-2 border-primary rounded-lg bg-primary/5">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-primary">Double Room</span>
+                      <span className="text-xs text-primary">Up to 2 guests</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <div className="flex justify-between items-center">
+                      <span>Quad Room</span>
+                      <span className="text-xs text-muted-foreground">Up to 4 guests</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <div className="flex justify-between items-center">
+                      <span>Multi-sharing</span>
+                      <span className="text-xs text-muted-foreground">Up to 6 guests</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Distance from Haram */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <MapPin className="w-4 h-4 text-primary" />
+                  <label className="font-medium">Distance from Haram</label>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors text-center">
+                    <div className="font-medium">200m</div>
+                    <div className="text-xs text-muted-foreground">Walking distance</div>
+                  </div>
+                  <div className="p-3 border-2 border-primary rounded-lg bg-primary/5 text-center">
+                    <div className="font-medium text-primary">500m</div>
+                    <div className="text-xs text-primary">5-7 min walk</div>
+                  </div>
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors text-center">
+                    <div className="font-medium">800m</div>
+                    <div className="text-xs text-muted-foreground">8-10 min walk</div>
+                  </div>
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors text-center">
+                    <div className="font-medium">1km+</div>
+                    <div className="text-xs text-muted-foreground">Shuttle service</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dates and Guests */}
+              <div className="space-y-4">
+                <div>
+                  <label className="font-medium mb-2 block">Check-in Date</label>
+                  <Input type="date" placeholder="dd----yyyy" />
+                </div>
+                <div>
+                  <label className="font-medium mb-2 block">Check-out Date</label>
+                  <Input type="date" placeholder="dd----yyyy" />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="font-medium mb-2 block text-sm">Rooms</label>
+                    <Select defaultValue="1">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1">1 Room</SelectItem>
+                        <SelectItem value="2">2 Rooms</SelectItem>
+                        <SelectItem value="3">3 Rooms</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="font-medium mb-2 block text-sm">Guests</label>
+                    <Select defaultValue="1">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1">1 Guest</SelectItem>
+                        <SelectItem value="2">2 Guests</SelectItem>
+                        <SelectItem value="3">3 Guests</SelectItem>
+                        <SelectItem value="4">4 Guests</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center pt-6 border-t">
+              <div>
+                <div className="text-2xl font-bold">$250 per night</div>
+                <div className="text-sm text-muted-foreground">1 Room • 1 Guest</div>
+              </div>
+              <div className="text-right">
+                <div className="text-sm text-muted-foreground mb-1">Payment Method</div>
+                <div className="text-green-600 font-medium">Cash on Arrival</div>
+              </div>
+            </div>
+            
+            <Button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white" size="lg">
+              Continue to Guest Details
+            </Button>
           </div>
         </div>
       </section>
@@ -166,7 +323,7 @@ const Index = () => {
       <section className="py-16 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-primary mb-12">
-            Our Sacred Services
+            Our Blessed Services
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => (
@@ -273,6 +430,26 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating Contact Buttons */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a
+          href="https://wa.me/966123456789"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-12 h-12 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+          title="WhatsApp Support"
+        >
+          <MessageCircle className="w-6 h-6" />
+        </a>
+        <a
+          href="tel:+966123456789"
+          className="w-12 h-12 bg-yellow-600 hover:bg-yellow-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+          title="Call Now"
+        >
+          <Phone className="w-6 h-6" />
+        </a>
+      </div>
 
       <Footer />
     </div>
