@@ -2,20 +2,23 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin, Phone, Mail } from "lucide-react";
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageSelector from './LanguageSelector';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Ziaraat", path: "/ziaraat" },
-    { name: "Taxi Booking", path: "/taxi" },
-    { name: "Umrah Guide", path: "/guide" },
-    { name: "Train Details", path: "/train" },
-    { name: "Blogs", path: "/blogs" },
-    { name: "FAQs", path: "/faq" },
-    { name: "About Us", path: "/about" },
+    { name: t('nav.home'), path: "/" },
+    { name: t('nav.ziaraat'), path: "/ziaraat" },
+    { name: t('nav.taxi'), path: "/taxi" },
+    { name: t('nav.guide'), path: "/guide" },
+    { name: t('nav.train'), path: "/train" },
+    { name: t('nav.blogs'), path: "/blogs" },
+    { name: t('nav.faq'), path: "/faq" },
+    { name: t('nav.about'), path: "/about" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -49,15 +52,16 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Contact & Login */}
+          {/* Contact, Language & Login */}
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Phone className="w-4 h-4" />
               <span>+966 123 456 789</span>
             </div>
+            <LanguageSelector />
             <Link to="/login">
               <Button variant="outline" size="sm">
-                Guest Login
+                {t('nav.guestLogin')}
               </Button>
             </Link>
           </div>
@@ -101,10 +105,11 @@ const Navigation = () => {
                   <Mail className="w-4 h-4" />
                   <span>info@umrahasan.com</span>
                 </div>
-                <div className="px-3 py-2">
+                <div className="px-3 py-2 space-y-2">
+                  <LanguageSelector />
                   <Link to="/login">
                     <Button variant="outline" size="sm" className="w-full">
-                      Guest Login
+                      {t('nav.guestLogin')}
                     </Button>
                   </Link>
                 </div>
