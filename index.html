@@ -1,20 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Umrah Asan - Coming Soon</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <title>Umrah Asan - Book Your Holy Umrah Trip</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header styling */
+        .header {
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Main content styling */
+        .maintenance-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(-20px);
+        }
+        
+        .content-box h2 {
+            color: #2b5876;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .content-box p {
+            font-size: 1.1rem;
+            margin-bottom: 1.8rem;
+            color: #555;
+        }
+        
+        .contact-info {
+            background: #f0f8ff;
+            border-left: 4px solid #2b5876;
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-email {
+            color: #2b5876;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-email:hover {
+            color: #4e4376;
+            text-decoration: underline;
+        }
+        
+        /* Footer styling */
+        .footer {
+            background: #2b5876;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content-box {
+                padding: 1.8rem 1.2rem;
+            }
+            
+            .content-box h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="header">
+    <header class="header">
         <h1>Umrah Asan</h1>
-    </div>
-    <div class="content-box">
-        <h2>We're Upgrading Our Website</h2>
-        <p>Exciting improvements are underway to serve you better!</p>
-        <div class="contact">
-            <p>Contact us:<br><strong>support@umrahasan.com</strong></p>
+        <p>Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours</p>
+    </header>
+    
+    <section class="maintenance-section">
+        <div class="content-box">
+            <h2>We're Upgrading Our Website</h2>
+            <p>Exciting improvements are underway to serve you better! We're enhancing our booking system to provide you with a seamless experience for your holy Umrah journey.</p>
+            
+            <div class="contact-info">
+                <p>For immediate assistance, please contact us:</p>
+                <a href="mailto:support@umrahasan.com" class="contact-email">support@umrahasan.com</a>
+            </div>
         </div>
-    </div>
+    </section>
+    
+    <footer class="footer">
+        <p>© 2023 Umrah Asan. All rights reserved.</p>
+    </footer>
 </body>
 </html>
