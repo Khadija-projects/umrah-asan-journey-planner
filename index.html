@@ -1,67 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Umrah Asan - Book Your Holy Umrah Trip | Hotels, Taxi & Ziaraat</title>
-    <meta name="description" content="Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours for your Umrah journey. Bank transfer payment, instant vouchers, 24/7 support." />
-    <meta name="author" content="Umrah Asan" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umrah Asan - Book Your Holy Umrah Trip | Hotels, Taxi & Ziaraat</title>
+  <meta name="description" content="Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours for your Umrah journey. Bank transfer payment, instant vouchers, 24/7 support.">
+  <meta name="author" content="Umrah Asan">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Umrah Asan - Book Your Holy Umrah Trip" />
-    <meta property="og:description" content="Trusted Umrah services - Hotels, Taxi & Ziaraat tours with transparent pricing and 24/7 support." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://umrahasan.com/" />
-    <meta property="og:image" content="https://umrahasan.com/images/og-image.jpg" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Umrah Asan - Book Your Holy Umrah Trip">
+  <meta property="og:description" content="Trusted Umrah services - Hotels, Taxi & Ziaraat tours with transparent pricing and 24/7 support.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://umrahasan.com/">
+  <meta property="og:image" content="https://umrahasan.com/images/social-preview.jpg">
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@umrahasan" />
-    <meta name="twitter:image" content="https://umrahasan.com/images/og-image.jpg" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@umrahasan">
+  <meta name="twitter:creator" content="@umrahasan">
+  <meta name="twitter:image" content="https://umrahasan.com/images/social-preview.jpg">
 
-    <!-- Preconnect to important origins -->
-    <link rel="preconnect" href="https://umrahasan.com" crossorigin>
-    
-    <!-- Inline critical CSS (remove if not using CSS) -->
-    <style>
-      #root { min-height: 100vh; }
-      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    </style>
-  </head>
+  <!-- Critical CSS -->
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.5;
+      color: #333;
+    }
+    #root {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .loading-error {
+      padding: 2rem;
+      text-align: center;
+      margin: auto;
+      max-width: 600px;
+    }
+    .loading-error h1 {
+      color: #d32f2f;
+      margin-bottom: 1rem;
+    }
+    .loading-error a {
+      color: #1976d2;
+      text-decoration: underline;
+    }
+  </style>
+</head>
 
-  <body>
-    <div id="root"></div>
-    
-    <!-- Modern script loading with fallbacks -->
-    <script>
-      // Load production JS
-      function loadScript(src) {
+<body>
+  <div id="root">
+    <!-- Dynamic content will load here -->
+  </div>
+
+  <!-- Smart Resource Loading -->
+  <script>
+    (function() {
+      const root = document.getElementById('root');
+      const startTime = Date.now();
+      
+      function showError(message) {
+        root.innerHTML = `
+          <div class="loading-error">
+            <h1>Application Loading Issue</h1>
+            <p>${message}</p>
+            <p>Page loaded in ${((Date.now() - startTime)/1000).toFixed(2)} seconds</p>
+            <p>Please <a href="/">refresh</a> or try again later.</p>
+            <p>If the problem continues, contact <a href="mailto:support@umrahasan.com">support@umrahasan.com</a></p>
+          </div>
+        `;
+      }
+
+      function loadScript(src, isModule = true) {
         return new Promise((resolve, reject) => {
           const script = document.createElement('script');
           script.src = src;
-          script.type = 'module';
-          script.crossOrigin = 'anonymous';
+          if (isModule) script.type = 'module';
           script.onload = resolve;
           script.onerror = () => reject(new Error(`Failed to load ${src}`));
           document.body.appendChild(script);
         });
       }
 
-      // Try production build first, then development if needed
+      // Try production JS first
       loadScript('/js/main.js')
         .catch(() => {
-          console.warn('Production JS not found, trying development version');
-          return loadScript('/src/main.js');
+          console.log('Production JS not found, trying alternate location');
+          return loadScript('/assets/js/main.js');
+        })
+        .catch(() => {
+          console.log('Alternate JS not found, trying CDN fallback');
+          return loadScript('https://cdn.umrahasan.com/js/main.js');
         })
         .catch((err) => {
-          console.error('All script loading failed:', err);
-          document.getElementById('root').innerHTML = `
-            <div style="padding: 2rem; text-align: center;">
-              <h1>Application Error</h1>
-              <p>Please refresh the page or try again later.</p>
-            </div>
-          `;
+          showError(`Technical difficulty: ${err.message}`);
+          console.error('Script loading failed:', err);
         });
-    </script>
-  </body>
+    })();
+  </script>
+
+  <!-- Analytics (optional) -->
+  <script defer src="/js/analytics.js"></script>
+</body>
 </html>
