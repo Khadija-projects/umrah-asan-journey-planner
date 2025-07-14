@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+// Fixed imports to use default exports
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
