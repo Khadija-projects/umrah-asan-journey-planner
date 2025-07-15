@@ -154,23 +154,14 @@ const Index = () => {
                   <label className="font-medium">Hotel Category</label>
                 </div>
                 <div className="space-y-2">
-                    <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
-                    <div className="flex justify-between items-center">
-                      <span>3 Star</span>
-                      <span className="text-sm text-green-600">SAR 562/night</span>
-                    </div>
+                  <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
+                    <span>3 Star</span>
                   </div>
                   <div className="p-3 border-2 border-primary rounded-lg bg-primary/5">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-primary">4 Star</span>
-                      <span className="text-sm text-green-600 font-medium">SAR 937/night</span>
-                    </div>
+                    <span className="font-medium text-primary">4 Star</span>
                   </div>
                   <div className="p-3 border rounded-lg hover:border-primary/50 cursor-pointer transition-colors">
-                    <div className="flex justify-between items-center">
-                      <span>5 Star</span>
-                      <span className="text-sm text-green-600">SAR 1500/night</span>
-                    </div>
+                    <span>5 Star</span>
                   </div>
                 </div>
               </div>
@@ -231,13 +222,15 @@ const Index = () => {
 
               {/* Dates and Guests */}
               <div className="space-y-4">
-                <div>
-                  <label className="font-medium mb-2 block">Check-in Date</label>
-                  <Input type="date" placeholder="dd----yyyy" />
-                </div>
-                <div>
-                  <label className="font-medium mb-2 block">Check-out Date</label>
-                  <Input type="date" placeholder="dd----yyyy" />
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="font-medium mb-2 block text-sm">Check-in</label>
+                    <Input type="date" />
+                  </div>
+                  <div>
+                    <label className="font-medium mb-2 block text-sm">Check-out</label>
+                    <Input type="date" />
+                  </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
@@ -273,17 +266,17 @@ const Index = () => {
 
             <div className="flex justify-between items-center pt-6 border-t">
               <div>
-                <div className="text-2xl font-bold">SAR 937 per night</div>
+                <div className="text-lg text-muted-foreground">Selected: 4 Star Hotel • Double Room</div>
                 <div className="text-sm text-muted-foreground">1 Room • 2 Guests</div>
               </div>
               <div className="text-right">
                 <div className="text-sm text-muted-foreground mb-1">Payment Method</div>
-                <div className="text-green-600 font-medium">Cash on Arrival</div>
+                <div className="text-green-600 font-medium">Bank Transfer</div>
               </div>
             </div>
             
             <Button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white" size="lg">
-              Continue to Guest Details
+              Get Quote & Continue
             </Button>
           </div>
         </div>
@@ -502,20 +495,20 @@ const Index = () => {
       </section>
 
       {/* Floating Contact Buttons */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+      <div className="fixed bottom-6 right-6 flex flex-col space-y-3 z-40">
         <a
           href="https://wa.me/966123456789"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-12 h-12 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
-          title="WhatsApp Support"
+          className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          title="WhatsApp"
         >
           <MessageCircle className="w-6 h-6" />
         </a>
         <a
           href="tel:+966123456789"
-          className="w-12 h-12 bg-yellow-600 hover:bg-yellow-700 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
-          title="Call Now"
+          className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          title="Call Us"
         >
           <Phone className="w-6 h-6" />
         </a>

@@ -14,13 +14,274 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_reference: string | null
+          check_in_date: string
+          check_out_date: string
+          created_at: string
+          guest_id: string
+          hotel_id: string
+          id: string
+          num_guests: number
+          num_rooms: number
+          payment_method: string | null
+          payment_status: string
+          room_id: string
+          special_requests: string | null
+          total_amount: number
+          updated_at: string
+          voucher_url: string | null
+        }
+        Insert: {
+          booking_reference?: string | null
+          check_in_date: string
+          check_out_date: string
+          created_at?: string
+          guest_id: string
+          hotel_id: string
+          id?: string
+          num_guests: number
+          num_rooms?: number
+          payment_method?: string | null
+          payment_status?: string
+          room_id: string
+          special_requests?: string | null
+          total_amount: number
+          updated_at?: string
+          voucher_url?: string | null
+        }
+        Update: {
+          booking_reference?: string | null
+          check_in_date?: string
+          check_out_date?: string
+          created_at?: string
+          guest_id?: string
+          hotel_id?: string
+          id?: string
+          num_guests?: number
+          num_rooms?: number
+          payment_method?: string | null
+          payment_status?: string
+          room_id?: string
+          special_requests?: string | null
+          total_amount?: number
+          updated_at?: string
+          voucher_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_guest_id_fkey"
+            columns: ["guest_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_hotel_id_fkey"
+            columns: ["hotel_id"]
+            isOneToOne: false
+            referencedRelation: "hotels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hotels: {
+        Row: {
+          amenities: Json | null
+          category: number
+          city: string
+          created_at: string
+          description: string | null
+          distance_from_haram: number
+          id: string
+          images: Json | null
+          is_active: boolean | null
+          name: string
+          partner_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          amenities?: Json | null
+          category: number
+          city: string
+          created_at?: string
+          description?: string | null
+          distance_from_haram: number
+          id?: string
+          images?: Json | null
+          is_active?: boolean | null
+          name: string
+          partner_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amenities?: Json | null
+          category?: number
+          city?: string
+          created_at?: string
+          description?: string | null
+          distance_from_haram?: number
+          id?: string
+          images?: Json | null
+          is_active?: boolean | null
+          name?: string
+          partner_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hotels_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_registrations: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          business_license: string | null
+          company_name: string
+          contact_person: string
+          created_at: string
+          email: string
+          id: string
+          phone: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          business_license?: string | null
+          company_name: string
+          contact_person: string
+          created_at?: string
+          email: string
+          id?: string
+          phone: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          business_license?: string | null
+          company_name?: string
+          contact_person?: string
+          created_at?: string
+          email?: string
+          id?: string
+          phone?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_registrations_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          nationality: string | null
+          phone: string | null
+          updated_at: string
+          user_id: string
+          user_type: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          nationality?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+          user_type?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          nationality?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+          user_type?: string
+        }
+        Relationships: []
+      }
+      rooms: {
+        Row: {
+          available_rooms: number | null
+          created_at: string
+          hotel_id: string
+          id: string
+          max_guests: number
+          price_per_night: number
+          room_type: string
+          updated_at: string
+        }
+        Insert: {
+          available_rooms?: number | null
+          created_at?: string
+          hotel_id: string
+          id?: string
+          max_guests: number
+          price_per_night: number
+          room_type: string
+          updated_at?: string
+        }
+        Update: {
+          available_rooms?: number | null
+          created_at?: string
+          hotel_id?: string
+          id?: string
+          max_guests?: number
+          price_per_night?: number
+          room_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rooms_hotel_id_fkey"
+            columns: ["hotel_id"]
+            isOneToOne: false
+            referencedRelation: "hotels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_booking_reference: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

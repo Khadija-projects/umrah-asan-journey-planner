@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin, Phone, Mail } from "lucide-react";
+import { Menu, X, MapPin, Phone, Mail, User, LogOut } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAuth } from '@/contexts/AuthContext';
 import LanguageSelector from './LanguageSelector';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { t } = useLanguage();
+  const { user, profile, signOut } = useAuth();
 
   const navLinks = [
     { name: t('nav.home'), path: "/" },
@@ -59,11 +61,32 @@ const Navigation = () => {
               <span>+966 123 456 789</span>
             </div>
             <LanguageSelector />
-            <Link to="/login">
-              <Button variant="outline" size="sm">
-                {t('nav.guestLogin')}
-              </Button>
-            </Link>
+            
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <Link to="/guest-dashboard">
+                  <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                    <User className="w-4 h-4" />
+                    <span>{profile?.full_name || 'Dashboard'}</span>
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={signOut}
+                  className="flex items-center space-x-1"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </Button>
+              </div>
+            ) : (
+              <Link to="/login">
+                <Button variant="outline" size="sm">
+                  Guest Login
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -107,11 +130,31 @@ const Navigation = () => {
                 </div>
                 <div className="px-3 py-2 space-y-2">
                   <LanguageSelector />
-                  <Link to="/login">
-                    <Button variant="outline" size="sm" className="w-full">
-                      {t('nav.guestLogin')}
-                    </Button>
-                  </Link>
+                  {user ? (
+                    <div className="space-y-2">
+                      <Link to="/guest-dashboard">
+                        <Button variant="outline" size="sm" className="w-full flex items-center space-x-1">
+                          <User className="w-4 h-4" />
+                          <span>{profile?.full_name || 'Dashboard'}</span>
+                        </Button>
+                      </Link>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="w-full flex items-center space-x-1"
+                        onClick={signOut}
+                      >
+                        <LogOut className="w-4 h-4" />
+                        <span>Logout</span>
+                      </Button>
+                    </div>
+                  ) : (
+                    <Link to="/login">
+                      <Button variant="outline" size="sm" className="w-full">
+                        Guest Login
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
