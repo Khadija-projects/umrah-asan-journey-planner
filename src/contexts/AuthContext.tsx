@@ -40,9 +40,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchProfile = async (userId: string) => {
     try {
+      setError(null);
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -51,12 +53,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error && error.code !== 'PGRST116') {
         console.error('Error fetching profile:', error);
+        setError('Failed to load profile');
         return;
       }
 
       setProfile(data as Profile);
     } catch (error) {
       console.error('Error fetching profile:', error);
+      setError('Failed to load profile');
     }
   };
 
@@ -86,10 +90,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        fetchProfile(session.user.id);
+        setTimeout(() => {
+          fetchProfile(session.user.id);
+        }, 0);
       } else {
         setLoading(false);
       }
+    }).catch((error) => {
+      console.error('Error getting session:', error);
+      setError('Failed to initialize authentication');
+      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
