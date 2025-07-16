@@ -21,11 +21,10 @@ const LanguageSelector = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="flex items-center space-x-2 hover:bg-accent"
+          className="flex items-center space-x-1 hover:bg-accent px-2"
         >
-          <Globe className="w-4 h-4" />
-          <span className="hidden md:inline">{currentLanguage?.flag}</span>
-          <span className="hidden lg:inline">{t('nav.language')}</span>
+          <span className="text-lg">{currentLanguage?.flag}</span>
+          <span className="text-xs font-medium">{currentLanguage?.code.toUpperCase()}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">

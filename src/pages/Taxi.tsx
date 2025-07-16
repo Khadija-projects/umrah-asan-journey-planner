@@ -21,7 +21,7 @@ const Taxi = () => {
     {
       icon: Car,
       title: "Ziaraat Trips",
-      description: "Private vehicle for visiting sacred sites with flexible timing and comfortable seating.",
+      description: "Private vehicle for visiting blessing sites with flexible timing and comfortable seating.",
       features: ["Full day tours", "Half day options", "Custom itineraries", "Air-conditioned vehicles"]
     }
   ];
@@ -38,7 +38,7 @@ const Taxi = () => {
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
             Safe, comfortable, and trusted transportation with verified drivers who understand 
-            the sacred nature of your journey.
+            the blessing nature of your journey.
           </p>
           <Button variant="holy" size="xl">
             Book Taxi Now

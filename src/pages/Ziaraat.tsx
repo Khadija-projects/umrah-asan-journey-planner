@@ -22,7 +22,7 @@ const Ziaraat = () => {
       name: "Jannat ul Baqi",
       city: "Madinah",
       distance: "500 m",
-      details: "Resting place of Prophet's family & Sahaba. Sacred cemetery.",
+      details: "Resting place of Prophet's family & Sahaba. Blessing cemetery.",
     },
     {
       name: "Mount Uhud",
@@ -64,7 +64,7 @@ const Ziaraat = () => {
       name: "Muzdalifah", 
       city: "Makkah",
       distance: "15 km",
-      details: "Pebble collection for Jamaraat. Sacred overnight stay.",
+      details: "Pebble collection for Jamaraat. Blessing overnight stay.",
     },
   ];
 
@@ -80,7 +80,7 @@ const Ziaraat = () => {
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
             Discover the holy places in Makkah & Madinah with verified local guides. 
-            Experience the spiritual journey through sacred history.
+            Experience the spiritual journey through blessing history.
           </p>
           <Button variant="holy" size="xl">
             Book Ziaraat Tour Now
@@ -99,7 +99,7 @@ const Ziaraat = () => {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Verified local guides with deep knowledge of Islamic history and sacred sites.
+                  Verified local guides with deep knowledge of Islamic history and blessing sites.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -107,7 +107,7 @@ const Ziaraat = () => {
             <Card className="text-center">
               <CardHeader>
                 <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                <CardTitle>All Sacred Sites</CardTitle>
+                <CardTitle>All Blessing Sites</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
@@ -135,7 +135,7 @@ const Ziaraat = () => {
       <section className="py-16 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-primary mb-12">
-            Sacred Sites & Holy Places
+            Blessing Sites & Holy Places
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,7 +168,7 @@ const Ziaraat = () => {
       <section className="py-16 px-4 bg-primary text-primary-foreground">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">
-            Ready for Your Sacred Journey?
+            Ready for Your Blessing Journey?
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8">
             Book your Ziaraat tour with verified guides and comfortable transportation. 

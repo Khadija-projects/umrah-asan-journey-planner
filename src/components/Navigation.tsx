@@ -36,7 +36,7 @@ const Navigation = () => {
             <div className="w-8 h-8 bg-gradient-holy rounded-full flex items-center justify-center">
               <MapPin className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-primary">Umrah Asan</span>
+            <span className="text-lg font-bold text-primary whitespace-nowrap">Umrah Asan</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -45,7 +45,7 @@ const Navigation = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-2 py-2 rounded-md text-xs font-medium transition-colors ${
                   isActive(link.path)
                     ? "bg-primary text-primary-foreground"
                     : "text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -56,12 +56,8 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Contact, Language & Login */}
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Phone className="w-4 h-4" />
-              <span>+966 123 456 789</span>
-            </div>
+          {/* Language & Login */}
+          <div className="hidden md:flex items-center space-x-3">
             <LanguageSelector />
             
             {user ? (
@@ -69,7 +65,7 @@ const Navigation = () => {
                 <Link to="/guest-dashboard">
                   <Button variant="outline" size="sm" className="flex items-center space-x-1">
                     <User className="w-4 h-4" />
-                    <span>{profile?.full_name || 'Dashboard'}</span>
+                    <span className="text-xs">{profile?.full_name || 'Dashboard'}</span>
                   </Button>
                 </Link>
                 <Button 
@@ -79,13 +75,13 @@ const Navigation = () => {
                   className="flex items-center space-x-1"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <span className="text-xs">Logout</span>
                 </Button>
               </div>
             ) : (
               <Link to="/login">
                 <Button variant="outline" size="sm">
-                  Guest Login
+                  <span className="text-xs">Guest Login</span>
                 </Button>
               </Link>
             )}
@@ -122,10 +118,6 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="pt-4 border-t">
-                <div className="flex items-center space-x-2 px-3 py-2 text-sm text-muted-foreground">
-                  <Phone className="w-4 h-4" />
-                  <span>+966 123 456 789</span>
-                </div>
                 <div className="flex items-center space-x-2 px-3 py-2 text-sm text-muted-foreground">
                   <Mail className="w-4 h-4" />
                   <span>info@umrahasan.com</span>

@@ -17,7 +17,7 @@ const Footer = () => {
               <span className="text-xl font-bold">Umrah Asan</span>
             </div>
             <p className="text-primary-foreground/80 text-sm">
-              Making your sacred journey easier than ever with trusted services, 
+              Making your blessing journey easier than ever with trusted services, 
               transparent pricing, and genuine support.
             </p>
           </div>
@@ -99,7 +99,7 @@ const Footer = () => {
               </div>
               <div className="mt-4 p-3 bg-primary-foreground/10 rounded-lg">
                 <p className="text-xs">
-                  <strong>24/7 Support:</strong> We're always here to help with your sacred journey.
+                  <strong>24/7 Support:</strong> We're always here to help with your blessing journey.
                 </p>
               </div>
             </div>

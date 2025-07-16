@@ -72,29 +72,58 @@ const Index = () => {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-holy">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="text-center">
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Your Trusted Partner for
-                <span className="block text-gold">Blessed Umrah Journey</span>
+                Book Your Blessing
+                <span className="block text-golden">Umrah Journey</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-                Experience the spiritual journey of a lifetime with our comprehensive Umrah services in Makkah and Madinah
+              <p className="text-lg md:text-xl text-white/90 mb-8 max-w-4xl mx-auto">
+                Premium hotel accommodations in Makkah and Madina with flexible Cash on Arrival payments
               </p>
+              
+              {/* Key Features */}
+              <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm text-white/80">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-golden rounded-full"></div>
+                  <span>No advance payment required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-golden rounded-full"></div>
+                  <span>Instant voucher generation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-golden rounded-full"></div>
+                  <span>24/7 support</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/ziaraat">
-                  <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6">
-                    Start Your Journey
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </Link>
-                <Link to="/guide">
-                  <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10 text-lg px-8 py-6">
-                    Read Umrah Guide
-                  </Button>
-                </Link>
+                <Button 
+                  size="lg" 
+                  className="bg-golden hover:bg-golden/90 text-primary-foreground px-6 text-lg py-6"
+                  onClick={() => navigate('/ziaraat')}
+                >
+                  Hotel Booking
+                </Button>
+                <Button 
+                  size="lg" 
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 text-lg py-6"
+                  onClick={() => navigate('/taxi')}
+                >
+                  Taxi Booking
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white text-white hover:bg-white hover:text-primary px-6 text-lg py-6"
+                  onClick={() => navigate('/ziaraat')}
+                >
+                  Explore Ziaraat
+                </Button>
               </div>
             </div>
           </div>
@@ -199,7 +228,7 @@ const Index = () => {
               What Our Pilgrims Say
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Hear from thousands of satisfied pilgrims who trusted us with their sacred journey
+              Hear from thousands of satisfied pilgrims who trusted us with their blessing journey
             </p>
           </div>
           
@@ -230,7 +259,7 @@ const Index = () => {
       <section className="py-20 bg-gradient-holy">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Begin Your Sacred Journey?
+            Ready to Begin Your Blessing Journey?
           </h2>
           <p className="text-xl text-white/90 mb-8">
             Join thousands of pilgrims who have trusted us with their Umrah experience

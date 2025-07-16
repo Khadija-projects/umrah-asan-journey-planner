@@ -24,7 +24,7 @@ const Blogs = () => {
       author: "Umrah Asan Team",
       date: "December 10, 2024",
       readTime: "6 min read",
-      category: "Sacred Places",
+      category: "Blessing Places",
       slug: "finding-serenity-holy-madina"
     }
   ];

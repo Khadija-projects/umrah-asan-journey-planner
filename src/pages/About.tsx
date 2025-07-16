@@ -8,7 +8,7 @@ const About = () => {
     {
       icon: Heart,
       title: "Spiritual Respect",
-      description: "We understand the sacred nature of your journey and treat every pilgrim with utmost respect and care."
+      description: "We understand the blessing nature of your journey and treat every pilgrim with utmost respect and care."
     },
     {
       icon: Shield,
@@ -38,7 +38,7 @@ const About = () => {
             About Umrah Asan
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Making your sacred journey easier than ever with trusted services, 
+            Making your blessing journey easier than ever with trusted services, 
             transparent pricing, and genuine human support.
           </p>
         </div>
@@ -54,7 +54,7 @@ const About = () => {
             <CardContent className="prose prose-lg max-w-none text-center">
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Umrah Asan was born from a simple belief: every pilgrim deserves a hassle-free, 
-                trustworthy experience when planning their sacred journey. We witnessed too many 
+                trustworthy experience when planning their blessing journey. We witnessed too many 
                 travelers struggling with complicated booking processes, hidden fees, and unreliable services.
               </p>
               <p className="text-muted-foreground leading-relaxed">
@@ -115,7 +115,7 @@ const About = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   To deliver hassle-free bookings, transparent payment options, verified partners 
                   & genuine local help so pilgrims can focus only on worship. Every service we 
-                  provide is designed to honor the sacred nature of your journey.
+                  provide is designed to honor the blessing nature of your journey.
                 </p>
               </CardContent>
             </Card>

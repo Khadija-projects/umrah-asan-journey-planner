@@ -19,7 +19,7 @@ const BlogPost = () => {
       <h2>Introduction</h2>
       <p>Holy Makkah — the birthplace of Prophet Muhammad (PBUH) — holds a special place in every Muslim's heart. Millions of pilgrims travel here each year to perform Umrah and Hajj, seeking forgiveness, blessings, and closeness to Allah Almighty. But beyond the Kaaba, what else makes Makkah so deeply spiritual and unique?</p>
 
-      <h2>The Sacred Masjid al-Haram</h2>
+      <h2>The Blessing Masjid al-Haram</h2>
       <p>At the heart of Makkah lies Masjid al-Haram, the largest mosque in the world and the home of the Holy Kaaba. Pilgrims from every corner of the globe gather here day and night, creating an atmosphere of unity, peace, and prayer.</p>
 
       <h2>Historic Landmarks</h2>
@@ -52,7 +52,7 @@ const BlogPost = () => {
       author: "Umrah Asan Team", 
       date: "December 10, 2024",
       readTime: "6 min read",
-      category: "Sacred Places",
+      category: "Blessing Places",
       content: `
       <h2>Introduction</h2>
       <p>Holy Madina — Al-Madinah Al-Munawwarah — is the second holiest city in Islam and the final resting place of Prophet Muhammad (PBUH). For every Muslim, a visit to Madina brings a sense of calmness, love, and connection to the Prophet's (PBUH) legacy.</p>

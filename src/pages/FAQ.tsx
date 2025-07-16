@@ -139,7 +139,7 @@ const FAQ = () => {
             Still Have Questions?
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8">
-            Our support team is available 24/7 to help with any questions about your sacred journey.
+            Our support team is available 24/7 to help with any questions about your blessing journey.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <div className="bg-primary-foreground/10 rounded-lg p-4">
