@@ -84,7 +84,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'Guest Login',
       adminLogin: 'Admin Login',
       partnerLogin: 'Partner Login',
-      language: 'Language'
+      language: 'Language',
+      logout: 'Logout'
     },
     hero: {
       title: 'Book Your Blessing',
@@ -232,7 +233,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'مہمان لاگ ان',
       adminLogin: 'ایڈمن لاگ ان',
       partnerLogin: 'پارٹنر لاگ ان',
-      language: 'زبان'
+      language: 'زبان',
+      logout: 'لاگ آؤٹ'
     },
     hero: {
       title: 'اپنا مبارک',
@@ -380,7 +382,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'गेस्ट लॉगिन',
       adminLogin: 'एडमिन लॉगिन',
       partnerLogin: 'पार्टनर लॉगिन',
-      language: 'भाषा'
+      language: 'भाषा',
+      logout: 'लॉगआउट'
     },
     hero: {
       title: 'अपना आशीर्वाद',
@@ -528,7 +531,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'Login Tamu',
       adminLogin: 'Login Admin',
       partnerLogin: 'Login Mitra',
-      language: 'Bahasa'
+      language: 'Bahasa',
+      logout: 'Keluar'
     },
     hero: {
       title: 'Pesan Perjalanan Berkah',
@@ -676,7 +680,72 @@ const translations: Record<Language, any> = {
       guestLogin: 'دخول الضيف',
       adminLogin: 'دخول المدير',
       partnerLogin: 'دخول الشريك',
-      language: 'اللغة'
+      language: 'اللغة',
+      logout: 'خروج'
+    },
+    hero: {
+      title: 'احجز رحلتك المباركة',
+      subtitle: 'رحلة العمرة',
+      description: 'إقامة فندقية فاخرة في مكة والمدينة مع مدفوعات مرنة عند الوصول',
+      hotelBooking: 'حجز فندق',
+      taxiBooking: 'حجز تاكسي',
+      exploreZiaraat: 'استكشف الزيارات',
+      noAdvancePayment: 'لا حاجة لدفع مقدم',
+      instantVoucher: 'إنشاء فوري للقسيمة',
+      support247: 'دعم 24/7'
+    },
+    bookingSteps: {
+      title: 'كيفية حجز عمرتك؟',
+      subtitle: 'اتبع هذه الخطوات البسيطة لحجز رحلة العمرة الكاملة',
+      getVisa: 'احصل على التأشيرة',
+      visaSubtitle: 'في أقل من 10 دقائق',
+      visaDesc: 'معالجة سريعة للتأشيرة مع تطبيقنا المبسط',
+      bookFlight: 'احجز رحلتك',
+      flightSubtitle: 'ابحث في 1000+ رحلة',
+      flightDesc: 'قارن واحجز من آلاف خيارات الرحلات',
+      bookHotel: 'احجز فندقك',
+      hotelSubtitle: '913 فندق متاح',
+      hotelDesc: 'اختر من الإقامة الفاخرة بالقرب من الحرم',
+      transfers: 'نقلاتك',
+      transfersSubtitle: 'احجز تاكسيك',
+      transfersDesc: 'نقل موثوق طوال رحلتك'
+    },
+    services: {
+      title: 'خدماتنا',
+      subtitle: 'خدمات عمرة شاملة لجعل رحلة حجك مريحة ومليئة بالروحانية',
+      ziaraatDesc: 'استكشف الأماكن المباركة في مكة والمدينة مع جولات مع مرشد',
+      taxiDesc: 'خدمات تاكسي آمنة وموثوقة للحجاج',
+      guideDesc: 'دليل عمرة كامل مع تعليمات خطوة بخطوة',
+      explorePlaces: 'استكشف الأماكن',
+      bookTaxi: 'احجز تاكسي',
+      readGuide: 'اقرأ الدليل'
+    },
+    whyChoose: {
+      title: 'لماذا تختار عمرة آسان؟',
+      subtitle: 'اختبر الفرق مع فريقنا المخصص والخدمات الشاملة',
+      trusted: 'موثوق وموثق',
+      trustedDesc: 'سنوات من الخبرة في خدمة الحجاج بإخلاص',
+      support: 'دعم 24/7',
+      supportDesc: 'مساعدة على مدار الساعة لجميع احتياجاتك',
+      spiritual: 'العناية الروحية',
+      spiritualDesc: 'إرشاد يغذي رحلتك الروحية',
+      quality: 'خدمة عالية الجودة',
+      qualityDesc: 'خدمات فاخرة بأسعار تنافسية'
+    },
+    testimonials: {
+      title: 'ماذا يقول حجاجنا',
+      subtitle: 'اسمع من آلاف الحجاج الراضين الذين وثقوا بنا في رحلتهم المباركة'
+    },
+    cta: {
+      title: 'هل أنت مستعد لبدء رحلتك المباركة؟',
+      subtitle: 'انضم إلى آلاف الحجاج الذين وثقوا بنا في تجربة العمرة',
+      getStarted: 'ابدأ اليوم'
+    },
+    stats: {
+      pilgrims: 'الحجاج المخدومون',
+      experience: 'سنوات الخبرة',
+      support: 'الدعم المتاح',
+      satisfaction: 'معدل الرضا'
     },
     home: {
       title: 'شريككم الموثوق لرحلة العمرة المباركة',
@@ -760,7 +829,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'Misafir Girişi',
       adminLogin: 'Admin Girişi',
       partnerLogin: 'Partner Girişi',
-      language: 'Dil'
+      language: 'Dil',
+      logout: 'Çıkış'
     },
     home: {
       title: 'Mübarek Umre Yolculuğunuz İçin Güvenilir Ortağınız',
@@ -844,7 +914,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'Log Masuk Tetamu',
       adminLogin: 'Log Masuk Admin',
       partnerLogin: 'Log Masuk Rakan Kongsi',
-      language: 'Bahasa'
+      language: 'Bahasa',
+      logout: 'Log Keluar'
     },
     home: {
       title: 'Rakan Kongsi Dipercayai untuk Perjalanan Umrah yang Berkat',
@@ -928,7 +999,8 @@ const translations: Record<Language, any> = {
       guestLogin: 'গেস্ট লগইন',
       adminLogin: 'অ্যাডমিন লগইন',
       partnerLogin: 'পার্টনার লগইন',
-      language: 'ভাষা'
+      language: 'ভাষা',
+      logout: 'লগআউট'
     },
     home: {
       title: 'আপনার পবিত্র উমরাহ যাত্রার জন্য বিশ্বস্ত সঙ্গী',

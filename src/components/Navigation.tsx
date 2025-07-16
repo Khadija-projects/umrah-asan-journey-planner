@@ -75,13 +75,13 @@ const Navigation = () => {
                   className="flex items-center space-x-1"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span className="text-xs">Logout</span>
+                  <span className="text-xs">{t('nav.logout')}</span>
                 </Button>
               </div>
             ) : (
               <Link to="/login">
                 <Button variant="outline" size="sm">
-                  <span className="text-xs">Guest Login</span>
+                  <span className="text-xs">{t('nav.guestLogin')}</span>
                 </Button>
               </Link>
             )}
@@ -132,22 +132,22 @@ const Navigation = () => {
                           <span>{profile?.full_name || 'Dashboard'}</span>
                         </Button>
                       </Link>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="w-full flex items-center space-x-1"
-                        onClick={signOut}
-                      >
-                        <LogOut className="w-4 h-4" />
-                        <span>Logout</span>
-                      </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="w-full flex items-center space-x-1"
+                          onClick={signOut}
+                        >
+                          <LogOut className="w-4 h-4" />
+                          <span>{t('nav.logout')}</span>
+                        </Button>
                     </div>
                   ) : (
-                    <Link to="/login">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Guest Login
-                      </Button>
-                    </Link>
+                      <Link to="/login">
+                        <Button variant="outline" size="sm" className="w-full">
+                          {t('nav.guestLogin')}
+                        </Button>
+                      </Link>
                   )}
                 </div>
               </div>
