@@ -1,283 +1,199 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Calendar, 
-  CreditCard, 
-  Download, 
-  LogOut,
-  Upload,
-  Clock,
-  CheckCircle,
-  User
-} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { Download, Calendar, MapPin, Users, CreditCard } from 'lucide-react';
+
+interface Booking {
+  id: string;
+  booking_reference: string;
+  check_in_date: string;
+  check_out_date: string;
+  num_guests: number;
+  num_rooms: number;
+  total_amount: number;
+  payment_status: string;
+  voucher_url: string | null;
+  hotels: {
+    name: string;
+    city: string;
+  };
+  rooms: {
+    room_type: string;
+  };
+}
 
 const GuestDashboard = () => {
-  const [user, setUser] = useState<any>(null);
-  const navigate = useNavigate();
+  const { user, profile } = useAuth();
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userData = localStorage.getItem("umrah_user");
-    if (!userData) {
-      navigate("/login");
-      return;
-    }
+    const fetchBookings = async () => {
+      if (!profile?.id) return;
 
-    const parsedUser = JSON.parse(userData);
-    if (parsedUser.type !== "guest") {
-      navigate("/login");
-      return;
-    }
+      try {
+        const { data, error } = await supabase
+          .from('bookings')
+          .select(`
+            *,
+            hotels(name, city),
+            rooms(room_type)
+          `)
+          .eq('guest_id', profile.id)
+          .order('created_at', { ascending: false });
 
-    setUser(parsedUser);
-  }, [navigate]);
+        if (error) {
+          console.error('Error fetching bookings:', error);
+        } else {
+          setBookings(data || []);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleLogout = () => {
-    localStorage.removeItem("umrah_user");
-    navigate("/");
-  };
+    fetchBookings();
+  }, [profile?.id]);
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
-  const bookings = [
-    {
-      id: "UMA001",
-      type: "Hotel",
-      service: "Al Haram Hotel - Deluxe Room",
-      dates: "Jan 15-18, 2024",
-      amount: "2,400 SAR",
-      status: "confirmed",
-      paymentStatus: "paid"
-    },
-    {
-      id: "UMA002", 
-      type: "Taxi",
-      service: "Airport Transfer",
-      dates: "Jan 15, 2024",
-      amount: "150 SAR",
-      status: "pending",
-      paymentStatus: "pending",
-      expiresIn: "2h 30m"
-    },
-    {
-      id: "UMA003",
-      type: "Ziaraat",
-      service: "Madinah Holy Sites Tour",
-      dates: "Jan 16, 2024",
-      amount: "300 SAR", 
-      status: "confirmed",
-      paymentStatus: "paid"
-    }
-  ];
-
-  const getStatusBadge = (status: string) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
-      case "confirmed":
-        return <Badge className="bg-green-100 text-green-800">Confirmed</Badge>;
-      case "pending":
-        return <Badge variant="outline" className="border-orange-300 text-orange-600">Pending Payment</Badge>;
-      case "expired":
-        return <Badge variant="destructive">Expired</Badge>;
+      case 'confirmed':
+        return 'bg-green-100 text-green-800';
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'cancelled':
+        return 'bg-red-100 text-red-800';
       default:
-        return <Badge variant="secondary">{status}</Badge>;
+        return 'bg-gray-100 text-gray-800';
     }
   };
+
+  const calculateNights = (checkIn: string, checkOut: string) => {
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+    const diffTime = Math.abs(end.getTime() - start.getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Loading your bookings...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="border-b bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-bold text-primary">My Umrah Journey</h1>
-              <Badge variant="secondary">Guest</Badge>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-muted-foreground">
-                Welcome, {user.name}
-              </span>
-              <Button variant="outline" size="sm" onClick={handleLogout}>
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
-            </div>
+      <Navigation />
+      
+      <div className="max-w-6xl mx-auto py-8 px-4">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-primary">Welcome, {profile?.full_name}</h1>
+          <p className="text-muted-foreground">Manage your Umrah bookings and download vouchers</p>
+        </div>
+
+        {bookings.length === 0 ? (
+          <Card>
+            <CardContent className="text-center py-12">
+              <MapPin className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">No bookings yet</h3>
+              <p className="text-muted-foreground mb-4">Start planning your Umrah journey today!</p>
+              <Button>Book Your Stay</Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-6">
+            {bookings.map((booking) => (
+              <Card key={booking.id} className="overflow-hidden">
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="flex items-center gap-2">
+                        <MapPin className="w-5 h-5 text-primary" />
+                        {booking.hotels.name}
+                      </CardTitle>
+                      <CardDescription>
+                        {booking.hotels.city} • Booking #{booking.booking_reference}
+                      </CardDescription>
+                    </div>
+                    <Badge className={getStatusColor(booking.payment_status)}>
+                      {booking.payment_status.charAt(0).toUpperCase() + booking.payment_status.slice(1)}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">Check-in</p>
+                        <p className="text-sm text-muted-foreground">
+                          {new Date(booking.check_in_date).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">Check-out</p>
+                        <p className="text-sm text-muted-foreground">
+                          {new Date(booking.check_out_date).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">{booking.num_rooms} Room(s)</p>
+                        <p className="text-sm text-muted-foreground">{booking.num_guests} Guests</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="w-4 h-4 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">Total Amount</p>
+                        <p className="text-sm text-muted-foreground">SAR {booking.total_amount}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t">
+                    <div>
+                      <p className="text-sm font-medium">{booking.rooms.room_type}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {calculateNights(booking.check_in_date, booking.check_out_date)} nights
+                      </p>
+                    </div>
+                    {booking.voucher_url && (
+                      <Button variant="outline" size="sm" className="flex items-center gap-2">
+                        <Download className="w-4 h-4" />
+                        Download Voucher
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </div>
+        )}
       </div>
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Bookings</CardTitle>
-              <Calendar className="h-4 w-4 text-blue-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{bookings.length}</div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Confirmed</CardTitle>
-              <CheckCircle className="h-4 w-4 text-green-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {bookings.filter(b => b.status === "confirmed").length}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Pending</CardTitle>
-              <Clock className="h-4 w-4 text-orange-600" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {bookings.filter(b => b.status === "pending").length}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Main Content */}
-        <Tabs defaultValue="bookings" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="bookings">My Bookings</TabsTrigger>
-            <TabsTrigger value="payments">Payments</TabsTrigger>
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="bookings" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Your Bookings</CardTitle>
-                <CardDescription>Manage your hotel, taxi, and ziaraat bookings</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {bookings.map((booking) => (
-                    <div key={booking.id} className="border rounded-lg p-4 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div>
-                            <div className="font-medium">Booking #{booking.id}</div>
-                            <div className="text-sm text-muted-foreground">{booking.type}</div>
-                          </div>
-                        </div>
-                        {getStatusBadge(booking.status)}
-                      </div>
-                      
-                      <div>
-                        <div className="font-medium">{booking.service}</div>
-                        <div className="text-sm text-muted-foreground">{booking.dates}</div>
-                        <div className="text-sm font-medium text-primary">{booking.amount}</div>
-                      </div>
-
-                      {booking.status === "pending" && booking.expiresIn && (
-                        <div className="bg-orange-50 border border-orange-200 rounded p-3">
-                          <div className="flex items-center text-orange-700">
-                            <Clock className="w-4 h-4 mr-2" />
-                            <span className="text-sm font-medium">
-                              Payment expires in: {booking.expiresIn}
-                            </span>
-                          </div>
-                          <div className="mt-2 flex space-x-2">
-                            <Button size="sm" className="bg-orange-600 hover:bg-orange-700">
-                              <Upload className="w-4 h-4 mr-1" />
-                              Upload Payment
-                            </Button>
-                          </div>
-                        </div>
-                      )}
-
-                      {booking.status === "confirmed" && (
-                        <div className="flex space-x-2">
-                          <Button size="sm" variant="outline">
-                            <Download className="w-4 h-4 mr-1" />
-                            Download Voucher
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="payments" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <CreditCard className="w-5 h-5 mr-2" />
-                  Payment History
-                </CardTitle>
-                <CardDescription>Track all your payments and receipts</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {bookings.filter(b => b.paymentStatus === "paid").map((booking) => (
-                    <div key={booking.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div>
-                        <div className="font-medium">Payment for #{booking.id}</div>
-                        <div className="text-sm text-muted-foreground">{booking.service}</div>
-                        <div className="text-xs text-muted-foreground">Paid on Jan 10, 2024</div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="font-medium">{booking.amount}</span>
-                        <Badge className="bg-green-100 text-green-800">Paid</Badge>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="profile" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <User className="w-5 h-5 mr-2" />
-                  Profile Information
-                </CardTitle>
-                <CardDescription>Update your personal information</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium">Full Name</label>
-                    <p className="text-sm text-muted-foreground">Demo Guest</p>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">Email</label>
-                    <p className="text-sm text-muted-foreground">guest@umrahasan.com</p>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">WhatsApp</label>
-                    <p className="text-sm text-muted-foreground">+966 123 456 789</p>
-                  </div>
-                  <div>
-                    <label className="text-sm font-medium">Preferred Language</label>
-                    <p className="text-sm text-muted-foreground">English</p>
-                  </div>
-                  <Button>Update Profile</Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
+      <Footer />
     </div>
   );
 };
