@@ -38,41 +38,41 @@ const AppContent = () => {
   console.log('App: Loading is false, showing main app');
 
   return (
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter basename={import.meta.env.PROD ? '/umrah-asan-journey-planner' : ''}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/ziaraat" element={<Ziaraat />} />
-            <Route path="/taxi" element={<Taxi />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/login" element={<GuestAuth />} />
-            <Route path="/admin-login" element={<AdminAuth />} />
-            <Route path="/partner-login" element={<PartnerAuth />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/partner-dashboard" element={<PartnerDashboard />} />
-            <Route path="/guest-dashboard" element={<GuestDashboard />} />
-            <Route path="/blogs" element={<Blogs />} />
-            <Route path="/blogs/:slug" element={<BlogPost />} />
-            <Route path="/guide" element={<UmrahGuide />} />
-            <Route path="/train" element={<TrainPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter basename={import.meta.env.PROD ? '/umrah-asan-journey-planner' : ''}>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/ziaraat" element={<Ziaraat />} />
+          <Route path="/taxi" element={<Taxi />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/login" element={<GuestAuth />} />
+          <Route path="/admin-login" element={<AdminAuth />} />
+          <Route path="/partner-login" element={<PartnerAuth />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/partner-dashboard" element={<PartnerDashboard />} />
+          <Route path="/guest-dashboard" element={<GuestDashboard />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:slug" element={<BlogPost />} />
+          <Route path="/guide" element={<UmrahGuide />} />
+          <Route path="/train" element={<TrainPage />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
   );
 };
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 
