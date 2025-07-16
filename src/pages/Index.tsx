@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, Users, Star, Shield, Clock, Heart, CheckCircle } from "lucide-react";
+import { ArrowRight, MapPin, Users, Star, Shield, Clock, Heart, CheckCircle, Phone, MessageCircle } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -73,7 +73,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-holy">
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="text-center">
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -101,28 +101,46 @@ const Index = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button 
                   size="lg" 
-                  className="bg-golden hover:bg-golden/90 text-primary-foreground px-6 text-lg py-6"
+                  className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg"
                   onClick={() => navigate('/ziaraat')}
                 >
-                  Hotel Booking
+                  Book Hotel Now
                 </Button>
                 <Button 
                   size="lg" 
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 text-lg py-6"
+                  variant="outline"
+                  className="bg-white/90 hover:bg-white text-primary border-2 border-white font-semibold px-8 py-4 rounded-lg"
                   onClick={() => navigate('/taxi')}
                 >
-                  Taxi Booking
+                  Book Taxi Now
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-primary px-6 text-lg py-6"
+                  className="bg-golden hover:bg-golden/90 text-white font-semibold px-8 py-4 rounded-lg"
                   onClick={() => navigate('/ziaraat')}
                 >
                   Explore Ziaraat
+                </Button>
+              </div>
+
+              {/* Contact Buttons */}
+              <div className="flex justify-center gap-4">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white p-4 rounded-full w-16 h-16"
+                  onClick={() => window.open('tel:+1234567890', '_self')}
+                >
+                  <Phone className="w-6 h-6" />
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-golden hover:bg-golden/90 text-white p-4 rounded-full w-16 h-16"
+                  onClick={() => window.open('https://wa.me/1234567890', '_blank')}
+                >
+                  <MessageCircle className="w-6 h-6" />
                 </Button>
               </div>
             </div>
