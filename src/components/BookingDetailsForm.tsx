@@ -80,7 +80,6 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
 
   const createBookingLead = async () => {
     if (!profile?.id || !bookingData) {
-      console.log('Missing profile or booking data:', { profile: profile?.id, bookingData });
       return;
     }
 

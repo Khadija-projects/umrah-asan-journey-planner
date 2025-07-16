@@ -2,6 +2,7 @@ import React from 'react';
 import { LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import kaabaWatermark from '@/assets/kaaba-watermark.png';
 
 interface CRMNavigationProps {
   title: string;
@@ -19,7 +20,7 @@ const CRMNavigation = ({ title }: CRMNavigationProps) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img 
-            src="/kaaba-watermark.png" 
+            src={kaabaWatermark} 
             alt="Umrah Asan" 
             className="h-8 w-8"
           />
