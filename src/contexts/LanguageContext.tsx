@@ -23,8 +23,11 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const useLanguage = () => {
+  console.log('useLanguage called');
   const context = useContext(LanguageContext);
+  console.log('useLanguage context:', context);
   if (!context) {
+    console.error('useLanguage called outside of LanguageProvider!');
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
@@ -35,6 +38,7 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
+  console.log('LanguageProvider rendering');
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem('preferred-language');
     return (saved as Language) || 'en';
@@ -63,6 +67,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     return value || key;
   };
 
+  console.log('LanguageProvider providing context with value:', { language, isRTL });
+  
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t, isRTL }}>
       {children}
