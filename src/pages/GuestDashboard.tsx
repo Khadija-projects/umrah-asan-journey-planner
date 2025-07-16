@@ -32,35 +32,108 @@ const GuestDashboard = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      if (!profile?.id) return;
-
-      try {
-        const { data, error } = await supabase
-          .from('bookings')
-          .select(`
-            *,
-            hotels(name, city),
-            rooms(room_type)
-          `)
-          .eq('guest_id', profile.id)
-          .order('created_at', { ascending: false });
-
-        if (error) {
-          console.error('Error fetching bookings:', error);
-        } else {
-          setBookings(data || []);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      } finally {
+  const fetchBookings = async () => {
+    if (!profile?.id) {
+      console.log('GuestDashboard: No profile.id available, checking if user exists');
+      if (user?.id) {
+        console.log('GuestDashboard: User exists but profile not loaded, trying fallback');
+        await fetchBookingsWithUserId();
+      } else {
+        console.log('GuestDashboard: No user, setting loading to false');
         setLoading(false);
       }
-    };
+      return;
+    }
 
+    try {
+      console.log('GuestDashboard: Fetching bookings for profile.id:', profile.id);
+      const { data, error } = await supabase
+        .from('bookings')
+        .select(`
+          *,
+          hotels(name, city),
+          rooms(room_type)
+        `)
+        .eq('guest_id', profile.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('GuestDashboard: Error fetching bookings:', error);
+      } else {
+        console.log('GuestDashboard: Bookings fetched successfully:', data);
+        setBookings(data || []);
+      }
+    } catch (error) {
+      console.error('GuestDashboard: Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchBookingsWithUserId = async () => {
+    if (!user?.id) {
+      console.log('GuestDashboard: No user.id available for fallback');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      console.log('GuestDashboard: Fallback - fetching profile first with user.id:', user.id);
+      
+      // First get the profile
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('user_id', user.id)
+        .single();
+
+      if (profileError) {
+        console.error('GuestDashboard: Error fetching profile in fallback:', profileError);
+        setLoading(false);
+        return;
+      }
+
+      if (!profileData?.id) {
+        console.log('GuestDashboard: No profile found for user');
+        setLoading(false);
+        return;
+      }
+
+      console.log('GuestDashboard: Found profile.id in fallback:', profileData.id);
+      
+      // Then fetch bookings with the profile id
+      const { data, error } = await supabase
+        .from('bookings')
+        .select(`
+          *,
+          hotels(name, city),
+          rooms(room_type)
+        `)
+        .eq('guest_id', profileData.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('GuestDashboard: Error fetching bookings in fallback:', error);
+      } else {
+        console.log('GuestDashboard: Bookings fetched successfully via fallback:', data);
+        setBookings(data || []);
+      }
+    } catch (error) {
+      console.error('GuestDashboard: Error in fetchBookingsWithUserId:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log('GuestDashboard: useEffect triggered', { 
+      profileId: profile?.id, 
+      userId: user?.id,
+      profileLoaded: !!profile
+    });
+    
     fetchBookings();
-  }, [profile?.id]);
+  }, [profile?.id, user?.id]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

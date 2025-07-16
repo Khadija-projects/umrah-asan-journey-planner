@@ -98,10 +98,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session?.user) {
           console.log('AuthContext: User found, fetching profile...');
-          // Use setTimeout to defer the profile fetch
-          setTimeout(() => {
-            fetchProfile(session.user.id);
-          }, 0);
+          fetchProfile(session.user.id);
         } else {
           console.log('AuthContext: No user, clearing profile');
           setProfile(null);
