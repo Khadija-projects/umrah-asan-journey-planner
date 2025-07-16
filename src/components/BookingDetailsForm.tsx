@@ -79,7 +79,21 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
   };
 
   const createBookingLead = async () => {
-    if (!profile?.id || !bookingData) {
+    if (!profile?.id) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to submit your booking request.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!bookingData) {
+      toast({
+        title: "Missing Information",
+        description: "Booking data is missing. Please try again.",
+        variant: "destructive",
+      });
       return;
     }
 
