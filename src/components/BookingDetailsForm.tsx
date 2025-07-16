@@ -79,10 +79,23 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
   };
 
   const createBookingLead = async () => {
-    if (!profile?.id || !bookingData) return;
+    if (!profile?.id || !bookingData) {
+      console.log('Missing profile or booking data:', { profile: profile?.id, bookingData });
+      return;
+    }
 
     setLoading(true);
     try {
+      console.log('Creating booking lead with data:', {
+        p_guest_id: profile.id,
+        p_check_in_date: bookingData.checkInDate,
+        p_check_out_date: bookingData.checkOutDate,
+        p_num_guests: parseInt(bookingData.guests),
+        p_num_rooms: parseInt(bookingData.rooms),
+        p_total_amount: calculateTotal(),
+        p_special_requests: guestDetails.specialRequests || null
+      });
+
       // Create booking lead using the database function
       const { data, error } = await supabase.rpc('create_booking_lead', {
         p_guest_id: profile.id,
@@ -95,6 +108,8 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
         p_total_amount: calculateTotal(),
         p_special_requests: guestDetails.specialRequests || null
       });
+
+      console.log('RPC response:', { data, error });
 
       if (error) throw error;
 
@@ -115,7 +130,7 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
       console.error('Error creating booking lead:', error);
       toast({
         title: "Error",
-        description: "Failed to create booking lead. Please try again.",
+        description: `Failed to create booking lead: ${error.message}`,
         variant: "destructive"
       });
     } finally {
@@ -302,9 +317,14 @@ Phone: +966 XXX XXX XXX
                 </div>
                 
                 <div className="border-t pt-4 mt-4">
-                  <div className="flex justify-between items-center text-lg font-bold">
-                    <span>Total Amount:</span>
-                    <span className="text-primary">SAR {calculateTotal()}</span>
+                  <div className="flex justify-center">
+                    <Button 
+                      onClick={createBookingLead}
+                      disabled={!isFormValid() || loading}
+                      className="px-8 py-3 text-lg font-semibold bg-gradient-holy hover:bg-gradient-holy/90"
+                    >
+                      {loading ? "Getting Quote..." : "GET THE QUOTE"}
+                    </Button>
                   </div>
                 </div>
               </CardContent>
@@ -313,13 +333,6 @@ Phone: +966 XXX XXX XXX
             <div className="flex justify-end gap-3">
               <Button variant="outline" onClick={handleClose}>
                 Cancel
-              </Button>
-              <Button 
-                onClick={createBookingLead}
-                disabled={!isFormValid() || loading}
-                className="min-w-32"
-              >
-                {loading ? "Creating..." : "Create Booking Lead"}
               </Button>
             </div>
           </div>
