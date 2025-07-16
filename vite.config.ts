@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
-  base: '/umrah-asan-journey-planner/', // Critical for GitHub Pages
+  base: mode === 'production' ? '/umrah-asan-journey-planner/' : '/',
   server: {
     host: "::",
     port: 8080
