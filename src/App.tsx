@@ -41,7 +41,7 @@ const AppContent = () => {
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={import.meta.env.PROD ? '/umrah-asan-journey-planner' : ''}>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/ziaraat" element={<Ziaraat />} />
