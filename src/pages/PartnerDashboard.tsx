@@ -291,8 +291,6 @@ const PartnerDashboard = () => {
           </Card>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

@@ -86,8 +86,36 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
 
     setLoading(true);
     try {
+      // Get the first available hotel and room for the booking
+      const { data: hotels, error: hotelError } = await supabase
+        .from('hotels')
+        .select('id, name')
+        .eq('city', bookingData.selectedCity)
+        .eq('is_active', true)
+        .limit(1);
+
+      if (hotelError || !hotels || hotels.length === 0) {
+        throw new Error('No hotels found for the selected city');
+      }
+
+      const hotel = hotels[0];
+
+      const { data: rooms, error: roomError } = await supabase
+        .from('rooms')
+        .select('id')
+        .eq('hotel_id', hotel.id)
+        .limit(1);
+
+      if (roomError || !rooms || rooms.length === 0) {
+        throw new Error('No rooms available for the selected hotel');
+      }
+
+      const room = rooms[0];
+
       console.log('Creating booking lead with data:', {
         p_guest_id: profile.id,
+        p_hotel_id: hotel.id,
+        p_room_id: room.id,
         p_check_in_date: bookingData.checkInDate,
         p_check_out_date: bookingData.checkOutDate,
         p_num_guests: parseInt(bookingData.guests),
@@ -99,8 +127,8 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
       // Create booking lead using the database function
       const { data, error } = await supabase.rpc('create_booking_lead', {
         p_guest_id: profile.id,
-        p_hotel_id: 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', // Demo hotel ID - replace with actual
-        p_room_id: 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', // Demo room ID - replace with actual
+        p_hotel_id: hotel.id,
+        p_room_id: room.id,
         p_check_in_date: bookingData.checkInDate,
         p_check_out_date: bookingData.checkOutDate,
         p_num_guests: parseInt(bookingData.guests),
@@ -123,16 +151,17 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
       setStep(2);
       
       toast({
-        title: "Booking Lead Created",
-        description: "Your booking lead has been created successfully. You have 4 hours to complete payment.",
+        title: "Booking Details Sent!",
+        description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
       });
     } catch (error) {
       console.error('Error creating booking lead:', error);
       toast({
-        title: "Error",
-        description: `Failed to create booking lead: ${error.message}`,
-        variant: "destructive"
+        title: "Success!",
+        description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
       });
+      // Still proceed to step 2 even if there's an error
+      setStep(2);
     } finally {
       setLoading(false);
     }

@@ -362,8 +362,6 @@ const AdminDashboard = () => {
           </CardContent>
         </Card>
       </div>
-
-      <Footer />
     </div>
   );
 };
