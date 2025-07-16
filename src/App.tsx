@@ -10,7 +10,6 @@ import Index from "./pages/Index";
 import Ziaraat from "./pages/Ziaraat";
 import Taxi from "./pages/Taxi";
 import About from "./pages/About";
-import About from "./pages/Visa";
 import FAQ from "./pages/FAQ";
 import GuestAuth from "./pages/GuestAuth";
 import AdminAuth from "./pages/AdminAuth";
