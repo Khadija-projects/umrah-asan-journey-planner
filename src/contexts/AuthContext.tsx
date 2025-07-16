@@ -68,19 +68,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     console.log('AuthContext: Initializing auth state...');
+    let isInitialized = false;
     
-    // Set loading timeout fallback (10 seconds)
+    // Set loading timeout fallback (reduced to 3 seconds)
     const loadingTimeout = setTimeout(() => {
-      console.log('AuthContext: Loading timeout reached, forcing loading to false');
-      setLoading(false);
-      setError('Authentication initialization timed out');
-    }, 10000);
+      if (!isInitialized) {
+        console.log('AuthContext: Loading timeout reached, forcing loading to false');
+        setLoading(false);
+        setError('Authentication initialization timed out');
+        isInitialized = true;
+      }
+    }, 3000);
 
-    // Set up auth state listener
+    // Set up auth state listener (handles both initial and subsequent changes)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         console.log('AuthContext: Auth state changed:', event, session ? 'Session exists' : 'No session');
-        clearTimeout(loadingTimeout);
+        
+        // Clear timeout since we got a response
+        if (!isInitialized) {
+          clearTimeout(loadingTimeout);
+          isInitialized = true;
+        }
         
         setSession(session);
         setUser(session?.user ?? null);
@@ -96,33 +105,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setProfile(null);
         }
         
+        // Always set loading to false after first auth state change
         setLoading(false);
       }
     );
 
-    // Check for existing session
-    console.log('AuthContext: Checking for existing session...');
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log('AuthContext: Got session:', session ? 'Session exists' : 'No session');
-      clearTimeout(loadingTimeout);
-      
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        console.log('AuthContext: User found in session, fetching profile...');
-        setTimeout(() => {
-          fetchProfile(session.user.id);
-        }, 0);
-      }
-      
-      setLoading(false);
-    }).catch((error) => {
-      console.error('AuthContext: Error getting session:', error);
-      clearTimeout(loadingTimeout);
-      setError('Failed to initialize authentication');
-      setLoading(false);
-    });
+    // Trigger initial session check (this will fire onAuthStateChange)
+    console.log('AuthContext: Triggering initial session check...');
+    supabase.auth.getSession();
 
     return () => {
       clearTimeout(loadingTimeout);
