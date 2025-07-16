@@ -19,13 +19,13 @@ const LanguageSelector = () => {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button 
-          variant="outline" 
+          variant="ghost" 
           size="sm" 
-          className="flex items-center space-x-2 px-3 py-2 border-2 border-muted-foreground/20 rounded-lg hover:bg-accent min-w-[80px] h-9"
+          className="flex items-center space-x-2 px-2 py-1 hover:bg-accent rounded-md min-w-[120px] h-auto border-0"
         >
           <span className="text-base">{currentLanguage?.flag}</span>
-          <span className="text-xs font-medium uppercase">{currentLanguage?.code}</span>
-          <ChevronDown className="w-3 h-3 opacity-50" />
+          <span className="text-sm font-medium">{currentLanguage?.name}</span>
+          <ChevronDown className="w-4 h-4 opacity-70" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56 bg-background border shadow-lg z-50">

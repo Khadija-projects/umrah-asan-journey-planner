@@ -16,26 +16,26 @@ const Index = () => {
   const services = [
     {
       title: t('nav.ziaraat'),
-      description: "Explore blessed places in Makkah and Madinah with guided tours",
+      description: t('services.ziaraatDesc'),
       icon: MapPin,
       features: ["Guided tours", "Historical insights", "Spiritual guidance"],
-      buttonText: "Explore Places",
+      buttonText: t('services.explorePlaces'),
       onClick: () => navigate("/ziaraat")
     },
     {
       title: t('nav.taxi'),
-      description: "Safe and reliable taxi services for pilgrims",
+      description: t('services.taxiDesc'),
       icon: Users,
       features: ["24/7 availability", "Professional drivers", "Comfortable vehicles"],
-      buttonText: "Book Taxi",
+      buttonText: t('services.bookTaxi'),
       onClick: () => navigate("/taxi")
     },
     {
       title: t('nav.guide'),
-      description: "Complete Umrah guide with step-by-step instructions",
+      description: t('services.guideDesc'),
       icon: Heart,
       features: ["Detailed procedures", "Spiritual preparation", "Practical tips"],
-      buttonText: "Read Guide",
+      buttonText: t('services.readGuide'),
       onClick: () => navigate("/guide")
     }
   ];
@@ -202,10 +202,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Services
+              {t('services.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive Umrah services to make your pilgrimage journey comfortable and spiritually fulfilling
+              {t('services.subtitle')}
             </p>
           </div>
           
@@ -230,10 +230,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Why Choose Umrah Asan?
+              {t('whyChoose.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Experience the difference with our dedicated team and comprehensive services
+              {t('whyChoose.subtitle')}
             </p>
           </div>
           
@@ -242,32 +242,32 @@ const Index = () => {
               <div className="w-16 h-16 bg-gradient-holy rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Trusted & Reliable</h3>
-              <p className="text-muted-foreground">Years of experience serving pilgrims with dedication</p>
+              <h3 className="text-xl font-semibold mb-2">{t('whyChoose.trusted')}</h3>
+              <p className="text-muted-foreground">{t('whyChoose.trustedDesc')}</p>
             </div>
             
             <div className="text-center animate-fade-in">
               <div className="w-16 h-16 bg-gradient-holy rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-              <p className="text-muted-foreground">Round-the-clock assistance for all your needs</p>
+              <h3 className="text-xl font-semibold mb-2">{t('whyChoose.support')}</h3>
+              <p className="text-muted-foreground">{t('whyChoose.supportDesc')}</p>
             </div>
             
             <div className="text-center animate-fade-in">
               <div className="w-16 h-16 bg-gradient-holy rounded-full flex items-center justify-center mx-auto mb-4">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Spiritual Care</h3>
-              <p className="text-muted-foreground">Guidance that nurtures your spiritual journey</p>
+              <h3 className="text-xl font-semibold mb-2">{t('whyChoose.spiritual')}</h3>
+              <p className="text-muted-foreground">{t('whyChoose.spiritualDesc')}</p>
             </div>
             
             <div className="text-center animate-fade-in">
               <div className="w-16 h-16 bg-gradient-holy rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Quality Service</h3>
-              <p className="text-muted-foreground">Premium services at competitive prices</p>
+              <h3 className="text-xl font-semibold mb-2">{t('whyChoose.quality')}</h3>
+              <p className="text-muted-foreground">{t('whyChoose.qualityDesc')}</p>
             </div>
           </div>
         </div>
@@ -278,10 +278,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              What Our Pilgrims Say
+              {t('testimonials.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Hear from thousands of satisfied pilgrims who trusted us with their blessing journey
+              {t('testimonials.subtitle')}
             </p>
           </div>
           
@@ -312,10 +312,10 @@ const Index = () => {
       <section className="py-20 bg-gradient-holy">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Begin Your Blessing Journey?
+            {t('cta.title')}
           </h2>
           <p className="text-xl text-white/90 mb-8">
-            Join thousands of pilgrims who have trusted us with their Umrah experience
+            {t('cta.subtitle')}
           </p>
           
           {/* Statistics in CTA */}
@@ -330,7 +330,7 @@ const Index = () => {
           
           <Link to="/login">
             <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6">
-              Get Started Today
+              {t('cta.getStarted')}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
