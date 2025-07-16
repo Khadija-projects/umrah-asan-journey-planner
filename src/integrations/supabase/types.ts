@@ -16,57 +16,78 @@ export type Database = {
     Tables: {
       bookings: {
         Row: {
+          admin_verified_at: string | null
           booking_reference: string | null
+          booking_status: string | null
           check_in_date: string
           check_out_date: string
           created_at: string
           guest_id: string
           hotel_id: string
           id: string
+          lead_created_at: string | null
           num_guests: number
           num_rooms: number
           payment_method: string | null
+          payment_receipt_url: string | null
           payment_status: string
+          receipt_uploaded_at: string | null
           room_id: string
           special_requests: string | null
           total_amount: number
           updated_at: string
+          verified_by: string | null
+          voucher_expiry: string | null
           voucher_url: string | null
         }
         Insert: {
+          admin_verified_at?: string | null
           booking_reference?: string | null
+          booking_status?: string | null
           check_in_date: string
           check_out_date: string
           created_at?: string
           guest_id: string
           hotel_id: string
           id?: string
+          lead_created_at?: string | null
           num_guests: number
           num_rooms?: number
           payment_method?: string | null
+          payment_receipt_url?: string | null
           payment_status?: string
+          receipt_uploaded_at?: string | null
           room_id: string
           special_requests?: string | null
           total_amount: number
           updated_at?: string
+          verified_by?: string | null
+          voucher_expiry?: string | null
           voucher_url?: string | null
         }
         Update: {
+          admin_verified_at?: string | null
           booking_reference?: string | null
+          booking_status?: string | null
           check_in_date?: string
           check_out_date?: string
           created_at?: string
           guest_id?: string
           hotel_id?: string
           id?: string
+          lead_created_at?: string | null
           num_guests?: number
           num_rooms?: number
           payment_method?: string | null
+          payment_receipt_url?: string | null
           payment_status?: string
+          receipt_uploaded_at?: string | null
           room_id?: string
           special_requests?: string | null
           total_amount?: number
           updated_at?: string
+          verified_by?: string | null
+          voucher_expiry?: string | null
           voucher_url?: string | null
         }
         Relationships: [
@@ -386,6 +407,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_booking_lead: {
+        Args: {
+          p_guest_id: string
+          p_hotel_id: string
+          p_room_id: string
+          p_check_in_date: string
+          p_check_out_date: string
+          p_num_guests: number
+          p_num_rooms: number
+          p_total_amount: number
+          p_special_requests?: string
+        }
+        Returns: string
+      }
       generate_booking_reference: {
         Args: Record<PropertyKey, never>
         Returns: string

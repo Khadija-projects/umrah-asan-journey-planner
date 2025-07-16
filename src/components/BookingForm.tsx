@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
+import BookingDetailsForm from "@/components/BookingDetailsForm";
 
 const BookingForm = () => {
   const { t } = useLanguage();
@@ -16,6 +17,7 @@ const BookingForm = () => {
   const [checkOutDate, setCheckOutDate] = useState("");
   const [rooms, setRooms] = useState("1");
   const [guests, setGuests] = useState("2");
+  const [showBookingForm, setShowBookingForm] = useState(false);
 
   const cities = [
     { 
@@ -61,18 +63,14 @@ const BookingForm = () => {
     }
   ];
 
-  const handleSearch = () => {
-    console.log("Search hotels with:", {
-      selectedCity,
-      selectedCategory,
-      selectedDistance,
-      selectedRoomType,
-      checkInDate,
-      checkOutDate,
-      rooms,
-      guests
-    });
-    // TODO: Implement hotel search logic
+  const handleBookNow = () => {
+    // Validate required fields
+    if (!selectedCity || !checkInDate || !checkOutDate) {
+      alert("Please fill in destination and dates to continue");
+      return;
+    }
+
+    setShowBookingForm(true);
   };
 
   return (
@@ -249,14 +247,14 @@ const BookingForm = () => {
               </div>
             </div>
 
-            {/* Search Button */}
+            {/* Book Now Button */}
             <div className="mt-8 text-center">
               <Button 
-                onClick={handleSearch}
+                onClick={handleBookNow}
                 size="lg"
                 className="bg-gradient-holy hover:bg-gradient-holy/90 text-white px-12 py-4 text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                {t('home.bookingForm.searchHotels')}
+                Book Now
               </Button>
             </div>
 
@@ -268,6 +266,22 @@ const BookingForm = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Booking Details Form Modal */}
+        <BookingDetailsForm
+          isOpen={showBookingForm}
+          onClose={() => setShowBookingForm(false)}
+          bookingData={{
+            selectedCity,
+            selectedCategory,
+            selectedDistance,
+            selectedRoomType,
+            checkInDate,
+            checkOutDate,
+            rooms,
+            guests
+          }}
+        />
       </div>
     </section>
   );
