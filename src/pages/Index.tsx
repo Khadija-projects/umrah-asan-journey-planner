@@ -90,11 +90,9 @@ const Index = () => {
     }
   ];
 
-  console.log('Index: Component is rendering');
-  
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+      <div>Hello World - Testing if Index renders</div>
       
       {/* Hero Section */}
       <section className="relative bg-gradient-subtle py-20 px-4">
