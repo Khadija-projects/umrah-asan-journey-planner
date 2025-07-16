@@ -109,6 +109,31 @@ const GuestAuth = () => {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setLoginEmail("guest@umrahasan.com");
+    setLoginPassword("demo123");
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const { error } = await signIn("guest@umrahasan.com", "demo123");
+      
+      if (error) {
+        setError(error.message);
+      } else {
+        toast({
+          title: "Demo login successful!",
+          description: "Welcome to Umrah Asan",
+        });
+        navigate("/guest-dashboard");
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -193,6 +218,33 @@ const GuestAuth = () => {
                     >
                       {isLoading ? "Signing in..." : "Sign In"}
                     </Button>
+
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t" />
+                      </div>
+                      <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">Or try demo</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      onClick={handleDemoLogin}
+                      disabled={isLoading}
+                    >
+                      Use Demo Account
+                    </Button>
+
+                    <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                      <p className="text-sm text-green-800 dark:text-green-200">
+                        <strong>Demo Credentials:</strong><br/>
+                        Email: guest@umrahasan.com<br/>
+                        Password: demo123
+                      </p>
+                    </div>
                   </form>
                 </TabsContent>
 

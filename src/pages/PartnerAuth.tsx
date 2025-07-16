@@ -63,6 +63,31 @@ const PartnerAuth = () => {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setLoginEmail("partner@umrahasan.com");
+    setLoginPassword("partner123");
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const { error } = await signIn("partner@umrahasan.com", "partner123");
+      
+      if (error) {
+        setError(error.message);
+      } else {
+        toast({
+          title: "Demo partner login successful!",
+          description: "Welcome to the partner portal",
+        });
+        navigate("/partner-dashboard");
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -228,6 +253,33 @@ const PartnerAuth = () => {
                     >
                       {isLoading ? "Signing in..." : "Partner Sign In"}
                     </Button>
+
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t" />
+                      </div>
+                      <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">Or try demo</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full"
+                      onClick={handleDemoLogin}
+                      disabled={isLoading}
+                    >
+                      Use Demo Partner Account
+                    </Button>
+
+                    <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                      <p className="text-sm text-blue-800 dark:text-blue-200">
+                        <strong>Demo Partner Credentials:</strong><br/>
+                        Email: partner@umrahasan.com<br/>
+                        Password: partner123
+                      </p>
+                    </div>
                   </form>
                 </TabsContent>
 

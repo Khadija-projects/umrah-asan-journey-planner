@@ -46,6 +46,31 @@ const AdminAuth = () => {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setEmail("admin@umrahasan.com");
+    setPassword("admin123");
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const { error } = await signIn("admin@umrahasan.com", "admin123");
+      
+      if (error) {
+        setError(error.message);
+      } else {
+        toast({
+          title: "Demo admin login successful!",
+          description: "Welcome to the admin dashboard",
+        });
+        navigate("/admin-dashboard");
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -126,7 +151,34 @@ const AdminAuth = () => {
                 >
                   {isLoading ? "Signing in..." : "Admin Sign In"}
                 </Button>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">Or try demo</span>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={handleDemoLogin}
+                  disabled={isLoading}
+                >
+                  Use Demo Admin Account
+                </Button>
               </form>
+
+              <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                <p className="text-sm text-red-800 dark:text-red-200">
+                  <strong>Demo Admin Credentials:</strong><br/>
+                  Email: admin@umrahasan.com<br/>
+                  Password: admin123
+                </p>
+              </div>
 
               <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
                 <p className="text-sm text-yellow-800 dark:text-yellow-200">
