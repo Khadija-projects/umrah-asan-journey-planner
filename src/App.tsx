@@ -31,7 +31,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter basename="/umrah-asan-journey-planner">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/ziaraat" element={<Ziaraat />} />
