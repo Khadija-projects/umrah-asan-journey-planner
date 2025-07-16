@@ -272,31 +272,34 @@ const GuestAuth = () => {
                       <Label htmlFor="reg-email">Email</Label>
                       <Input
                         id="reg-email"
-                        type="email"
-                        placeholder="Enter your email"
+                        type="text"
+                        placeholder="Enter any email (e.g., test@test.com)"
                         value={registerData.email}
                         onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
                         required
                       />
+                      <p className="text-xs text-muted-foreground">
+                        You can use any email format for testing
+                      </p>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="reg-phone">Phone Number</Label>
+                      <Label htmlFor="reg-phone">Phone Number (Optional)</Label>
                       <Input
                         id="reg-phone"
-                        type="tel"
-                        placeholder="Enter your phone number"
+                        type="text"
+                        placeholder="Enter any phone format (optional)"
                         value={registerData.phone}
                         onChange={(e) => setRegisterData({...registerData, phone: e.target.value})}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="reg-nationality">Nationality</Label>
+                      <Label htmlFor="reg-nationality">Nationality (Optional)</Label>
                       <Input
                         id="reg-nationality"
                         type="text"
-                        placeholder="Enter your nationality"
+                        placeholder="Enter your nationality (optional)"
                         value={registerData.nationality}
                         onChange={(e) => setRegisterData({...registerData, nationality: e.target.value})}
                       />

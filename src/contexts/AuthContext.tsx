@@ -127,6 +127,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, userData?: any) => {
     const redirectUrl = `${window.location.origin}/`;
     
+    // Basic email validation - allow any format for testing
+    if (!email || !email.includes('@')) {
+      return { error: { message: 'Please enter a valid email address' } };
+    }
+    
     const { data, error } = await supabase.auth.signUp({
       email,
       password,

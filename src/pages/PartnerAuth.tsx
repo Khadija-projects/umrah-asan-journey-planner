@@ -319,23 +319,25 @@ const PartnerAuth = () => {
                       <Label htmlFor="business-email">Business Email</Label>
                       <Input
                         id="business-email"
-                        type="email"
-                        placeholder="Enter business email"
+                        type="text"
+                        placeholder="Enter any email format (e.g., test@test.com)"
                         value={registerData.email}
                         onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
                         required
                       />
+                      <p className="text-xs text-muted-foreground">
+                        You can use any email format for testing
+                      </p>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="business-phone">Phone Number</Label>
+                      <Label htmlFor="business-phone">Phone Number (Optional)</Label>
                       <Input
                         id="business-phone"
-                        type="tel"
-                        placeholder="Business phone number"
+                        type="text"
+                        placeholder="Enter any phone format (optional)"
                         value={registerData.phone}
                         onChange={(e) => setRegisterData({...registerData, phone: e.target.value})}
-                        required
                       />
                     </div>
 
