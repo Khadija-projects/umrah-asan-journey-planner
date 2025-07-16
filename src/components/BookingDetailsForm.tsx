@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -240,6 +240,9 @@ Phone: +966 XXX XXX XXX
           <DialogTitle className="text-2xl font-bold">
             {step === 1 ? "Guest Details" : step === 2 ? "Booking Confirmation" : "Payment Required"}
           </DialogTitle>
+          <DialogDescription>
+            {step === 1 ? "Please fill in your details to proceed with the booking" : step === 2 ? "Your booking has been submitted successfully" : "Complete your payment to finalize the booking"}
+          </DialogDescription>
         </DialogHeader>
 
         {step === 1 && (
@@ -275,12 +278,16 @@ Phone: +966 XXX XXX XXX
                 
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number *</Label>
-                  <Input
-                    id="phone"
-                    value={guestDetails.phone}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="Enter your phone number"
-                  />
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">+</span>
+                    <Input
+                      id="phone"
+                      value={guestDetails.phone}
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                      placeholder="966123456789"
+                      className="pl-8"
+                    />
+                  </div>
                 </div>
                 
                 <div className="space-y-2">
@@ -353,7 +360,7 @@ Phone: +966 XXX XXX XXX
                 </div>
                 
                 <div className="border-t pt-4 mt-4">
-                  <div className="flex justify-center">
+                  <div className="flex justify-center gap-3">
                     <Button 
                       onClick={createBookingLead}
                       disabled={!isFormValid() || loading}
@@ -361,16 +368,14 @@ Phone: +966 XXX XXX XXX
                     >
                       {loading ? "Getting Quote..." : "GET THE QUOTE"}
                     </Button>
+                    <Button variant="outline" onClick={handleClose} className="px-6 py-3">
+                      Cancel
+                    </Button>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <div className="flex justify-end gap-3">
-              <Button variant="outline" onClick={handleClose}>
-                Cancel
-              </Button>
-            </div>
           </div>
         )}
 
