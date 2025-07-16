@@ -19,7 +19,7 @@ const CRMNavigation = ({ title }: CRMNavigationProps) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img 
-            src="/src/assets/kaaba-watermark.png" 
+            src="/kaaba-watermark.png" 
             alt="Umrah Asan" 
             className="h-8 w-8"
           />
