@@ -85,7 +85,7 @@ const GuestDashboard = () => {
         .from('profiles')
         .select('id')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (profileError) {
         console.error('GuestDashboard: Error fetching profile in fallback:', profileError);

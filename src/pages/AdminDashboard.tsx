@@ -4,8 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
+import CRMNavigation from '@/components/CRMNavigation';
 import { Users, Building2, UserCheck, CreditCard, Clock, CheckCircle, XCircle } from 'lucide-react';
 
 interface DashboardStats {
@@ -152,26 +151,24 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
+        <CRMNavigation title="Admin Dashboard" />
         <div className="flex items-center justify-center min-h-[50vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
             <p className="mt-4 text-muted-foreground">Loading dashboard...</p>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+      <CRMNavigation title="Admin Dashboard" />
       
       <div className="max-w-7xl mx-auto py-8 px-4">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-primary">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Manage your Umrah Asan platform</p>
+          <p className="text-muted-foreground">Manage partner registrations and booking leads</p>
         </div>
 
         {/* Stats Cards */}

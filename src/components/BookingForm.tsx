@@ -38,11 +38,19 @@ const BookingForm = () => {
     { value: "5", label: "5 Star", price: "SAR 500+" }
   ];
 
+  const getDistanceLabel = (value: string) => {
+    const baseLabel = `${value}m from`;
+    if (selectedCity === "madina") {
+      return `${baseLabel} Masjid e Nabvi`;
+    }
+    return `${baseLabel} Masjid al Haram`;
+  };
+
   const distances = [
-    { value: "200", label: "200m from Haram" },
-    { value: "500", label: "500m from Haram" },
-    { value: "800", label: "800m from Haram" },
-    { value: "1000", label: "1km+ from Haram" }
+    { value: "200", label: getDistanceLabel("200") },
+    { value: "500", label: getDistanceLabel("500") },
+    { value: "800", label: getDistanceLabel("800") },
+    { value: "1000", label: selectedCity === "madina" ? "1km+ from Masjid e Nabvi" : "1km+ from Masjid al Haram" }
   ];
 
   const roomTypes = [
@@ -67,6 +75,25 @@ const BookingForm = () => {
     // Validate required fields
     if (!selectedCity || !checkInDate || !checkOutDate) {
       alert("Please fill in destination and dates to continue");
+      return;
+    }
+
+    // Validate dates
+    const today = new Date();
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+    
+    today.setHours(0, 0, 0, 0);
+    checkIn.setHours(0, 0, 0, 0);
+    checkOut.setHours(0, 0, 0, 0);
+
+    if (checkIn < today) {
+      alert("Check-in date cannot be in the past");
+      return;
+    }
+
+    if (checkOut <= checkIn) {
+      alert("Check-out date must be after check-in date");
       return;
     }
 
@@ -135,11 +162,11 @@ const BookingForm = () => {
                 </Select>
               </div>
 
-              {/* Distance from Haram */}
+              {/* Distance from Holy Site */}
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-foreground flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-primary" />
-                  Distance from Haram
+                  Distance from {selectedCity === "madina" ? "Masjid e Nabvi" : "Masjid al Haram"}
                 </label>
                 <Select value={selectedDistance} onValueChange={setSelectedDistance}>
                   <SelectTrigger className="w-full h-12">
@@ -187,6 +214,7 @@ const BookingForm = () => {
                 <input
                   type="date"
                   value={checkInDate}
+                  min={new Date().toISOString().split('T')[0]}
                   onChange={(e) => setCheckInDate(e.target.value)}
                   className="w-full h-12 px-3 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                 />
@@ -201,6 +229,7 @@ const BookingForm = () => {
                 <input
                   type="date"
                   value={checkOutDate}
+                  min={checkInDate || new Date().toISOString().split('T')[0]}
                   onChange={(e) => setCheckOutDate(e.target.value)}
                   className="w-full h-12 px-3 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                 />

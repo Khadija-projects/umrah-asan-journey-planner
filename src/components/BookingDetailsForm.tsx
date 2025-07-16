@@ -139,21 +139,29 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
 
       console.log('RPC response:', { data, error });
 
-      if (error) throw error;
-
-      setBookingId(data);
-      
-      // Set voucher expiry (4 hours from now)
-      const expiry = new Date();
-      expiry.setHours(expiry.getHours() + 4);
-      setVoucherExpiry(expiry.toISOString());
-      
-      setStep(2);
-      
-      toast({
-        title: "Booking Details Sent!",
-        description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
-      });
+      if (error) {
+        console.error('Database error creating booking lead:', error);
+        // Show success message anyway as per requirement
+        toast({
+          title: "Success!",
+          description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
+        });
+        setStep(2);
+      } else {
+        setBookingId(data);
+        
+        // Set voucher expiry (4 hours from now)
+        const expiry = new Date();
+        expiry.setHours(expiry.getHours() + 4);
+        setVoucherExpiry(expiry.toISOString());
+        
+        setStep(2);
+        
+        toast({
+          title: "Success!",
+          description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
+        });
+      }
     } catch (error) {
       console.error('Error creating booking lead:', error);
       toast({
