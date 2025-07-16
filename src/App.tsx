@@ -27,10 +27,15 @@ const queryClient = new QueryClient();
 
 const AppContent = () => {
   const { loading } = useAuth();
+  
+  console.log('App: Current loading state:', loading);
 
   if (loading) {
+    console.log('App: Showing LoadingScreen because loading is true');
     return <LoadingScreen />;
   }
+
+  console.log('App: Loading is false, showing main app');
 
   return (
     <LanguageProvider>

@@ -84,9 +84,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         console.log('AuthContext: Auth state changed:', event, session ? 'Session exists' : 'No session');
+        console.log('AuthContext: About to set loading to false, current loading state:', loading);
         
         // Clear timeout since we got a response
         if (!isInitialized) {
+          console.log('AuthContext: Clearing timeout and marking as initialized');
           clearTimeout(loadingTimeout);
           isInitialized = true;
         }
@@ -106,7 +108,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
         
         // Always set loading to false after first auth state change
+        console.log('AuthContext: Setting loading to false NOW');
         setLoading(false);
+        console.log('AuthContext: Loading should now be false');
       }
     );
 
