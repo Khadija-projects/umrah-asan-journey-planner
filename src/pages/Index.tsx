@@ -76,22 +76,22 @@ const Index = () => {
 
   const testimonials = [
     {
-      name: "Ahmad Ali",
-      location: "Pakistan",
+      name: t('home.reviews.review1.name'),
+      location: t('home.reviews.review1.country'),
       rating: 5,
-      text: "Excellent service! Made our Umrah journey smooth and memorable."
+      text: t('home.reviews.review1.text')
     },
     {
-      name: "Fatima Hassan", 
-      location: "Egypt",
+      name: t('home.reviews.review2.name'), 
+      location: t('home.reviews.review2.country'),
       rating: 5,
-      text: "Very helpful staff and great accommodations. Highly recommended!"
+      text: t('home.reviews.review2.text')
     },
     {
-      name: "Mohammed Khan",
-      location: "India", 
+      name: t('home.reviews.review3.name'),
+      location: t('home.reviews.review3.country'), 
       rating: 5,
-      text: "Professional service with great attention to detail. Thank you!"
+      text: t('home.reviews.review3.text')
     }
   ];
 

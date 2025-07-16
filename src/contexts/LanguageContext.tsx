@@ -210,6 +210,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'Your trusted partner for a blessed Umrah journey with comfortable accommodations and reliable transport services.',
       quickLinks: 'Quick Links',
+      legal: 'Legal',
       services: 'Services',
       contact: 'Contact Us',
       address: 'Makkah, Saudi Arabia',
@@ -357,6 +358,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'آرام دہ رہائش اور قابل اعتماد ٹرانسپورٹ سروسز کے ساتھ مبارک عمرہ کے سفر کے لیے آپ کا قابل اعتماد ساتھی۔',
       quickLinks: 'فوری لنکس',
+      legal: 'قانونی',
       services: 'خدمات',
       contact: 'رابطہ کریں',
       address: 'مکہ، سعودی عرب',
@@ -379,6 +381,70 @@ const translations: Record<Language, any> = {
       adminLogin: 'एडमिन लॉगिन',
       partnerLogin: 'पार्टनर लॉगिन',
       language: 'भाषा'
+    },
+    hero: {
+      title: 'अपना आशीर्वाद',
+      subtitle: 'उमराह यात्रा बुक करें',
+      description: 'मक्का और मदीना में प्रीमियम होटल आवास नकद आगमन भुगतान के साथ',
+      hotelBooking: 'होटल बुकिंग',
+      taxiBooking: 'टैक्सी बुकिंग',
+      exploreZiaraat: 'ज़ियारत देखें',
+      noAdvancePayment: 'कोई अग्रिम भुगतान आवश्यक नहीं',
+      instantVoucher: 'त्वरित वाउचर जेनरेशन',
+      support247: '24/7 सहायता'
+    },
+    bookingSteps: {
+      title: 'अपना उमराह कैसे बुक करें?',
+      subtitle: 'अपनी पूरी उमराह यात्रा बुक करने के लिए इन सरल चरणों का पालन करें',
+      getVisa: 'अपना वीज़ा प्राप्त करें',
+      visaSubtitle: '10 मिनट से कम में',
+      visaDesc: 'हमारे सुव्यवस्थित आवेदन के साथ त्वरित वीज़ा प्रसंस्करण',
+      bookFlight: 'अपनी फ्लाइट बुक करें',
+      flightSubtitle: '1000+ फ्लाइट खोजें',
+      flightDesc: 'हजारों फ्लाइट विकल्पों से तुलना और बुकिंग करें',
+      bookHotel: 'अपना होटल बुक करें',
+      hotelSubtitle: '913 होटल उपलब्ध',
+      hotelDesc: 'हरम के पास प्रीमियम आवास से चुनें',
+      transfers: 'आपका स्थानांतरण',
+      transfersSubtitle: 'अपनी टैक्सी बुक करें',
+      transfersDesc: 'आपकी पूरी यात्रा में विश्वसनीय परिवहन'
+    },
+    services: {
+      title: 'हमारी सेवाएं',
+      subtitle: 'आपकी तीर्थयात्रा को आरामदायक और आध्यात्मिक रूप से संतुष्ट बनाने के लिए व्यापक उमराह सेवाएं',
+      ziaraatDesc: 'निर्देशित टूर के साथ मक्का और मदीना में पवित्र स्थानों का अन्वेषण करें',
+      taxiDesc: 'तीर्थयात्रियों के लिए सुरक्षित और विश्वसनीय टैक्सी सेवाएं',
+      guideDesc: 'चरण-दर-चरण निर्देशों के साथ पूर्ण उमराह गाइड',
+      explorePlaces: 'स्थान देखें',
+      bookTaxi: 'टैक्सी बुक करें',
+      readGuide: 'गाइड पढ़ें'
+    },
+    whyChoose: {
+      title: 'उमराह आसान क्यों चुनें?',
+      subtitle: 'हमारी समर्पित टीम और व्यापक सेवाओं के साथ अंतर का अनुभव करें',
+      trusted: 'विश्वसनीय और भरोसेमंद',
+      trustedDesc: 'समर्पण के साथ तीर्थयात्रियों की सेवा करने का वर्षों का अनुभव',
+      support: '24/7 सहायता',
+      supportDesc: 'आपकी सभी आवश्यकताओं के लिए चौबीसों घंटे सहायता',
+      spiritual: 'आध्यात्मिक देखभाल',
+      spiritualDesc: 'मार्गदर्शन जो आपकी आध्यात्मिक यात्रा का पोषण करता है',
+      quality: 'गुणवत्तापूर्ण सेवा',
+      qualityDesc: 'प्रतिस्पर्धी मूल्यों पर प्रीमियम सेवाएं'
+    },
+    testimonials: {
+      title: 'हमारे तीर्थयात्री क्या कहते हैं',
+      subtitle: 'हजारों संतुष्ट तीर्थयात्रियों से सुनें जिन्होंने अपनी आशीर्वाद यात्रा के लिए हम पर भरोसा किया'
+    },
+    cta: {
+      title: 'अपनी आशीर्वाद यात्रा शुरू करने के लिए तैयार हैं?',
+      subtitle: 'हजारों तीर्थयात्रियों में शामिल हों जिन्होंने अपने उमराह अनुभव के लिए हम पर भरोसा किया',
+      getStarted: 'आज ही शुरू करें'
+    },
+    stats: {
+      pilgrims: 'तीर्थयात्री परोसे गए',
+      experience: 'वर्षों का अनुभव',
+      support: 'सहायता उपलब्ध',
+      satisfaction: 'संतुष्टि दर'
     },
     home: {
       title: 'पवित्र उमराह यात्रा के लिए आपका विश्वसनीय साथी',
@@ -440,6 +506,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'आरामदायक आवास और विश्वसनीय परिवहन सेवाओं के साथ पवित्र उमराह यात्रा के लिए आपका विश्वसनीय साथी।',
       quickLinks: 'त्वरित लिंक',
+      legal: 'कानूनी',
       services: 'सेवाएं',
       contact: 'संपर्क करें',
       address: 'मक्का, सऊदी अरब',
@@ -462,6 +529,70 @@ const translations: Record<Language, any> = {
       adminLogin: 'Login Admin',
       partnerLogin: 'Login Mitra',
       language: 'Bahasa'
+    },
+    hero: {
+      title: 'Pesan Perjalanan Berkah',
+      subtitle: 'Umrah Anda',
+      description: 'Akomodasi hotel premium di Makkah dan Madinah dengan pembayaran fleksibel Cash on Arrival',
+      hotelBooking: 'Booking Hotel',
+      taxiBooking: 'Booking Taksi',
+      exploreZiaraat: 'Jelajahi Ziarah',
+      noAdvancePayment: 'Tidak perlu uang muka',
+      instantVoucher: 'Pembuatan voucher instan',
+      support247: 'Dukungan 24/7'
+    },
+    bookingSteps: {
+      title: 'Bagaimana Cara Memesan Umrah Anda?',
+      subtitle: 'Ikuti langkah sederhana ini untuk memesan perjalanan Umrah lengkap Anda',
+      getVisa: 'Dapatkan Visa Anda',
+      visaSubtitle: 'Dalam waktu kurang dari 10 menit',
+      visaDesc: 'Pemrosesan visa cepat dengan aplikasi yang disederhanakan',
+      bookFlight: 'Pesan Penerbangan Anda',
+      flightSubtitle: 'Cari 1000+ Penerbangan',
+      flightDesc: 'Bandingkan dan pesan dari ribuan pilihan penerbangan',
+      bookHotel: 'Pesan Hotel Anda',
+      hotelSubtitle: '913 Hotel Tersedia',
+      hotelDesc: 'Pilih dari akomodasi premium dekat Haram',
+      transfers: 'Transfer Anda',
+      transfersSubtitle: 'Pesan Taksi Anda',
+      transfersDesc: 'Transportasi yang dapat diandalkan sepanjang perjalanan Anda'
+    },
+    services: {
+      title: 'Layanan Kami',
+      subtitle: 'Layanan Umrah komprehensif untuk membuat perjalanan ibadah Anda nyaman dan spiritual',
+      ziaraatDesc: 'Jelajahi tempat-tempat suci di Makkah dan Madinah dengan tur berpemandu',
+      taxiDesc: 'Layanan taksi yang aman dan dapat diandalkan untuk jamaah',
+      guideDesc: 'Panduan Umrah lengkap dengan instruksi langkah demi langkah',
+      explorePlaces: 'Jelajahi Tempat',
+      bookTaxi: 'Pesan Taksi',
+      readGuide: 'Baca Panduan'
+    },
+    whyChoose: {
+      title: 'Mengapa Memilih Umrah Asan?',
+      subtitle: 'Rasakan perbedaan dengan tim berpengalaman dan layanan komprehensif kami',
+      trusted: 'Terpercaya & Dapat Diandalkan',
+      trustedDesc: 'Bertahun-tahun pengalaman melayani jamaah dengan dedikasi',
+      support: 'Dukungan 24/7',
+      supportDesc: 'Bantuan sepanjang waktu untuk semua kebutuhan Anda',
+      spiritual: 'Perawatan Spiritual',
+      spiritualDesc: 'Bimbingan yang memelihara perjalanan spiritual Anda',
+      quality: 'Layanan Berkualitas',
+      qualityDesc: 'Layanan premium dengan harga kompetitif'
+    },
+    testimonials: {
+      title: 'Apa Kata Jamaah Kami',
+      subtitle: 'Dengar dari ribuan jamaah yang puas yang mempercayai kami dengan perjalanan berkah mereka'
+    },
+    cta: {
+      title: 'Siap Memulai Perjalanan Berkah Anda?',
+      subtitle: 'Bergabunglah dengan ribuan jamaah yang telah mempercayai kami dengan pengalaman Umrah mereka',
+      getStarted: 'Mulai Hari Ini'
+    },
+    stats: {
+      pilgrims: 'Jamaah Dilayani',
+      experience: 'Tahun Pengalaman',
+      support: 'Dukungan Tersedia',
+      satisfaction: 'Tingkat Kepuasan'
     },
     home: {
       title: 'Mitra Terpercaya untuk Perjalanan Umrah yang Berkah',
@@ -523,6 +654,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'Mitra terpercaya Anda untuk perjalanan Umrah yang berkah dengan akomodasi nyaman dan layanan transportasi yang dapat diandalkan.',
       quickLinks: 'Tautan Cepat',
+      legal: 'Hukum',
       services: 'Layanan',
       contact: 'Hubungi Kami',
       address: 'Makkah, Arab Saudi',
@@ -606,6 +738,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'شريككم الموثوق لرحلة العمرة المباركة مع إقامة مريحة وخدمات نقل موثوقة.',
       quickLinks: 'روابط سريعة',
+      legal: 'قانوني',
       services: 'الخدمات',
       contact: 'اتصل بنا',
       address: 'مكة المكرمة، المملكة العربية السعودية',
@@ -689,6 +822,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'Rahat konaklama ve güvenilir ulaşım hizmetleri ile mübarek Umre yolculuğunuz için güvenilir ortağınız.',
       quickLinks: 'Hızlı Bağlantılar',
+      legal: 'Yasal',
       services: 'Hizmetler',
       contact: 'İletişim',
       address: 'Mekke, Suudi Arabistan',
@@ -772,6 +906,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'Rakan kongsi dipercayai anda untuk perjalanan Umrah yang berkat dengan penginapan selesa dan perkhidmatan pengangkutan yang boleh dipercayai.',
       quickLinks: 'Pautan Pantas',
+      legal: 'Undang-undang',
       services: 'Perkhidmatan',
       contact: 'Hubungi Kami',
       address: 'Makkah, Arab Saudi',
@@ -855,6 +990,7 @@ const translations: Record<Language, any> = {
     footer: {
       description: 'আরামদায়ক থাকার ব্যবস্থা এবং নির্ভরযোগ্য পরিবহন সেবার সাথে পবিত্র উমরাহ যাত্রার জন্য আপনার বিশ্বস্ত সঙ্গী।',
       quickLinks: 'দ্রুত লিংক',
+      legal: 'আইনি',
       services: 'সেবাসমূহ',
       contact: 'যোগাযোগ করুন',
       address: 'মক্কা, সৌদি আরব',
