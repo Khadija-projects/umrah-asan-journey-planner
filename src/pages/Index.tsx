@@ -41,36 +41,36 @@ const Index = () => {
   ];
 
   const stats = [
-    { number: "10,000+", label: "Pilgrims Served" },
-    { number: "5", label: "Years Experience" },
-    { number: "24/7", label: "Support Available" },
-    { number: "100%", label: "Satisfaction Rate" }
+    { number: "10,000+", label: t('stats.pilgrims') },
+    { number: "5", label: t('stats.experience') },
+    { number: "24/7", label: t('stats.support') },
+    { number: "100%", label: t('stats.satisfaction') }
   ];
 
   const bookingSteps = [
     {
       icon: FileText,
-      title: "Get Your Visa",
-      subtitle: "In less than 10 minutes",
-      description: "Quick visa processing with our streamlined application"
+      title: t('bookingSteps.getVisa'),
+      subtitle: t('bookingSteps.visaSubtitle'),
+      description: t('bookingSteps.visaDesc')
     },
     {
       icon: Plane,
-      title: "Book Your Flight",
-      subtitle: "Search 1000+ Flights", 
-      description: "Compare and book from thousands of flight options"
+      title: t('bookingSteps.bookFlight'),
+      subtitle: t('bookingSteps.flightSubtitle'), 
+      description: t('bookingSteps.flightDesc')
     },
     {
       icon: MapPin,
-      title: "Book Your Hotel",
-      subtitle: "913 Hotels Available",
-      description: "Choose from premium accommodations near Haram"
+      title: t('bookingSteps.bookHotel'),
+      subtitle: t('bookingSteps.hotelSubtitle'),
+      description: t('bookingSteps.hotelDesc')
     },
     {
       icon: Car,
-      title: "Your Transfers",
-      subtitle: "Book Your Taxi",
-      description: "Reliable transportation throughout your journey"
+      title: t('bookingSteps.transfers'),
+      subtitle: t('bookingSteps.transfersSubtitle'),
+      description: t('bookingSteps.transfersDesc')
     }
   ];
 
@@ -116,26 +116,26 @@ const Index = () => {
           <div className="text-center">
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Book Your Blessing
-                <span className="block text-golden">Umrah Journey</span>
+                {t('hero.title')}
+                <span className="block text-golden">{t('hero.subtitle')}</span>
               </h1>
               <p className="text-lg md:text-xl text-white/90 mb-8 max-w-4xl mx-auto">
-                Premium hotel accommodations in Makkah and Madina with flexible Cash on Arrival payments
+                {t('hero.description')}
               </p>
               
               {/* Key Features */}
               <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm text-white/80">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-golden rounded-full"></div>
-                  <span>No advance payment required</span>
+                  <span>{t('hero.noAdvancePayment')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-golden rounded-full"></div>
-                  <span>Instant voucher generation</span>
+                  <span>{t('hero.instantVoucher')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-golden rounded-full"></div>
-                  <span>24/7 support</span>
+                  <span>{t('hero.support247')}</span>
                 </div>
               </div>
 
@@ -146,21 +146,21 @@ const Index = () => {
                   className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg border-2 border-white"
                   onClick={() => navigate('/ziaraat')}
                 >
-                  Hotel Booking
+                  {t('hero.hotelBooking')}
                 </Button>
                 <Button 
                   size="lg" 
                   className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg border-2 border-white"
                   onClick={() => navigate('/taxi')}
                 >
-                  Taxi Booking
+                  {t('hero.taxiBooking')}
                 </Button>
                 <Button 
                   size="lg" 
                   className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg border-2 border-white"
                   onClick={() => navigate('/ziaraat')}
                 >
-                  Explore Ziaraat
+                  {t('hero.exploreZiaraat')}
                 </Button>
               </div>
             </div>
@@ -173,10 +173,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              How To Book Your Umrah?
+              {t('bookingSteps.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Follow these simple steps to book your complete Umrah journey
+              {t('bookingSteps.subtitle')}
             </p>
           </div>
           

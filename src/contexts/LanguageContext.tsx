@@ -86,6 +86,70 @@ const translations: Record<Language, any> = {
       partnerLogin: 'Partner Login',
       language: 'Language'
     },
+    hero: {
+      title: 'Book Your Blessing',
+      subtitle: 'Umrah Journey',
+      description: 'Premium hotel accommodations in Makkah and Madina with flexible Cash on Arrival payments',
+      hotelBooking: 'Hotel Booking',
+      taxiBooking: 'Taxi Booking',
+      exploreZiaraat: 'Explore Ziaraat',
+      noAdvancePayment: 'No advance payment required',
+      instantVoucher: 'Instant voucher generation',
+      support247: '24/7 support'
+    },
+    bookingSteps: {
+      title: 'How To Book Your Umrah?',
+      subtitle: 'Follow these simple steps to book your complete Umrah journey',
+      getVisa: 'Get Your Visa',
+      visaSubtitle: 'In less than 10 minutes',
+      visaDesc: 'Quick visa processing with our streamlined application',
+      bookFlight: 'Book Your Flight',
+      flightSubtitle: 'Search 1000+ Flights',
+      flightDesc: 'Compare and book from thousands of flight options',
+      bookHotel: 'Book Your Hotel',
+      hotelSubtitle: '913 Hotels Available',
+      hotelDesc: 'Choose from premium accommodations near Haram',
+      transfers: 'Your Transfers',
+      transfersSubtitle: 'Book Your Taxi',
+      transfersDesc: 'Reliable transportation throughout your journey'
+    },
+    services: {
+      title: 'Our Services',
+      subtitle: 'Comprehensive Umrah services to make your pilgrimage journey comfortable and spiritually fulfilling',
+      ziaraatDesc: 'Explore blessed places in Makkah and Madinah with guided tours',
+      taxiDesc: 'Safe and reliable taxi services for pilgrims',
+      guideDesc: 'Complete Umrah guide with step-by-step instructions',
+      explorePlaces: 'Explore Places',
+      bookTaxi: 'Book Taxi',
+      readGuide: 'Read Guide'
+    },
+    whyChoose: {
+      title: 'Why Choose Umrah Asan?',
+      subtitle: 'Experience the difference with our dedicated team and comprehensive services',
+      trusted: 'Trusted & Reliable',
+      trustedDesc: 'Years of experience serving pilgrims with dedication',
+      support: '24/7 Support',
+      supportDesc: 'Round-the-clock assistance for all your needs',
+      spiritual: 'Spiritual Care',
+      spiritualDesc: 'Guidance that nurtures your spiritual journey',
+      quality: 'Quality Service',
+      qualityDesc: 'Premium services at competitive prices'
+    },
+    testimonials: {
+      title: 'What Our Pilgrims Say',
+      subtitle: 'Hear from thousands of satisfied pilgrims who trusted us with their blessing journey'
+    },
+    cta: {
+      title: 'Ready to Begin Your Blessing Journey?',
+      subtitle: 'Join thousands of pilgrims who have trusted us with their Umrah experience',
+      getStarted: 'Get Started Today'
+    },
+    stats: {
+      pilgrims: 'Pilgrims Served',
+      experience: 'Years Experience',
+      support: 'Support Available',
+      satisfaction: 'Satisfaction Rate'
+    },
     home: {
       title: 'Your Trusted Partner for Blessed Umrah Journey',
       subtitle: 'Experience the spiritual journey of a lifetime with our comprehensive Umrah services in Blessed Makkah and Madina',
@@ -168,6 +232,70 @@ const translations: Record<Language, any> = {
       adminLogin: 'ایڈمن لاگ ان',
       partnerLogin: 'پارٹنر لاگ ان',
       language: 'زبان'
+    },
+    hero: {
+      title: 'اپنا مبارک',
+      subtitle: 'عمرہ کا سفر بک کریں',
+      description: 'مکہ اور مدینہ میں پریمیم ہوٹل کی رہائش نقد ادائیگی کے ساتھ',
+      hotelBooking: 'ہوٹل بکنگ',
+      taxiBooking: 'ٹیکسی بکنگ',
+      exploreZiaraat: 'زیارات دیکھیں',
+      noAdvancePayment: 'پیشگی ادائیگی کی ضرورت نہیں',
+      instantVoucher: 'فوری واؤچر جنریشن',
+      support247: '24/7 سپورٹ'
+    },
+    bookingSteps: {
+      title: 'اپنا عمرہ کیسے بک کریں؟',
+      subtitle: 'اپنے مکمل عمرہ سفر کو بک کرنے کے لیے یہ آسان اقدامات اپنائیں',
+      getVisa: 'اپنا ویزا حاصل کریں',
+      visaSubtitle: '10 منٹ سے کم میں',
+      visaDesc: 'ہمارے آسان درخواست کے ساتھ تیز ویزا پروسیسنگ',
+      bookFlight: 'اپنی فلائٹ بک کریں',
+      flightSubtitle: '1000+ فلائٹس تلاش کریں',
+      flightDesc: 'ہزاروں فلائٹ کے آپشنز سے موازنہ اور بکنگ کریں',
+      bookHotel: 'اپنا ہوٹل بک کریں',
+      hotelSubtitle: '913 ہوٹل دستیاب',
+      hotelDesc: 'حرم کے قریب پریمیم رہائش سے انتخاب کریں',
+      transfers: 'آپ کی ٹرانسفر',
+      transfersSubtitle: 'اپنی ٹیکسی بک کریں',
+      transfersDesc: 'آپ کے پورے سفر میں قابل اعتماد نقل و حمل'
+    },
+    services: {
+      title: 'ہماری خدمات',
+      subtitle: 'آپ کے حج کے سفر کو آرام دہ اور روحانی طور پر پرورش دینے کے لیے جامع عمرہ خدمات',
+      ziaraatDesc: 'رہنمائی کے ساتھ مکہ اور مدینہ کی مبارک جگہوں کا دورہ کریں',
+      taxiDesc: 'حجاج کے لیے محفوظ اور قابل اعتماد ٹیکسی خدمات',
+      guideDesc: 'قدم بہ قدم ہدایات کے ساتھ مکمل عمرہ گائیڈ',
+      explorePlaces: 'جگہیں دیکھیں',
+      bookTaxi: 'ٹیکسی بک کریں',
+      readGuide: 'گائیڈ پڑھیں'
+    },
+    whyChoose: {
+      title: 'عمرہ آسان کیوں منتخب کریں؟',
+      subtitle: 'ہماری مخصوص ٹیم اور جامع خدمات کے ساتھ فرق کا تجربہ کریں',
+      trusted: 'قابل اعتماد اور موثق',
+      trustedDesc: 'عقیدت کے ساتھ حجاج کی خدمت کا سالوں کا تجربہ',
+      support: '24/7 سپورٹ',
+      supportDesc: 'آپ کی تمام ضروریات کے لیے 24 گھنٹے معاونت',
+      spiritual: 'روحانی دیکھ بھال',
+      spiritualDesc: 'رہنمائی جو آپ کے روحانی سفر کو پروان چڑھاتی ہے',
+      quality: 'معیاری خدمت',
+      qualityDesc: 'مسابقتی قیمتوں پر پریمیم سروسز'
+    },
+    testimonials: {
+      title: 'ہمارے حجاج کیا کہتے ہیں',
+      subtitle: 'ہزاروں مطمئن حجاج سے سنیں جنہوں نے اپنے مبارک سفر کے لیے ہم پر بھروسہ کیا'
+    },
+    cta: {
+      title: 'اپنا مبارک سفر شروع کرنے کے لیے تیار ہیں؟',
+      subtitle: 'ہزاروں حجاج میں شامل ہوں جنہوں نے اپنے عمرہ کے تجربے کے لیے ہم پر بھروسہ کیا',
+      getStarted: 'آج ہی شروع کریں'
+    },
+    stats: {
+      pilgrims: 'حجاج کی خدمت',
+      experience: 'سال کا تجربہ',
+      support: 'سپورٹ دستیاب',
+      satisfaction: 'اطمینان کی شرح'
     },
     home: {
       title: 'مبارک عمرہ کے سفر کے لیے آپ کا قابل اعتماد ساتھی',
