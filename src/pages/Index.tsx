@@ -1,11 +1,13 @@
-import { ArrowRight, MapPin, Users, Star, Shield, Clock, Heart, CheckCircle, Phone, MessageCircle } from "lucide-react";
+import { ArrowRight, MapPin, Users, Star, Shield, Clock, Heart, CheckCircle, FileText, CreditCard, Plane, Car } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
+import FloatingContactButtons from "@/components/FloatingContactButtons";
 import { useLanguage } from "@/contexts/LanguageContext";
+import kaabaWatermark from "@/assets/kaaba-watermark.png";
 
 const Index = () => {
   const { t } = useLanguage();
@@ -45,6 +47,33 @@ const Index = () => {
     { number: "100%", label: "Satisfaction Rate" }
   ];
 
+  const bookingSteps = [
+    {
+      icon: FileText,
+      title: "Get Your Visa",
+      subtitle: "In less than 10 minutes",
+      description: "Quick visa processing with our streamlined application"
+    },
+    {
+      icon: Plane,
+      title: "Book Your Flight",
+      subtitle: "Search 1000+ Flights", 
+      description: "Compare and book from thousands of flight options"
+    },
+    {
+      icon: MapPin,
+      title: "Book Your Hotel",
+      subtitle: "913 Hotels Available",
+      description: "Choose from premium accommodations near Haram"
+    },
+    {
+      icon: Car,
+      title: "Your Transfers",
+      subtitle: "Book Your Taxi",
+      description: "Reliable transportation throughout your journey"
+    }
+  ];
+
   const testimonials = [
     {
       name: "Ahmad Ali",
@@ -72,8 +101,18 @@ const Index = () => {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-holy">
+        {/* Kaaba Watermark Background */}
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-10"
+          style={{
+            backgroundImage: `url(${kaabaWatermark})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
+          }}
+        ></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           <div className="text-center">
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -101,46 +140,27 @@ const Index = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-lg"
+                  className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg border-2 border-white"
                   onClick={() => navigate('/ziaraat')}
                 >
-                  Book Hotel Now
+                  Hotel Booking
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline"
-                  className="bg-white/90 hover:bg-white text-primary border-2 border-white font-semibold px-8 py-4 rounded-lg"
+                  className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg border-2 border-white"
                   onClick={() => navigate('/taxi')}
                 >
-                  Book Taxi Now
+                  Taxi Booking
                 </Button>
                 <Button 
                   size="lg" 
-                  className="bg-golden hover:bg-golden/90 text-white font-semibold px-8 py-4 rounded-lg"
+                  className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg border-2 border-white"
                   onClick={() => navigate('/ziaraat')}
                 >
                   Explore Ziaraat
-                </Button>
-              </div>
-
-              {/* Contact Buttons */}
-              <div className="flex justify-center gap-4">
-                <Button
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-white p-4 rounded-full w-16 h-16"
-                  onClick={() => window.open('tel:+1234567890', '_self')}
-                >
-                  <Phone className="w-6 h-6" />
-                </Button>
-                <Button
-                  size="lg"
-                  className="bg-golden hover:bg-golden/90 text-white p-4 rounded-full w-16 h-16"
-                  onClick={() => window.open('https://wa.me/1234567890', '_blank')}
-                >
-                  <MessageCircle className="w-6 h-6" />
                 </Button>
               </div>
             </div>
@@ -148,15 +168,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* How To Book Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center animate-fade-in">
-                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              How To Book Your Umrah?
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Follow these simple steps to book your complete Umrah journey
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {bookingSteps.map((step, index) => (
+              <Card key={index} className="text-center animate-fade-in shadow-card hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 bg-gradient-holy rounded-full flex items-center justify-center mx-auto mb-4">
+                    <step.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-primary font-medium mb-2">{step.subtitle}</p>
+                  <p className="text-muted-foreground text-sm">{step.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -282,6 +317,17 @@ const Index = () => {
           <p className="text-xl text-white/90 mb-8">
             Join thousands of pilgrims who have trusted us with their Umrah experience
           </p>
+          
+          {/* Statistics in CTA */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center animate-fade-in">
+                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-white/80">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+          
           <Link to="/login">
             <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-6">
               Get Started Today
@@ -292,6 +338,7 @@ const Index = () => {
       </section>
 
       <Footer />
+      <FloatingContactButtons />
     </div>
   );
 };

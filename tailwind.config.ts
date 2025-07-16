@@ -54,9 +54,9 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				gold: {
-					DEFAULT: 'hsl(var(--gold))',
-					muted: 'hsl(var(--gold-muted))'
+				golden: {
+					DEFAULT: 'hsl(var(--golden))',
+					muted: 'hsl(var(--golden-muted))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -130,7 +130,7 @@ export default {
 			backgroundImage: {
 				'gradient-holy': 'var(--gradient-holy)',
 				'gradient-subtle': 'var(--gradient-subtle)',
-				'gradient-gold': 'var(--gradient-gold)'
+				'gradient-golden': 'var(--gradient-golden)'
 			},
 			boxShadow: {
 				'holy': 'var(--shadow-holy)',
