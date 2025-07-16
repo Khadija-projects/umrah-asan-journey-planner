@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
+import BookingForm from "@/components/BookingForm";
 import { useLanguage } from "@/contexts/LanguageContext";
 import kaabaWatermark from "@/assets/kaaba-watermark.png";
 
@@ -167,6 +168,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Booking Form Section */}
+      <BookingForm />
 
       {/* How To Book Section */}
       <section className="py-16 bg-white">
