@@ -7,10 +7,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import LanguageSelector from './LanguageSelector';
 
 const Navigation = () => {
+  console.log('Navigation: Component is rendering');
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { t } = useLanguage();
   const { user, profile, signOut } = useAuth();
+  console.log('Navigation: Got auth values:', { user: !!user, profile: !!profile });
 
   const navLinks = [
     { name: t('nav.home'), path: "/" },

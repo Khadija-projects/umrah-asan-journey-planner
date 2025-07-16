@@ -90,6 +90,8 @@ const Index = () => {
     }
   ];
 
+  console.log('Index: Component is rendering');
+  
   return (
     <div className="min-h-screen bg-background">
       <Navigation />

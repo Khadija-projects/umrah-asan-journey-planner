@@ -21,6 +21,7 @@ const ServiceCard = ({
   buttonVariant = "default",
   onClick,
 }: ServiceCardProps) => {
+  console.log('ServiceCard: Rendering service card for:', title);
   return (
     <Card className="h-full hover:shadow-holy transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-primary">
       <CardHeader className="text-center">
