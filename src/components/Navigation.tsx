@@ -62,7 +62,7 @@ const Navigation = () => {
             
             {user ? (
               <div className="flex items-center space-x-2">
-                <Link to="/guest-dashboard">
+                <Link to={profile?.user_type === 'admin' ? '/admin-dashboard' : profile?.user_type === 'partner' ? '/partner-dashboard' : '/guest-dashboard'}>
                   <Button variant="outline" size="sm" className="flex items-center space-x-1">
                     <User className="w-4 h-4" />
                     <span className="text-xs">{profile?.full_name || 'Dashboard'}</span>
@@ -126,7 +126,7 @@ const Navigation = () => {
                   <LanguageSelector />
                   {user ? (
                     <div className="space-y-2">
-                      <Link to="/guest-dashboard">
+                      <Link to={profile?.user_type === 'admin' ? '/admin-dashboard' : profile?.user_type === 'partner' ? '/partner-dashboard' : '/guest-dashboard'}>
                         <Button variant="outline" size="sm" className="w-full flex items-center space-x-1">
                           <User className="w-4 h-4" />
                           <span>{profile?.full_name || 'Dashboard'}</span>
