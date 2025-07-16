@@ -93,6 +93,114 @@ export type Database = {
           },
         ]
       }
+      demo_bookings: {
+        Row: {
+          booking_reference: string | null
+          check_in_date: string | null
+          check_out_date: string | null
+          created_at: string | null
+          guest_email: string | null
+          hotel_name: string | null
+          id: string
+          num_guests: number | null
+          num_rooms: number | null
+          payment_status: string | null
+          room_type: string | null
+          special_requests: string | null
+          total_amount: number | null
+        }
+        Insert: {
+          booking_reference?: string | null
+          check_in_date?: string | null
+          check_out_date?: string | null
+          created_at?: string | null
+          guest_email?: string | null
+          hotel_name?: string | null
+          id?: string
+          num_guests?: number | null
+          num_rooms?: number | null
+          payment_status?: string | null
+          room_type?: string | null
+          special_requests?: string | null
+          total_amount?: number | null
+        }
+        Update: {
+          booking_reference?: string | null
+          check_in_date?: string | null
+          check_out_date?: string | null
+          created_at?: string | null
+          guest_email?: string | null
+          hotel_name?: string | null
+          id?: string
+          num_guests?: number | null
+          num_rooms?: number | null
+          payment_status?: string | null
+          room_type?: string | null
+          special_requests?: string | null
+          total_amount?: number | null
+        }
+        Relationships: []
+      }
+      demo_partner_registrations: {
+        Row: {
+          business_license: string | null
+          company_name: string | null
+          contact_person: string | null
+          created_at: string | null
+          partner_email: string
+          phone: string | null
+          status: string | null
+        }
+        Insert: {
+          business_license?: string | null
+          company_name?: string | null
+          contact_person?: string | null
+          created_at?: string | null
+          partner_email: string
+          phone?: string | null
+          status?: string | null
+        }
+        Update: {
+          business_license?: string | null
+          company_name?: string | null
+          contact_person?: string | null
+          created_at?: string | null
+          partner_email?: string
+          phone?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      demo_user_data: {
+        Row: {
+          company_name: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          nationality: string | null
+          phone: string | null
+          user_type: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          nationality?: string | null
+          phone?: string | null
+          user_type?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          nationality?: string | null
+          phone?: string | null
+          user_type?: string | null
+        }
+        Relationships: []
+      }
       hotels: {
         Row: {
           amenities: Json | null
