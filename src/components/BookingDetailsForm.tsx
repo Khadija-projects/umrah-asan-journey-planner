@@ -78,16 +78,7 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
     return diffDays;
   };
 
-  const createBookingLead = async () => {
-    if (!profile?.id) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in to submit your booking request.",
-        variant: "destructive",
-      });
-      return;
-    }
-
+  const createQuoteRequest = async () => {
     if (!bookingData) {
       toast({
         title: "Missing Information",
@@ -99,7 +90,60 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
 
     setLoading(true);
     try {
-      // Get the first available hotel and room for the booking
+      // For guests (no authentication), store in demo tables
+      if (!profile?.id) {
+        // Store guest data in demo_user_data
+        const { error: userError } = await supabase
+          .from('demo_user_data')
+          .insert({
+            email: guestDetails.email,
+            full_name: guestDetails.fullName,
+            phone: guestDetails.phone,
+            nationality: guestDetails.nationality,
+            user_type: 'guest'
+          });
+
+        if (userError) {
+          console.log('Note: Could not store guest data:', userError);
+        }
+
+        // Generate a temporary reference for the quote
+        const tempReference = 'QT' + Math.random().toString(36).substr(2, 8).toUpperCase();
+        
+        // Store quote request in demo_bookings
+        const { error: bookingError } = await supabase
+          .from('demo_bookings')
+          .insert({
+            booking_reference: tempReference,
+            guest_email: guestDetails.email,
+            hotel_name: `${bookingData.selectedCategory} Star Hotel in ${bookingData.selectedCity}`,
+            room_type: bookingData.selectedRoomType,
+            check_in_date: bookingData.checkInDate,
+            check_out_date: bookingData.checkOutDate,
+            num_rooms: parseInt(bookingData.rooms),
+            num_guests: parseInt(bookingData.guests),
+            total_amount: calculateTotal(),
+            payment_status: 'quote_requested',
+            special_requests: guestDetails.specialRequests || null
+          });
+
+        if (bookingError) {
+          console.log('Note: Could not store quote request:', bookingError);
+        }
+
+        setBookingId(tempReference);
+        setStep(2);
+        
+        toast({
+          title: "Quote Request Submitted!",
+          description: "Your quote request has been submitted. We'll get back to you with a proper quote soon via email or WhatsApp.",
+        });
+        
+        setLoading(false);
+        return;
+      }
+
+      // For authenticated users, use the existing booking flow
       const { data: hotels, error: hotelError } = await supabase
         .from('hotels')
         .select('id, name')
@@ -125,18 +169,6 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
 
       const room = rooms[0];
 
-      console.log('Creating booking lead with data:', {
-        p_guest_id: profile.id,
-        p_hotel_id: hotel.id,
-        p_room_id: room.id,
-        p_check_in_date: bookingData.checkInDate,
-        p_check_out_date: bookingData.checkOutDate,
-        p_num_guests: parseInt(bookingData.guests),
-        p_num_rooms: parseInt(bookingData.rooms),
-        p_total_amount: calculateTotal(),
-        p_special_requests: guestDetails.specialRequests || null
-      });
-
       // Create booking lead using the database function
       const { data, error } = await supabase.rpc('create_booking_lead', {
         p_guest_id: profile.id,
@@ -150,11 +182,8 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
         p_special_requests: guestDetails.specialRequests || null
       });
 
-      console.log('RPC response:', { data, error });
-
       if (error) {
         console.error('Database error creating booking lead:', error);
-        // Show success message anyway as per requirement
         toast({
           title: "Success!",
           description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
@@ -176,12 +205,11 @@ const BookingDetailsForm = ({ isOpen, onClose, bookingData }: BookingDetailsForm
         });
       }
     } catch (error) {
-      console.error('Error creating booking lead:', error);
+      console.error('Error creating quote request:', error);
       toast({
         title: "Success!",
-        description: "Your booking details are sent for quotation. You will be contacted soon via email or WhatsApp on your number provided.",
+        description: "Your quote request has been submitted. We'll get back to you with a proper quote soon via email or WhatsApp.",
       });
-      // Still proceed to step 2 even if there's an error
       setStep(2);
     } finally {
       setLoading(false);
@@ -376,7 +404,7 @@ Phone: +966 XXX XXX XXX
                 <div className="border-t pt-4 mt-4">
                   <div className="flex justify-center gap-3">
                     <Button 
-                      onClick={createBookingLead}
+                      onClick={createQuoteRequest}
                       disabled={!isFormValid() || loading}
                       className="px-8 py-3 text-lg font-semibold bg-gradient-holy hover:bg-gradient-holy/90"
                     >
@@ -399,37 +427,63 @@ Phone: +966 XXX XXX XXX
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Booking Lead Created Successfully!</h3>
+              <h3 className="text-xl font-semibold mb-2">{profile?.id ? "Booking Lead Created Successfully!" : "Quote Request Submitted!"}</h3>
               <p className="text-muted-foreground">
-                Your booking reference: <span className="font-mono font-bold">UMR{bookingId?.substring(0, 8).toUpperCase()}</span>
+                Your reference: <span className="font-mono font-bold">{profile?.id ? `UMR${bookingId?.substring(0, 8).toUpperCase()}` : bookingId}</span>
               </p>
             </div>
 
-            <Card className="border-yellow-200 bg-yellow-50">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-3">
-                  <CreditCard className="w-6 h-6 text-yellow-600 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-yellow-800 mb-2">Payment Required</h4>
-                    <p className="text-yellow-700 text-sm mb-3">
-                      This is a temporary voucher valid for 4 hours. Complete payment and upload receipt to get your final voucher.
-                    </p>
-                    <p className="text-xs text-yellow-600">
-                      Valid until: {voucherExpiry ? new Date(voucherExpiry).toLocaleString() : 'N/A'}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            {profile?.id ? (
+              <>
+                <Card className="border-yellow-200 bg-yellow-50">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-3">
+                      <CreditCard className="w-6 h-6 text-yellow-600 mt-1" />
+                      <div>
+                        <h4 className="font-semibold text-yellow-800 mb-2">Payment Required</h4>
+                        <p className="text-yellow-700 text-sm mb-3">
+                          This is a temporary voucher valid for 4 hours. Complete payment and upload receipt to get your final voucher.
+                        </p>
+                        <p className="text-xs text-yellow-600">
+                          Valid until: {voucherExpiry ? new Date(voucherExpiry).toLocaleString() : 'N/A'}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <div className="flex justify-center gap-3">
-              <Button onClick={downloadVoucher} className="min-w-32">
-                Download Temporary Voucher
-              </Button>
-              <Button variant="outline" onClick={handleClose}>
-                Close
-              </Button>
-            </div>
+                <div className="flex justify-center gap-3">
+                  <Button onClick={downloadVoucher} className="min-w-32">
+                    Download Temporary Voucher
+                  </Button>
+                  <Button variant="outline" onClick={handleClose}>
+                    Close
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <Card className="border-green-200 bg-green-50">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-3">
+                      <Mail className="w-6 h-6 text-green-600 mt-1" />
+                      <div>
+                        <h4 className="font-semibold text-green-800 mb-2">Quote Request Received</h4>
+                        <p className="text-green-700 text-sm">
+                          We have received your quote request and will get back to you with pricing details via email or WhatsApp within 24 hours.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <div className="flex justify-center">
+                  <Button variant="outline" onClick={handleClose}>
+                    Close
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         )}
       </DialogContent>
