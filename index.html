@@ -4,10 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Umrah Asan</title>
-  <link rel="icon" href="favicon.ico" />
+  <base href="/umrah-asan-journey-planner/" />
 </head>
 <body>
   <div id="root"></div>
-  <!-- Vite will auto-inject scripts -->
+  
+  <!-- Debug Script -->
+  <script>
+    console.log('Debug:', {
+      basePath: window.location.pathname,
+      rootElement: document.getElementById('root')
+    });
+  </script>
 </body>
 </html>
