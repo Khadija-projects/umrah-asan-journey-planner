@@ -1,0 +1,18 @@
+{
+  "index.html": {
+    "file": "assets/index-B8FKZcas.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "css": [
+      "assets/index-6n-Jl59c.css"
+    ],
+    "assets": [
+      "assets/kaaba-watermark-DSrch21K.png"
+    ]
+  },
+  "src/assets/kaaba-watermark.png": {
+    "file": "assets/kaaba-watermark-DSrch21K.png",
+    "src": "src/assets/kaaba-watermark.png"
+  }
+}
