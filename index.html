@@ -1,36 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="/umrah-asan-journey-planner/" />
-  <title>Umrah Asan</title>
-  <style>
-    #root {
-      padding: 2rem;
-      font-family: sans-serif;
-      text-align: center;
-    }
-    .error { color: red; }
-  </style>
+  <base href="/umrah-asan-journey-planner/">
+  <title>TEST PAGE</title>
 </head>
 <body>
-  <div id="root">
-    <h1>Application Error</h1>
-    <p class="error">JavaScript bundle failed to load</p>
-    <p>Technical details:</p>
-    <ul>
-      <li>Build version: <span id="build-version">unknown</span></li>
-      <li>Last updated: <span id="build-time"></span></li>
-    </ul>
-  </div>
-
+  <h1>GitHub Pages is Working!</h1>
+  <p>Build time: <span id="time"></span></p>
   <script>
-    // Debug information
-    document.getElementById('build-time').textContent = new Date().toISOString();
-    document.getElementById('build-version').textContent = 
-      window.location.pathname.split('/').filter(Boolean).pop() || 'unknown';
-    
-    // Auto-refresh for debugging
-    setTimeout(() => location.reload(), 5000);
+    document.getElementById('time').textContent = new Date().toLocaleString();
   </script>
 </body>
 </html>
