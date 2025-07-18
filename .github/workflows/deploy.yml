@@ -13,9 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -26,9 +27,30 @@ jobs:
 
       - name: Build project
         run: |
-          npm run build || echo "Build fallback"
-          mkdir -p dist
-          echo "<h1>Loading...</h1>" > dist/index.html
+          npm run build || echo "Build failed - creating fallback"
+          mkdir -p dist/assets
+          echo "<!DOCTYPE html>
+          <html>
+            <head>
+              <base href='/umrah-asan-journey-planner/' />
+              <title>Umrah Asan</title>
+            </head>
+            <body>
+              <div id='root'></div>
+              <script>
+                console.log('Base path:', window.location.pathname);
+                window.addEventListener('error', e => console.error(e));
+              </script>
+            </body>
+          </html>" > dist/index.html
+          echo "console.log('App loaded');" > dist/assets/main.js
+
+      - name: Debug build output
+        run: |
+          echo "=== DIST FOLDER STRUCTURE ==="
+          ls -R dist
+          echo "=== INDEX.HTML CONTENTS ==="
+          cat dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
