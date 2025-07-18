@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Umrah Asan</title>
   <base href="/umrah-asan-journey-planner/" />
+  <title>Umrah Asan</title>
+  <script>
+    // Debugging script
+    window.APP_DEBUG = {
+      basePath: location.pathname,
+      buildTime: new Date().toISOString()
+    };
+  </script>
 </head>
 <body>
   <div id="root"></div>
-  
-  <!-- Debug Script -->
-  <script>
-    console.log('Debug:', {
-      basePath: window.location.pathname,
-      rootElement: document.getElementById('root')
-    });
-  </script>
+  <!-- Production script will be injected here -->
 </body>
 </html>
