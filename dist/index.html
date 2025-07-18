@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Test Page</title>
+  <title>Umrah Asan</title>
+  <base href="/umrah-asan-journey-planner/" />
 </head>
 <body>
-  <h1>Umrah Asan - Coming Soon</h1>
-  <script src="/umrah-asan-journey-planner/assets/main.js"></script>
+  <div id="root"></div>
+  
+  <!-- Add this script for debugging -->
+  <script>
+    console.log('Environment:', {
+      base: import.meta.env.BASE_URL,
+      mode: import.meta.env.MODE
+    });
+    window.addEventListener('error', (e) => {
+      console.error('Global error:', e.error);
+    });
+  </script>
+  
+  <!-- Production script (will be injected by Vite) -->
+  <script type="module" src="/umrah-asan-journey-planner/assets/index.js"></script>
 </body>
 </html>
