@@ -6,8 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const FAQ = () => {
+  const { t } = useLanguage();
+  
   const faqs = [
     {
       question: "How do I book a hotel with Umrah Asan?",
@@ -99,11 +102,10 @@ const FAQ = () => {
       <section className="bg-gradient-subtle py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Frequently Asked Questions
+            {t('faq.title')}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Find answers to common questions about our services, booking process, and policies.
-            Can't find what you're looking for? Contact our 24/7 support team.
+            {t('faq.subtitle')}
           </p>
         </div>
       </section>

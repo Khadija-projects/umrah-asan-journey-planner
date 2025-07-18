@@ -3,8 +3,11 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Clock, Users } from "lucide-react";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Ziaraat = () => {
+  const { t } = useLanguage();
+  
   const ziaraatSites = [
     {
       name: "Masjid Quba",
@@ -76,11 +79,10 @@ const Ziaraat = () => {
       <section className="bg-gradient-subtle py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Visit the Blessed Sites — Ziaraat with Umrah Asan
+            {t('ziaraat.title')}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Discover the holy places in Makkah & Madinah with verified local guides. 
-            Experience the spiritual journey through blessing history.
+            {t('ziaraat.subtitle')}
           </p>
           <Button variant="holy" size="xl">
             Book Ziaraat Tour Now

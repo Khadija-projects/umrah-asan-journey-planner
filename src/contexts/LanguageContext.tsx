@@ -214,6 +214,28 @@ const translations: Record<Language, any> = {
         }
       }
     },
+    about: {
+      title: "About Umrah Asan",
+      subtitle: "Making your blessing journey easier than ever with trusted services, transparent pricing, and genuine human support.",
+      values: {
+        spiritualRespect: "Spiritual Respect",
+        spiritualRespectDesc: "We understand the blessing nature of your journey and treat every pilgrim with utmost respect and care.",
+        trustTransparency: "Trust & Transparency",
+        trustTransparencyDesc: "No hidden fees, clear policies, and honest communication in every interaction.",
+        humanSupport: "Human Support",
+        humanSupportDesc: "Real people providing genuine help, available 24/7 for your peace of mind.",
+        excellence: "Excellence",
+        excellenceDesc: "Verified partners, quality services, and continuous improvement to serve you better."
+      }
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      subtitle: "Find answers to common questions about our services, booking process, and policies. Can't find what you're looking for? Contact our 24/7 support team."
+    },
+    ziaraat: {
+      title: "Visit the Blessed Sites — Ziaraat with Umrah Asan",
+      subtitle: "Discover the holy places in Makkah & Madinah with verified local guides. Experience the spiritual journey through blessing history."
+    },
     footer: {
       description: 'Your trusted partner for a blessed Umrah journey with comfortable accommodations and reliable transport services.',
       quickLinks: 'Quick Links',
@@ -362,6 +384,28 @@ const translations: Record<Language, any> = {
           description: 'معیاری خدمات کے لیے بہترین ریٹ'
         }
       }
+    },
+    about: {
+      title: "عمرہ آسان کے بارے میں",
+      subtitle: "قابل اعتماد خدمات، شفاف قیمتوں، اور حقیقی انسانی مدد کے ساتھ آپ کا مبارک سفر پہلے سے آسان بنانا۔",
+      values: {
+        spiritualRespect: "روحانی احترام",
+        spiritualRespectDesc: "ہم آپ کے سفر کی مبارک نوعیت کو سمجھتے ہیں اور ہر حاجی کے ساتھ انتہائی احترام اور خیال سے پیش آتے ہیں۔",
+        trustTransparency: "اعتماد اور شفافیت",
+        trustTransparencyDesc: "کوئی چھپی ہوئی فیسیں نہیں، واضح پالیسیاں، اور ہر بات چیت میں ایماندار رابطہ۔",
+        humanSupport: "انسانی مدد",
+        humanSupportDesc: "حقیقی لوگ جو آپ کے ذہنی سکون کے لیے 24/7 دستیاب حقیقی مدد فراہم کرتے ہیں۔",
+        excellence: "بہترین",
+        excellenceDesc: "تصدیق شدہ پارٹنرز، معیاری خدمات، اور آپ کی بہتر خدمت کے لیے مسلسل بہتری۔"
+      }
+    },
+    faq: {
+      title: "عام طور پر پوچھے جانے والے سوالات",
+      subtitle: "ہماری خدمات، بکنگ کے عمل، اور پالیسیوں کے بارے میں عام سوالات کے جوابات تلاش کریں۔ جو آپ تلاش کر رہے ہیں وہ نہیں مل رہا؟ ہماری 24/7 سپورٹ ٹیم سے رابطہ کریں۔"
+    },
+    ziaraat: {
+      title: "مبارک مقامات کی زیارت — عمرہ آسان کے ساتھ زیارات",
+      subtitle: "تصدیق شدہ مقامی گائیڈز کے ساتھ مکہ اور مدینہ کے مقدس مقامات دریافت کریں۔ مبارک تاریخ کے ذریعے روحانی سفر کا تجربہ کریں۔"
     },
     footer: {
       description: 'آرام دہ رہائش اور قابل اعتماد ٹرانسپورٹ سروسز کے ساتھ مبارک عمرہ کے سفر کے لیے آپ کا قابل اعتماد ساتھی۔',

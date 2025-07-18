@@ -2,28 +2,31 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heart, Shield, Users, Star } from "lucide-react";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const About = () => {
+  const { t } = useLanguage();
+  
   const values = [
     {
       icon: Heart,
-      title: "Spiritual Respect",
-      description: "We understand the blessing nature of your journey and treat every pilgrim with utmost respect and care."
+      title: t('about.values.spiritualRespect'),
+      description: t('about.values.spiritualRespectDesc')
     },
     {
       icon: Shield,
-      title: "Trust & Transparency", 
-      description: "No hidden fees, clear policies, and honest communication in every interaction."
+      title: t('about.values.trustTransparency'), 
+      description: t('about.values.trustTransparencyDesc')
     },
     {
       icon: Users,
-      title: "Human Support",
-      description: "Real people providing genuine help, available 24/7 for your peace of mind."
+      title: t('about.values.humanSupport'),
+      description: t('about.values.humanSupportDesc')
     },
     {
       icon: Star,
-      title: "Excellence",
-      description: "Verified partners, quality services, and continuous improvement to serve you better."
+      title: t('about.values.excellence'),
+      description: t('about.values.excellenceDesc')
     }
   ];
 
@@ -35,11 +38,10 @@ const About = () => {
       <section className="bg-gradient-subtle py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            About Umrah Asan
+            {t('about.title')}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Making your blessing journey easier than ever with trusted services, 
-            transparent pricing, and genuine human support.
+            {t('about.subtitle')}
           </p>
         </div>
       </section>
