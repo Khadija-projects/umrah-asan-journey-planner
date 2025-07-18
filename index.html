@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Critical Base Path Fix -->
-    
     <title>Umrah Asan - Book Your Holy Umrah Trip | Hotels, Taxi & Ziaraat</title>
     <meta name="description" content="Book trusted hotels near Haram, reliable taxi service & guided ziaraat tours for your Umrah journey. Bank transfer payment, instant vouchers, 24/7 support." />
     <meta name="author" content="Umrah Asan" />
@@ -21,27 +19,18 @@
     <!-- Preload/Prefetch for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="icon" href="/umrah-asan-journey-planner/favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
   </head>
 
   <body>
     <div id="root"></div>
     
     <!-- Production Script Loading -->
-    <script type="module">
-      // Dynamic script loading for GitHub Pages compatibility
-      const loadApp = () => {
-        const script = document.createElement('script');
-        script.type = 'module';
-        script.src = '/umrah-asan-journey-planner/assets/main.js'; // Matches Vite's output
-        document.body.appendChild(script);
+    <script>
+      // Wait for Vite to transform this during build
+      window.__APP_CONFIG__ = {
+        basePath: '/umrah-asan-journey-planner/'
       };
-      
-      if (document.readyState === 'complete') {
-        loadApp();
-      } else {
-        window.addEventListener('load', loadApp);
-      }
     </script>
   </body>
 </html>
