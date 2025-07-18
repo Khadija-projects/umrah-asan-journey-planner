@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <base href="/umrah-asan-journey-planner/" />
   <title>Umrah Asan</title>
-  <!-- Fallback CSS -->
   <style>
-    #root { 
+    #root {
       padding: 2rem;
       font-family: sans-serif;
       text-align: center;
@@ -17,18 +14,23 @@
 </head>
 <body>
   <div id="root">
-    <h1>Loading Application...</h1>
-    <p class="error" id="load-error"></p>
+    <h1>Application Error</h1>
+    <p class="error">JavaScript bundle failed to load</p>
+    <p>Technical details:</p>
+    <ul>
+      <li>Build version: <span id="build-version">unknown</span></li>
+      <li>Last updated: <span id="build-time"></span></li>
+    </ul>
   </div>
 
-  <!-- Debug Script -->
   <script>
-    setTimeout(() => {
-      if (!window.React) {
-        document.getElementById('load-error').textContent = 
-          'JavaScript failed to load. Check console for errors.';
-      }
-    }, 3000);
+    // Debug information
+    document.getElementById('build-time').textContent = new Date().toISOString();
+    document.getElementById('build-version').textContent = 
+      window.location.pathname.split('/').filter(Boolean).pop() || 'unknown';
+    
+    // Auto-refresh for debugging
+    setTimeout(() => location.reload(), 5000);
   </script>
 </body>
 </html>
