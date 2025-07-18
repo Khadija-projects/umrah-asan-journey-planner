@@ -1,25 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
-import { componentTagger } from "lovable-tagger"
 
-export default defineConfig(({ mode }) => ({
-  plugins: [
-    react(),
-    mode === 'development' && componentTagger(),
-  ].filter(Boolean),
-  base: mode === 'production' ? '/umrah-asan-journey-planner/' : '/',
-  server: {
-    host: "::",
-    port: 8080
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  },
+export default defineConfig({
+  plugins: [react()],
+  base: '/umrah-asan-journey-planner/',
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    // Force asset creation
+    manifest: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash][extname]',
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js'
+      }
+    }
   }
-}))
+})
