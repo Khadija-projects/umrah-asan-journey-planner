@@ -1,71 +1,41 @@
-name: Deploy to GitHub Pages
+name: Deploy Static Site to GitHub Pages
 
 on:
   push:
-    branches: [main]
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+    branches: [ "main" ]  # Change to your default branch if different
 
 jobs:
-  verify-build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build with debug
-        run: |
-          npm run build -- --debug 2>&1 | tee build.log
-          echo "=== BUILD OUTPUT ==="
-          ls -R dist || echo "No dist folder"
-          [ -f "dist/index.html" ] || exit 1
-          [ -d "dist/assets" ] || exit 1
+      - name: Build static files
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://smoxbbuvuwjarpuxanmo.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtb3hiYnV2dXdqYXJwdXhhbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NDMzNDcsImV4cCI6MjA2ODAxOTM0N30.zppp0hJd1n8ZmdAc4w6Z5hM63jCTj7t2RHRiKEhBj-g
 
-      - name: Upload build logs
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: build-debug-logs
-          path: |
-            build.log
-            dist/
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
 
-  deploy:
-    needs: verify-build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-debug-logs
-          path: dist
-
-      - name: Verify artifact
-        run: |
-          echo "=== DEPLOYMENT FILES ==="
-          ls -R dist
-          [ -f "dist/index.html" ] || exit 1
-
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'dist'
 
-      - uses: actions/deploy-pages@v4
-        id: deployment
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
