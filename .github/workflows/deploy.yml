@@ -9,18 +9,37 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      - run: ls -R dist # Verify build output
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify build
+        run: |
+          ls -R dist
+          [ -f "dist/index.html" ] || exit 1
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
 
   deploy:
     needs: build
@@ -29,8 +48,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'dist'
-      - uses: actions/deploy-pages@v3
+      - name: Deploy
         id: deployment
+        uses: actions/deploy-pages@v4
