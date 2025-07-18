@@ -1,7 +1,11 @@
 name: Build and Deploy
 on:
   push:
-    branches: [ main ]  # Trigger on pushes to `main`
+    branches: [main]  # Trigger on pushes to main
+
+permissions:
+  pages: write  # Required for Pages deployment
+  id-token: write  # Required for Auth
 
 jobs:
   build:
@@ -12,16 +16,16 @@ jobs:
         with:
           node-version: 18
       - run: npm install
-      - run: npm run build  # Your build script
+      - run: npm run build  # Your build command (e.g., Vite)
       - uses: actions/upload-pages-artifact@v2
         with:
-          path: 'dist'  # Replace with your build output folder
+          path: 'dist'  # Path to your built files (e.g., Vite's default)
 
   deploy:
-    needs: build  # Wait for build job to finish
+    needs: build  # Wait for build to finish
     runs-on: ubuntu-latest
-    environment:  # ⭐ REQUIRED FOR GITHUB PAGES ⭐
+    environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}  # Auto-generated URL
     steps:
       - uses: actions/deploy-pages@v4  # Official GitHub Pages action
