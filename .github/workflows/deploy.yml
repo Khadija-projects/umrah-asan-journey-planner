@@ -18,15 +18,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: |
-          npm install
-          npm run build
-          [ -d "dist" ] || exit 1
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with debug
+        run: |
+          npm run build -- --debug 2>&1 | tee build.log
           echo "=== BUILD OUTPUT ==="
-          ls -R dist
+          ls -R dist || echo "No dist folder"
+          [ -f "dist/index.html" ] || exit 1
+          [ -d "dist/assets" ] || exit 1
+
+      - name: Upload build logs
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: build-debug-logs
+          path: |
+            build.log
+            dist/
 
   deploy:
     needs: verify-build
@@ -35,8 +52,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-debug-logs
+          path: dist
+
+      - name: Verify artifact
+        run: |
+          echo "=== DEPLOYMENT FILES ==="
+          ls -R dist
+          [ -f "dist/index.html" ] || exit 1
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: 'dist'
+
       - uses: actions/deploy-pages@v4
         id: deployment
