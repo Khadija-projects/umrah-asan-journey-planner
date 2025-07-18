@@ -1,51 +1,27 @@
-name: Deploy to GitHub Pages
-
+name: Build and Deploy
 on:
   push:
-    branches: [main]
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+    branches: [ main ]  # Trigger on pushes to `main`
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: |
-          npm run build
-          echo "=== Build Verification ==="
-          [ -d "dist/assets" ] || {
-            echo "❌ Error: Missing assets folder!"
-            ls -R dist
-            exit 1
-          }
-          echo "✅ Assets found:"
-          ls -lh dist/assets/
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+          node-version: 18
+      - run: npm install
+      - run: npm run build  # Your build script
+      - uses: actions/upload-pages-artifact@v2
         with:
-          path: 'dist'
+          path: 'dist'  # Replace with your build output folder
 
   deploy:
-    needs: build
+    needs: build  # Wait for build job to finish
     runs-on: ubuntu-latest
-    environment:
+    environment:  # ⭐ REQUIRED FOR GITHUB PAGES ⭐
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4  # Official GitHub Pages action
