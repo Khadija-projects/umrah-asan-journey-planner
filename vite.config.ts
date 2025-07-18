@@ -3,15 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/umrah-asan-journey-planner/',
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        entryFileNames: '[name]-[hash].js',
-        assetFileNames: '[name]-[hash][extname]'
-      }
-    }
-  }
+  base: '/umrah-asan-journey-planner/'
 })
