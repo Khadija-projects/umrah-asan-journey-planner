@@ -6,7 +6,7 @@ export default defineConfig({
   base: '/umrah-asan-journey-planner/',
   build: {
     outDir: 'dist',
-    // Force asset creation
+    emptyOutDir: true,
     manifest: true,
     rollupOptions: {
       output: {
