@@ -45,7 +45,10 @@ jobs:
           ls -la dist/assets/ || echo "Assets directory not found"
           
       - name: Create CNAME file for custom domain
-        run: echo "umrahasan.com" > dist/CNAME
+        run: |
+          echo "umrahasan.com" > dist/CNAME
+          echo "CNAME file created with content:"
+          cat dist/CNAME
 
       - name: Create .nojekyll file
         run: touch dist/.nojekyll
@@ -67,3 +70,11 @@ jobs:
           echo "Deployment completed!"
           echo "Site should be available at: https://umrahasan.com"
           echo "GitHub Pages URL: ${{ steps.deployment.outputs.page_url }}"
+          echo ""
+          echo "If domain is not working, ensure DNS A records point to:"
+          echo "185.199.108.153"
+          echo "185.199.109.153"
+          echo "185.199.110.153"
+          echo "185.199.111.153"
+          echo ""
+          echo "Current DNS shows: 185.158.133.1 (incorrect IP)"
