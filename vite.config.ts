@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
-  base: mode === 'production' ? '/umrah-asan-journey-planner/' : '/',
+  base: '/',
   server: {
     host: "::",
     port: 8080
