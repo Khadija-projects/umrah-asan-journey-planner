@@ -54,6 +54,13 @@ jobs:
           echo "umrahasan.com" > dist/CNAME
           echo "CNAME file created with content:"
           cat dist/CNAME
+          
+      - name: Fix asset permissions and paths
+        run: |
+          find dist -type f -name "*.js" -exec chmod 644 {} \;
+          find dist -type f -name "*.css" -exec chmod 644 {} \;
+          find dist -type f -name "*.html" -exec chmod 644 {} \;
+          echo "Asset permissions fixed"
 
       - name: Create .nojekyll file
         run: touch dist/.nojekyll
