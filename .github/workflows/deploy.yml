@@ -36,6 +36,7 @@ jobs:
         env:
           VITE_SUPABASE_URL: https://smoxbbuvuwjarpuxanmo.supabase.co
           VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtb3hiYnV2dXdqYXJwdXhhbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NDMzNDcsImV4cCI6MjA2ODAxOTM0N30.zppp0hJd1n8ZmdAc4w6Z5hM63jCTj7t2RHRiKEhBj-g
+          NODE_ENV: production
 
       - name: Verify build output
         run: |
@@ -43,6 +44,10 @@ jobs:
           ls -la dist/
           echo "Checking for main files..."
           ls -la dist/assets/ || echo "Assets directory not found"
+          echo "Checking index.html content..."
+          head -20 dist/index.html || echo "index.html not found"
+          echo "Verifying asset references in index.html..."
+          grep -o 'assets/[^"]*' dist/index.html || echo "No asset references found"
           
       - name: Create CNAME file for custom domain
         run: |
@@ -52,6 +57,9 @@ jobs:
 
       - name: Create .nojekyll file
         run: touch dist/.nojekyll
+        
+      - name: Create 404.html for SPA routing
+        run: cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
