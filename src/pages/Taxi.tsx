@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -33,15 +32,8 @@ const Taxi = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="bg-gradient-subtle py-16 px-4">
+      <section className="bg-gradient-subtle py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8">
-            <img 
-              src="/lovable-uploads/170254fc-3d5e-4528-b57b-405fffa962b5.png" 
-              alt="Umrah Asan Logo" 
-              className="w-32 h-32 mx-auto mb-6"
-            />
-          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
             Reliable Taxi Service for Haram, Airport & Ziaraat
           </h1>
@@ -55,10 +47,17 @@ const Taxi = () => {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-16 px-4 bg-background">
+      {/* Pricing Table */}
+      <section className="py-8 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-primary mb-12">
+          <TaxiPricingTable />
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-12 px-4 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-primary mb-8">
             Why Choose Our Taxi Service?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -114,9 +113,9 @@ const Taxi = () => {
       </section>
 
       {/* Services */}
-      <section className="py-16 px-4 bg-accent/30">
+      <section className="py-12 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-primary mb-12">
+          <h2 className="text-3xl font-bold text-center text-primary mb-8">
             Our Transportation Services
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -140,13 +139,6 @@ const Taxi = () => {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Pricing Table */}
-      <section className="py-16 px-4 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <TaxiPricingTable />
         </div>
       </section>
 

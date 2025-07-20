@@ -184,21 +184,9 @@ const TaxiBookingForm = ({ isOpen, onClose, route }: TaxiBookingFormProps) => {
                     required
                     placeholder="Enter specific pickup address"
                   />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="dropoffLocation" className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    Drop-off Location *
-                  </Label>
-                  <Input
-                    id="dropoffLocation"
-                    name="dropoffLocation"
-                    value={formData.dropoffLocation}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Enter specific drop-off address"
-                  />
+                  <p className="text-xs text-muted-foreground">
+                    For Ziaraat trips, driver will return you to the same pickup location
+                  </p>
                 </div>
 
                 <div className="space-y-2">

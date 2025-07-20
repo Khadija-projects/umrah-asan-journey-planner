@@ -25,9 +25,11 @@ const Navigation = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-holy rounded-full flex items-center justify-center">
-                <MapPin className="w-4 h-4 text-primary-foreground" />
-              </div>
+              <img 
+                src="/lovable-uploads/308484dd-1a34-41ae-9cca-4a601bf3d89b.png" 
+                alt="Umrah Asan Logo" 
+                className="w-8 h-8 object-contain"
+              />
               <span className="text-lg font-bold text-primary whitespace-nowrap">Umrah Asan</span>
             </Link>
 
@@ -73,9 +75,11 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-holy rounded-full flex items-center justify-center">
-              <MapPin className="w-4 h-4 text-primary-foreground" />
-            </div>
+            <img 
+              src="/lovable-uploads/308484dd-1a34-41ae-9cca-4a601bf3d89b.png" 
+              alt="Umrah Asan Logo" 
+              className="w-8 h-8 object-contain"
+            />
             <span className="text-lg font-bold text-primary whitespace-nowrap">Umrah Asan</span>
           </Link>
 
