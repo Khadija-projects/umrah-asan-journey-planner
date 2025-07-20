@@ -1,8 +1,10 @@
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, MapPin, Clock, Shield, Users, Plane } from "lucide-react";
+import TaxiPricingTable from "@/components/TaxiPricingTable";
 
 const Taxi = () => {
   const services = [
@@ -33,6 +35,13 @@ const Taxi = () => {
       {/* Hero Section */}
       <section className="bg-gradient-subtle py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/170254fc-3d5e-4528-b57b-405fffa962b5.png" 
+              alt="Umrah Asan Logo" 
+              className="w-32 h-32 mx-auto mb-6"
+            />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
             Reliable Taxi Service for Haram, Airport & Ziaraat
           </h1>
@@ -134,64 +143,10 @@ const Taxi = () => {
         </div>
       </section>
 
-      {/* Pricing Info */}
+      {/* Pricing Table */}
       <section className="py-16 px-4 bg-background">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-primary mb-8">
-            Transparent Pricing
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Standard Routes</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-left">
-                <div className="flex justify-between">
-                  <span>Airport to Makkah Hotels</span>
-                  <span className="font-semibold">80-120 SAR</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Airport to Madinah Hotels</span>
-                  <span className="font-semibold">100-150 SAR</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Hotel to Haram (one way)</span>
-                  <span className="font-semibold">15-30 SAR</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Makkah to Madinah</span>
-                  <span className="font-semibold">400-500 SAR</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Ziaraat Packages</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-left">
-                <div className="flex justify-between">
-                  <span>Half Day Makkah Ziaraat</span>
-                  <span className="font-semibold">200-250 SAR</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Full Day Makkah Ziaraat</span>
-                  <span className="font-semibold">350-400 SAR</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Half Day Madinah Ziaraat</span>
-                  <span className="font-semibold">180-220 SAR</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Full Day Madinah Ziaraat</span>
-                  <span className="font-semibold">300-350 SAR</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          <p className="text-muted-foreground mt-6">
-            *Prices may vary based on vehicle type, distance, and time. All fares are shown before booking.
-          </p>
+        <div className="max-w-7xl mx-auto">
+          <TaxiPricingTable />
         </div>
       </section>
 
@@ -211,6 +166,9 @@ const Taxi = () => {
             </Button>
             <p className="text-sm text-primary-foreground/80">
               Available 24/7 • Instant confirmation • Verified drivers
+            </p>
+            <p className="text-sm text-primary-foreground/80">
+              Contact us: +923455141224 (Call/WhatsApp)
             </p>
           </div>
         </div>
