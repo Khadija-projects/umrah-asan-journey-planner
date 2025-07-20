@@ -13,30 +13,7 @@ const Ziaraat = () => {
       name: "Masjid Quba",
       city: "Madinah",
       distance: "3 km",
-      details: "Masjid Quba holds the honor of being the first mosque ever built in Islam. When Prophet Muhammad (peace be upon him) migrated from Makkah to Madinah (the Hijrah), he stopped in the area of Quba, a small village at the time. There, he personally laid the foundation stone of this mosque with his own blessed hands. The Prophet (peace be upon him) would often visit Masjid Quba every Saturday, either walking or riding, and would encourage his companions to do so.
-
-Virtue & Hadith:
-The virtue of Masjid Quba is clearly mentioned in authentic Hadith. The Prophet (peace be upon him) said:
-
-“Whoever purifies himself in his house, then comes to Masjid Quba and prays in it, he will have a reward like that of Umrah.”
-— (Ibn Majah, Book 5, Hadith 1404; Tirmidhi 3234)
-
-Another narration from Sahih Bukhari states that the Prophet (peace be upon him) used to visit Masjid Quba every Saturday to pray two Rak‘ahs.
-
-Importance for Pilgrims:
-Praying in Masjid Quba is an easy and beautiful Sunnah. Visitors are encouraged to perform Wudu (ablution) at their accommodation or nearby, then visit Masjid Quba to pray two Rak‘ahs of Nafl prayer and make Dua for acceptance.
-
-Visitor Tips:
-
-The mosque is open to everyone — men and women have designated areas.
-
-Try to visit during early morning hours when it is less crowded and peaceful.
-
-Keep the sanctity of the place in mind: maintain silence, dress modestly, and respect local customs.
-
-Reminder:
-Visiting Masjid Quba is not an obligatory ritual of Hajj or Umrah, but a beautiful Sunnah that brings great reward..",
-   
+      details: "First mosque built by Prophet Muhammad ﷺ. Prayer here equals one Umrah.",
     },
     {
       name: "Masjid Qiblatain",
