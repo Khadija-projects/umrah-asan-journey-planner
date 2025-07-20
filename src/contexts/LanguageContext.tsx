@@ -100,7 +100,7 @@ const translations: Record<Language, any> = {
       hotelBooking: 'Hotel Booking',
       taxiBooking: 'Taxi Booking',
       exploreZiaraat: 'Explore Ziaraat',
-      noAdvancePayment: 'No advance payment required',
+      noAdvancePayment: 'Easy bank tranfer',
       instantVoucher: 'Instant voucher generation',
       support247: '24/7 support'
     },
@@ -108,7 +108,7 @@ const translations: Record<Language, any> = {
       title: 'How To Book Your Umrah?',
       subtitle: 'Follow these simple steps to book your complete Umrah journey',
       getVisa: 'Get Your Visa',
-      visaSubtitle: 'In less than 10 Days',
+      visaSubtitle: 'In less than 10 minutes',
       visaDesc: 'Quick visa processing with our streamlined application',
       bookFlight: 'Book Your Flight',
       flightSubtitle: 'Search 1000+ Flights',
