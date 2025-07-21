@@ -34,8 +34,6 @@ jobs:
       - name: Build static files
         run: npm run build
         env:
-          VITE_SUPABASE_URL: https://smoxbbuvuwjarpuxanmo.supabase.co
-          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtb3hiYnV2dXdqYXJwdXhhbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NDMzNDcsImV4cCI6MjA2ODAxOTM0N30.zppp0hJd1n8ZmdAc4w6Z5hM63jCTj7t2RHRiKEhBj-g
           NODE_ENV: production
 
       - name: Verify build output

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import CRMNavigation from '@/components/CRMNavigation';
+import { BlogManager } from "@/components/admin/BlogManager";
 import { Users, Building2, UserCheck, CreditCard, Clock, CheckCircle, XCircle } from 'lucide-react';
 
 interface DashboardStats {
@@ -54,7 +55,7 @@ const AdminDashboard = () => {
   const [registrations, setRegistrations] = useState<PartnerRegistration[]>([]);
   const [bookingLeads, setBookingLeads] = useState<BookingLead[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'registrations' | 'leads'>('registrations');
+  const [activeTab, setActiveTab] = useState<'registrations' | 'leads' | 'blogs'>('registrations');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -244,6 +245,14 @@ const AdminDashboard = () => {
                 <Clock className="w-4 h-4" />
                 Booking Leads & Payments ({stats.bookingLeads})
               </Button>
+              <Button 
+                variant={activeTab === 'blogs' ? 'default' : 'outline'}
+                onClick={() => setActiveTab('blogs')}
+                className="flex items-center gap-2"
+              >
+                <Users className="w-4 h-4" />
+                Blog Management
+              </Button>
             </div>
           </CardHeader>
           <CardContent>
@@ -298,7 +307,7 @@ const AdminDashboard = () => {
                   ))}
                 </div>
               )
-            ) : (
+            ) : activeTab === 'leads' ? (
               bookingLeads.length === 0 ? (
                 <div className="text-center py-8">
                   <Clock className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
@@ -355,7 +364,9 @@ const AdminDashboard = () => {
                   ))}
                 </div>
               )
-            )}
+            ) : activeTab === 'blogs' ? (
+              <BlogManager />
+            ) : null}
           </CardContent>
         </Card>
       </div>
