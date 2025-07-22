@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import CRMNavigation from '@/components/CRMNavigation';
-import { BlogManager } from "@/components/admin/BlogManager";
+import { ContentManagement } from "@/components/admin/ContentManagement";
 import { Users, Building2, UserCheck, CreditCard, Clock, CheckCircle, XCircle } from 'lucide-react';
 
 interface DashboardStats {
@@ -365,7 +365,7 @@ const AdminDashboard = () => {
                 </div>
               )
             ) : activeTab === 'blogs' ? (
-              <BlogManager />
+              <ContentManagement />
             ) : null}
           </CardContent>
         </Card>

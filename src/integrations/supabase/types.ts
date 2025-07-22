@@ -273,6 +273,42 @@ export type Database = {
         }
         Relationships: []
       }
+      faqs: {
+        Row: {
+          answer: string
+          category: string
+          created_at: string
+          id: string
+          is_active: boolean
+          is_featured: boolean | null
+          question: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          category: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_featured?: boolean | null
+          question: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          category?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_featured?: boolean | null
+          question?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       hotels: {
         Row: {
           amenities: Json | null
@@ -325,6 +361,57 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      pages: {
+        Row: {
+          content: string
+          created_at: string
+          excerpt: string | null
+          featured_image_url: string | null
+          id: string
+          is_published: boolean
+          meta_description: string | null
+          meta_keywords: string | null
+          navigation_order: number | null
+          page_type: string
+          show_in_navigation: boolean | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
+          id?: string
+          is_published?: boolean
+          meta_description?: string | null
+          meta_keywords?: string | null
+          navigation_order?: number | null
+          page_type: string
+          show_in_navigation?: boolean | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
+          id?: string
+          is_published?: boolean
+          meta_description?: string | null
+          meta_keywords?: string | null
+          navigation_order?: number | null
+          page_type?: string
+          show_in_navigation?: boolean | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       partner_registrations: {
         Row: {
@@ -452,6 +539,201 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      services: {
+        Row: {
+          booking_url: string | null
+          contact_info: Json | null
+          created_at: string
+          description: string
+          featured_image_url: string | null
+          features: Json | null
+          gallery_images: Json | null
+          id: string
+          is_active: boolean
+          is_featured: boolean | null
+          meta_description: string | null
+          meta_keywords: string | null
+          name: string
+          pricing_info: Json | null
+          service_type: string
+          short_description: string | null
+          slug: string
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          booking_url?: string | null
+          contact_info?: Json | null
+          created_at?: string
+          description: string
+          featured_image_url?: string | null
+          features?: Json | null
+          gallery_images?: Json | null
+          id?: string
+          is_active?: boolean
+          is_featured?: boolean | null
+          meta_description?: string | null
+          meta_keywords?: string | null
+          name: string
+          pricing_info?: Json | null
+          service_type: string
+          short_description?: string | null
+          slug: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          booking_url?: string | null
+          contact_info?: Json | null
+          created_at?: string
+          description?: string
+          featured_image_url?: string | null
+          features?: Json | null
+          gallery_images?: Json | null
+          id?: string
+          is_active?: boolean
+          is_featured?: boolean | null
+          meta_description?: string | null
+          meta_keywords?: string | null
+          name?: string
+          pricing_info?: Json | null
+          service_type?: string
+          short_description?: string | null
+          slug?: string
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      umrah_guide_steps: {
+        Row: {
+          common_mistakes: string | null
+          content: string
+          created_at: string
+          duration_estimate: string | null
+          featured_image_url: string | null
+          gallery_images: Json | null
+          id: string
+          important_notes: string | null
+          is_active: boolean
+          meta_description: string | null
+          meta_keywords: string | null
+          short_description: string | null
+          slug: string
+          step_number: number
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          common_mistakes?: string | null
+          content: string
+          created_at?: string
+          duration_estimate?: string | null
+          featured_image_url?: string | null
+          gallery_images?: Json | null
+          id?: string
+          important_notes?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_keywords?: string | null
+          short_description?: string | null
+          slug: string
+          step_number: number
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          common_mistakes?: string | null
+          content?: string
+          created_at?: string
+          duration_estimate?: string | null
+          featured_image_url?: string | null
+          gallery_images?: Json | null
+          id?: string
+          important_notes?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_keywords?: string | null
+          short_description?: string | null
+          slug?: string
+          step_number?: number
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      ziaraat_locations: {
+        Row: {
+          city: string
+          created_at: string
+          description: string
+          distance_from_haram: number | null
+          entry_fee: string | null
+          featured_image_url: string | null
+          gallery_images: Json | null
+          historical_significance: string | null
+          id: string
+          is_active: boolean
+          location_type: string
+          meta_description: string | null
+          meta_keywords: string | null
+          name: string
+          recommended_duration: string | null
+          slug: string
+          sort_order: number | null
+          special_notes: string | null
+          updated_at: string
+          visiting_hours: string | null
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          description: string
+          distance_from_haram?: number | null
+          entry_fee?: string | null
+          featured_image_url?: string | null
+          gallery_images?: Json | null
+          historical_significance?: string | null
+          id?: string
+          is_active?: boolean
+          location_type: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          name: string
+          recommended_duration?: string | null
+          slug: string
+          sort_order?: number | null
+          special_notes?: string | null
+          updated_at?: string
+          visiting_hours?: string | null
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          description?: string
+          distance_from_haram?: number | null
+          entry_fee?: string | null
+          featured_image_url?: string | null
+          gallery_images?: Json | null
+          historical_significance?: string | null
+          id?: string
+          is_active?: boolean
+          location_type?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          name?: string
+          recommended_duration?: string | null
+          slug?: string
+          sort_order?: number | null
+          special_notes?: string | null
+          updated_at?: string
+          visiting_hours?: string | null
+        }
+        Relationships: []
       }
     }
     Views: {
