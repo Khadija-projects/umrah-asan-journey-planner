@@ -3,9 +3,27 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heart, Shield, Users, Star } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const About = () => {
   const { t } = useLanguage();
+  
+  // Fetch about page content from Supabase
+  const { data: aboutPage } = useQuery({
+    queryKey: ["pages", "about"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("pages")
+        .select("*")
+        .eq("page_type", "about")
+        .eq("is_published", true)
+        .single();
+      
+      if (error && error.code !== 'PGRST116') throw error;
+      return data;
+    },
+  });
   
   const values = [
     {
@@ -38,10 +56,10 @@ const About = () => {
       <section className="bg-gradient-subtle py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            {t('about.title')}
+            {aboutPage?.title || t('about.title')}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            {t('about.subtitle')}
+            {aboutPage?.excerpt || t('about.subtitle')}
           </p>
         </div>
       </section>
@@ -54,16 +72,25 @@ const About = () => {
               <CardTitle className="text-2xl text-primary text-center">Our Story</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-lg max-w-none text-center">
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Umrah Asan was born from a simple belief: every pilgrim deserves a hassle-free, 
-                trustworthy experience when planning their blessing journey. We witnessed too many 
-                travelers struggling with complicated booking processes, hidden fees, and unreliable services.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Our platform brings together trusted hotel partners, verified transport providers, 
-                and experienced local guides under one roof. We eliminated the need for credit cards, 
-                simplified payments through bank transfers, and built a system that puts pilgrims first.
-              </p>
+              {aboutPage?.content ? (
+                <div 
+                  className="text-muted-foreground leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: aboutPage.content }}
+                />
+              ) : (
+                <>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    Umrah Asan was born from a simple belief: every pilgrim deserves a hassle-free, 
+                    trustworthy experience when planning their blessing journey. We witnessed too many 
+                    travelers struggling with complicated booking processes, hidden fees, and unreliable services.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Our platform brings together trusted hotel partners, verified transport providers, 
+                    and experienced local guides under one roof. We eliminated the need for credit cards, 
+                    simplified payments through bank transfers, and built a system that puts pilgrims first.
+                  </p>
+                </>
+              )}
             </CardContent>
           </Card>
 

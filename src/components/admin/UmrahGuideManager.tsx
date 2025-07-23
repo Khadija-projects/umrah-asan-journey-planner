@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Switch } from "@/components/ui/switch";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { ImageUpload } from "./ImageUpload";
 
 interface UmrahGuideStep {
   id: string;
@@ -260,15 +261,12 @@ export function UmrahGuideManager() {
                     placeholder="e.g., 30 minutes"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="featured_image_url">Featured Image URL</Label>
-                  <Input
-                    id="featured_image_url"
-                    value={formData.featured_image_url}
-                    onChange={(e) => setFormData({ ...formData, featured_image_url: e.target.value })}
-                    placeholder="https://example.com/image.jpg"
-                  />
-                </div>
+                <ImageUpload
+                  label="Featured Image"
+                  value={formData.featured_image_url}
+                  onChange={(value) => setFormData({ ...formData, featured_image_url: value })}
+                  placeholder="Upload or enter image URL"
+                />
               </div>
 
               <div>

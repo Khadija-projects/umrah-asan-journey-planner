@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Edit, Trash2, Navigation } from "lucide-react";
 import { toast } from "sonner";
+import { ImageUpload } from "./ImageUpload";
 
 interface Page {
   id: string;
@@ -250,15 +251,12 @@ export function PagesManager() {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="featured_image_url">Featured Image URL</Label>
-                <Input
-                  id="featured_image_url"
-                  value={formData.featured_image_url}
-                  onChange={(e) => setFormData({ ...formData, featured_image_url: e.target.value })}
-                  placeholder="https://example.com/image.jpg"
-                />
-              </div>
+              <ImageUpload
+                label="Featured Image"
+                value={formData.featured_image_url}
+                onChange={(value) => setFormData({ ...formData, featured_image_url: value })}
+                placeholder="Upload or enter image URL"
+              />
 
               <div>
                 <Label htmlFor="meta_description">Meta Description (SEO)</Label>

@@ -2,8 +2,26 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Train, Clock, MapPin, Info, AlertTriangle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const TrainPage = () => {
+  // Fetch train service data from Supabase
+  const { data: trainService } = useQuery({
+    queryKey: ["services", "train"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("services")
+        .select("*")
+        .eq("service_type", "train")
+        .eq("is_active", true)
+        .single();
+      
+      if (error && error.code !== 'PGRST116') throw error;
+      return data;
+    },
+  });
+
   const stations = [
     { name: "Makkah", distance: "0 km", time: "0:00" },
     { name: "Jeddah", distance: "79 km", time: "0:30" },
@@ -33,10 +51,10 @@ const TrainPage = () => {
       <section className="bg-gradient-subtle py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Haramain High-Speed Railway
+            {trainService?.name || "Haramain High-Speed Railway"}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            High-speed train connecting the holy cities of Makkah and Madinah via Jeddah and King Abdulaziz International Airport
+            {trainService?.description || "High-speed train connecting the holy cities of Makkah and Madinah via Jeddah and King Abdulaziz International Airport"}
           </p>
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 max-w-2xl mx-auto">
             <div className="flex items-center gap-2 text-amber-800">

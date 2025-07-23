@@ -8,13 +8,44 @@ import ServiceCard from "@/components/ServiceCard";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
 import BookingForm from "@/components/BookingForm";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import kaabaWatermark from "@/assets/kaaba-watermark.png";
 
 const Index = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const services = [
+  // Fetch dynamic services from Supabase
+  const { data: dynamicServices } = useQuery({
+    queryKey: ["services", "featured"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("services")
+        .select("*")
+        .eq("is_active", true)
+        .eq("is_featured", true)
+        .order("sort_order", { ascending: true })
+        .limit(3);
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  // Use dynamic services if available, fallback to static
+  const services = dynamicServices?.length ? dynamicServices.map(service => ({
+    title: service.name,
+    description: service.short_description || service.description,
+    icon: service.service_type === 'ziaraat' ? MapPin : 
+          service.service_type === 'taxi' ? Users : 
+          service.service_type === 'guide' ? Heart : MapPin,
+    features: Array.isArray(service.features) ? service.features.map(f => String(f)) : [],
+    buttonText: service.service_type === 'ziaraat' ? t('services.explorePlaces') :
+                service.service_type === 'taxi' ? t('services.bookTaxi') :
+                t('services.readGuide'),
+    onClick: () => navigate(`/${service.service_type}`)
+  })) : [
     {
       title: t('nav.ziaraat'),
       description: t('services.ziaraatDesc'),
