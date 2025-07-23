@@ -33,6 +33,22 @@ const Index = () => {
     },
   });
 
+  // Fetch Ziaraat locations for home page
+  const { data: ziaraatLocations } = useQuery({
+    queryKey: ["ziaraat-locations", "featured"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("ziaraat_locations")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true })
+        .limit(6);
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
   // Use dynamic services if available, fallback to static
   const services = dynamicServices?.length ? dynamicServices.map(service => ({
     title: service.name,
@@ -343,6 +359,75 @@ const Index = () => {
         </div>
       </section>
 
+
+      {/* Ziaraat Locations Section */}
+      {ziaraatLocations && ziaraatLocations.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                {t('nav.ziaraat')}
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Discover the holy places with spiritual significance
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {ziaraatLocations.map((location) => (
+                <Card key={location.id} className="animate-fade-in shadow-card hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    {location.featured_image_url && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={location.featured_image_url} 
+                          alt={location.name}
+                          className="w-full h-48 object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-xl font-semibold text-foreground">{location.name}</h3>
+                      <span className="text-sm bg-accent px-2 py-1 rounded">{location.city}</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm mb-3 line-clamp-3">
+                      {location.description}
+                    </p>
+                    {location.distance_from_haram && (
+                      <div className="flex items-center text-sm text-muted-foreground mb-3">
+                        <MapPin className="w-4 h-4 mr-1" />
+                        {location.distance_from_haram} km from Haram
+                      </div>
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-primary">
+                        {location.visiting_hours || 'Open 24/7'}
+                      </span>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => navigate('/ziaraat')}
+                      >
+                        Learn More
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            <div className="text-center mt-12">
+              <Button 
+                onClick={() => navigate('/ziaraat')}
+                className="bg-gradient-holy text-white hover:opacity-90"
+              >
+                View All Ziaraat Places
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-holy">
