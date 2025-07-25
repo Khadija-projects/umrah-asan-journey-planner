@@ -4,10 +4,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Download, CheckCircle, Circle, MapPin, Book, Plane, Heart } from "lucide-react";
+import { Download, CheckCircle, Circle, MapPin, Book, Plane, Heart, Clock } from "lucide-react";
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const UmrahGuide = () => {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+
+  // Fetch Umrah guide steps from Supabase
+  const { data: umrahSteps, isLoading } = useQuery({
+    queryKey: ["umrah-guide-steps"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("umrah_guide_steps")
+        .select("*")
+        .eq("is_active", true)
+        .order("step_number", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
 
   const handleCheck = (item: string) => {
     setCheckedItems(prev => ({ ...prev, [item]: !prev[item] }));
@@ -156,52 +173,115 @@ const UmrahGuide = () => {
         </div>
       </section>
 
-      {/* Checklist */}
+      {/* Dynamic Umrah Guide Steps */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-primary">Interactive Umrah Checklist</h2>
+            <h2 className="text-3xl font-bold text-primary">Step-by-Step Umrah Guide</h2>
             <Button onClick={generatePDF} className="bg-green-600 hover:bg-green-700">
               <Download className="w-4 h-4 mr-2" />
               Download PDF
             </Button>
           </div>
 
-          <div className="space-y-8">
-            {checklistSections.map((section, sectionIndex) => (
-              <Card key={sectionIndex} className="overflow-hidden">
-                <CardHeader className="bg-primary/5">
-                  <CardTitle className="text-lg">{section.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="space-y-3">
-                    {section.items.map((item, itemIndex) => {
-                      const itemKey = `${sectionIndex}-${itemIndex}`;
-                      const isChecked = checkedItems[itemKey];
-                      
-                      return (
-                        <div 
-                          key={itemIndex} 
-                          className="flex items-center space-x-3 p-2 rounded hover:bg-accent/50 cursor-pointer transition-colors"
-                          onClick={() => handleCheck(itemKey)}
-                        >
-                          <div className="flex-shrink-0">
-                            {isChecked ? (
-                              <CheckCircle className="w-5 h-5 text-green-600" />
-                            ) : (
-                              <Circle className="w-5 h-5 text-muted-foreground" />
-                            )}
-                          </div>
-                          <span className={`${isChecked ? 'line-through text-muted-foreground' : 'text-foreground'} transition-colors`}>
-                            {item}
-                          </span>
+          {isLoading ? (
+            <div className="text-center py-8">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              <p className="mt-4 text-muted-foreground">Loading guide steps...</p>
+            </div>
+          ) : (
+            <div className="space-y-8">
+              {umrahSteps?.map((step, index) => (
+                <Card key={step.id} className="overflow-hidden">
+                  <CardHeader className="bg-primary/5">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg">
+                        Step {step.step_number}: {step.title}
+                      </CardTitle>
+                      {step.duration_estimate && (
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4 mr-1" />
+                          {step.duration_estimate}
                         </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      )}
+                    </div>
+                    {step.short_description && (
+                      <CardDescription>{step.short_description}</CardDescription>
+                    )}
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    {step.featured_image_url && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={step.featured_image_url} 
+                          alt={step.title}
+                          className="w-full h-48 object-cover"
+                        />
+                      </div>
+                    )}
+                    
+                    <div className="prose prose-sm max-w-none mb-4">
+                      <div dangerouslySetInnerHTML={{ __html: step.content }} />
+                    </div>
+
+                    {step.important_notes && (
+                      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                        <h4 className="font-semibold text-amber-800 mb-2">Important Notes:</h4>
+                        <div className="text-sm text-amber-700" dangerouslySetInnerHTML={{ __html: step.important_notes }} />
+                      </div>
+                    )}
+
+                    {step.common_mistakes && (
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <h4 className="font-semibold text-red-800 mb-2">Common Mistakes to Avoid:</h4>
+                        <div className="text-sm text-red-700" dangerouslySetInnerHTML={{ __html: step.common_mistakes }} />
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {/* Checklist */}
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-primary mb-6">Interactive Umrah Checklist</h3>
+            <div className="space-y-8">
+              {checklistSections.map((section, sectionIndex) => (
+                <Card key={sectionIndex} className="overflow-hidden">
+                  <CardHeader className="bg-primary/5">
+                    <CardTitle className="text-lg">{section.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="space-y-3">
+                      {section.items.map((item, itemIndex) => {
+                        const itemKey = `${sectionIndex}-${itemIndex}`;
+                        const isChecked = checkedItems[itemKey];
+                        
+                        return (
+                          <div 
+                            key={itemIndex} 
+                            className="flex items-center space-x-3 p-2 rounded hover:bg-accent/50 cursor-pointer transition-colors"
+                            onClick={() => handleCheck(itemKey)}
+                          >
+                            <div className="flex-shrink-0">
+                              {isChecked ? (
+                                <CheckCircle className="w-5 h-5 text-green-600" />
+                              ) : (
+                                <Circle className="w-5 h-5 text-muted-foreground" />
+                              )}
+                            </div>
+                            <span className={`${isChecked ? 'line-through text-muted-foreground' : 'text-foreground'} transition-colors`}>
+                              {item}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
 
           {/* Tips */}

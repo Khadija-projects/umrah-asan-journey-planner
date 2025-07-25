@@ -7,11 +7,29 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const FAQ = () => {
   const { t } = useLanguage();
   
-  const faqs = [
+  // Fetch FAQs from Supabase
+  const { data: faqs, isLoading } = useQuery({
+    queryKey: ["faqs"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("faqs")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  // Fallback FAQs if none exist in database
+  const fallbackFaqs = [
     {
       question: "How do I book a hotel with Umrah Asan?",
       answer: "You can easily book a hotel by browsing our verified options, selecting your dates, and clicking 'Book Now.' You'll receive payment instructions to transfer the amount to our bank account. Once we confirm payment, your voucher is generated instantly."
@@ -113,24 +131,31 @@ const FAQ = () => {
       {/* FAQ Section */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="border border-border rounded-lg px-6 bg-card"
-              >
-                <AccordionTrigger className="text-left hover:no-underline py-6">
-                  <span className="font-semibold text-primary">
-                    {index + 1}. {faq.question}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          {isLoading ? (
+            <div className="text-center py-8">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              <p className="mt-4 text-muted-foreground">Loading FAQs...</p>
+            </div>
+          ) : (
+            <Accordion type="single" collapsible className="space-y-4">
+              {(faqs && faqs.length > 0 ? faqs : fallbackFaqs).map((faq, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  className="border border-border rounded-lg px-6 bg-card"
+                >
+                  <AccordionTrigger className="text-left hover:no-underline py-6">
+                    <span className="font-semibold text-primary">
+                      {index + 1}. {faq.question}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          )}
         </div>
       </section>
 

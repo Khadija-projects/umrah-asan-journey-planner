@@ -4,9 +4,27 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, MapPin, Clock, Shield, Users, Plane } from "lucide-react";
 import TaxiPricingTable from "@/components/TaxiPricingTable";
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const Taxi = () => {
-  const services = [
+  // Fetch taxi services from Supabase
+  const { data: taxiServices, isLoading } = useQuery({
+    queryKey: ["taxi-services"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("services")
+        .select("*")
+        .eq("service_type", "taxi")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const fallbackServices = [
     {
       icon: Plane,
       title: "Airport Transfers",
@@ -35,11 +53,10 @@ const Taxi = () => {
       <section className="bg-gradient-subtle py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Reliable Taxi Service for Haram, Airport & Ziaraat
+            {taxiServices && taxiServices.length > 0 ? taxiServices[0].name : "Reliable Taxi Service for Haram, Airport & Ziaraat"}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Safe, comfortable, and trusted transportation with verified drivers who understand 
-            the blessing nature of your journey.
+            {taxiServices && taxiServices.length > 0 ? taxiServices[0].description : "Safe, comfortable, and trusted transportation with verified drivers who understand the blessing nature of your journey."}
           </p>
           <Button variant="holy" size="xl">
             Book Taxi Now
@@ -118,27 +135,46 @@ const Taxi = () => {
           <h2 className="text-3xl font-bold text-center text-primary mb-8">
             Our Transportation Services
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-card transition-all duration-300">
-                <CardHeader>
-                  <service.icon className="w-12 h-12 text-primary mb-4" />
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center space-x-2 text-sm">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="text-center py-8">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              <p className="mt-4 text-muted-foreground">Loading services...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {(taxiServices && taxiServices.length > 0 ? taxiServices : fallbackServices).map((service, index) => (
+                <Card key={service.id || index} className="hover:shadow-card transition-all duration-300">
+                  <CardHeader>
+                    {service.featured_image_url && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={service.featured_image_url} 
+                          alt={service.name || service.title}
+                          className="w-full h-32 object-cover"
+                        />
+                      </div>
+                    )}
+                    <CardTitle className="text-xl">{service.name || service.title}</CardTitle>
+                    <CardDescription>{service.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {service.features ? (
+                      <div dangerouslySetInnerHTML={{ __html: service.features }} />
+                    ) : (
+                      <ul className="space-y-2">
+                        {service.features?.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center space-x-2 text-sm">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -4,72 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Clock, Users } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const Ziaraat = () => {
   const { t } = useLanguage();
   
-  const ziaraatSites = [
-    {
-      name: "Masjid Quba",
-      city: "Madinah",
-      distance: "3 km",
-      details: "First mosque built by Prophet Muhammad ﷺ. Prayer here equals one Umrah.",
+  // Fetch ziaraat locations from Supabase
+  const { data: ziaraatSites, isLoading } = useQuery({
+    queryKey: ["ziaraat-locations"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("ziaraat_locations")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true });
+      
+      if (error) throw error;
+      return data;
     },
-    {
-      name: "Masjid Qiblatain",
-      city: "Madinah", 
-      distance: "7 km",
-      details: "Where Qibla changed during prayer from Jerusalem to Makkah.",
-    },
-    {
-      name: "Jannat ul Baqi",
-      city: "Madinah",
-      distance: "500 m",
-      details: "Resting place of Prophet's family & Sahaba. Blessing cemetery.",
-    },
-    {
-      name: "Mount Uhud",
-      city: "Madinah",
-      distance: "5 km", 
-      details: "Battle of Uhud site. Mountain that loves us and we love it.",
-    },
-    {
-      name: "Cave Hira",
-      city: "Makkah",
-      distance: "5 km",
-      details: "Where first revelation was sent to Prophet Muhammad ﷺ.",
-    },
-    {
-      name: "Cave Thawr",
-      city: "Makkah",
-      distance: "7 km",
-      details: "Hideout during Hijrah. Protected by Allah's miracle.",
-    },
-    {
-      name: "Jannat al-Mu'alla",
-      city: "Makkah", 
-      distance: "2 km",
-      details: "Family cemetery. Resting place of Prophet's first wife Khadijah RA.",
-    },
-    {
-      name: "Mina",
-      city: "Makkah",
-      distance: "8 km",
-      details: "Ritual site for Hajj. Valley of sacrifice and remembrance.",
-    },
-    {
-      name: "Arafat",
-      city: "Makkah",
-      distance: "20 km",
-      details: "Main standing place for Hajj. Where sins are forgiven.",
-    },
-    {
-      name: "Muzdalifah", 
-      city: "Makkah",
-      distance: "15 km",
-      details: "Pebble collection for Jamaraat. Blessing overnight stay.",
-    },
-  ];
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -140,29 +94,58 @@ const Ziaraat = () => {
             Blessing Sites & Holy Places
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {ziaraatSites.map((site, index) => (
-              <Card key={index} className="hover:shadow-card transition-all duration-300">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-xl text-primary">{site.name}</CardTitle>
-                      <div className="flex items-center space-x-4 mt-2 text-sm text-muted-foreground">
-                        <span className="flex items-center space-x-1">
-                          <MapPin className="w-4 h-4" />
-                          <span>{site.city}</span>
-                        </span>
-                        <span>{site.distance}</span>
+          {isLoading ? (
+            <div className="text-center py-8">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              <p className="mt-4 text-muted-foreground">Loading locations...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {ziaraatSites?.map((site) => (
+                <Card key={site.id} className="hover:shadow-card transition-all duration-300">
+                  <CardHeader>
+                    {site.featured_image_url && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={site.featured_image_url} 
+                          alt={site.name}
+                          className="w-full h-48 object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-xl text-primary">{site.name}</CardTitle>
+                        <div className="flex items-center space-x-4 mt-2 text-sm text-muted-foreground">
+                          <span className="flex items-center space-x-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{site.city}</span>
+                          </span>
+                          {site.distance_from_haram && (
+                            <span>{site.distance_from_haram} km from Haram</span>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{site.details}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-3">{site.description}</p>
+                    {site.historical_significance && (
+                      <p className="text-xs text-blue-600 font-medium">
+                        Historical Significance: {site.historical_significance}
+                      </p>
+                    )}
+                    {site.visiting_hours && (
+                      <div className="flex items-center text-xs text-muted-foreground mt-2">
+                        <Clock className="w-3 h-3 mr-1" />
+                        {site.visiting_hours}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
